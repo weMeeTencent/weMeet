@@ -1,6 +1,10 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/main/index/index",
+    "pages/main/form/index",
+    "pages/main/calendar/index",
+    "pages/recommend/index",
+    "pages/me/index",
     "pages/logs/logs"
   ],
   "window":{
@@ -13,15 +17,15 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/main/index/index",
         "text": "发起活动"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/recommend/index",
         "text": "去处推荐"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/me/index",
         "text": "我的活动"
       }
     ]
