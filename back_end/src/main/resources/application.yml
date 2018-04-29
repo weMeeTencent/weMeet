@@ -1,0 +1,11 @@
+server:
+  servlet:
+    context-path: /weili
+  port: 8080
+
+url:
+  address: https://api.weixin.qq.com/sns/jscode2session
+  appid: wx52a0d060f49fb61c
+  secret: 8fe5bcea6652c325aa2c6c040fe96828
+  grant_type: authorization_code
+
