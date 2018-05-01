@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tencent.weili.dao.ParticipationDAO">
+
+    <resultMap id="participationResultMap" type="com.tencent.weili.entity.Participation">
+        <result property="userId" column="user_id" />
+        <result property="activityId" column="activity_id" />
+        <result property="creatorId" column="creator_id" />
+        <result property="time" column="time" />
+        <result property="type" column="type" />
+        <result property="flag" column="flag" />
+        <!--一对一关系映射-->
+        <association property="user" javaType="com.tencent.weili.entity.User"
+                    column="user_id"
+                    select="com.tencent.weili.dao.UserDAO.selectUserByOpenId">
+        </association>
+
+        <association property="activity" javaType="com.tencent.weili.entity.Activity"
+                     column="activity_id"
+                     select="com.tencent.weili.dao.ActivityDAO.selectActivityById">
+        </association>
+    </resultMap>
+
+    <select id="selectAllParticipationByActivityId" parameterType="java.lang.Integer"
+            resultType="com.tencent.weili.entity.Participation"
+            resultMap="participationResultMap">
+        SELECT * FROM user_activity_table
+        WHERE activity_id = #{activityId}
+    </select>
+
+    <delete id="deleteByCreatorId" parameterType="java.lang.String">
+        DELETE FROM user_activity_table
+        WHERE creator_id = #{creatorId}
+    </delete>
+
+    <insert id="insertParticipation" useGeneratedKeys="true" parameterType="com.tencent.weili.entity.Participation">
+        INSERT INTO
+        user_activity_table(user_id, activity_id, creator_id, time, type, flag)
+        VALUES
+        (#{userId}, #{activityId}, #{creatorId}, #{time}, #{type}, #{flag})
+    </insert>
+
+</mapper>

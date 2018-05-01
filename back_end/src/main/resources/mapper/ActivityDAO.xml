@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tencent.weili.dao.ActivityDAO">
+    <resultMap id="activityResultMap" type="com.tencent.weili.entity.Activity">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="description" column="description" />
+        <result property="count" column="count" />
+        <result property="location" column="location" />
+        <result property="timeType" column="time_type" />
+        <result property="startTime" column="start_time" />
+        <result property="endTime" column="end_time" />
+        <result property="deadline" column="deadline" />
+        <result property="creator" column="creator" />
+        <!--一对多关系映射-->
+        <collection property="userList" javaType="java.util.ArrayList"
+                    column="id" ofType="com.tencent.weili.entity.User"
+                    select="com.tencent.weili.dao.UserDAO.selectAllUserByActivityId"
+                    fetchType="lazy">
+            <result property="openId" column="open_id" />
+            <result property="nickname" column="nickname" />
+            <result property="avatar" column="avatar" />
+        </collection>
+    </resultMap>
+
+    <select id="selectAllActivitiesByUserId" parameterType="java.lang.String"
+            resultType="com.tencent.weili.entity.Activity"
+            resultMap="activityResultMap">
+        SELECT * FROM activity_table
+        WHERE id IN (
+          SELECT activity_id FROM user_activity_table WHERE user_id = #{userId}
+        )
+    </select>
+
+    <select id="selectActivityById" parameterType="java.lang.Integer"
+            resultType="com.tencent.weili.entity.Activity"
+            resultMap="activityResultMap">
+        SELECT * FROM activity_table
+        WHERE id = #{id}
+    </select>
+
+    <delete id="deleteActivity" parameterType="java.lang.Integer">
+        DELETE FROM activity_table
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="insertActivity" useGeneratedKeys="true" parameterType="com.tencent.weili.entity.Activity">
+      INSERT INTO
+      activity_table(name, description, count, location, time_type, start_time, end_time, deadline, creator)
+      VALUES
+      (#{name}, #{description}, #{count}, #{location}, #{timeType}, #{startTime}, #{endTime}, #{deadline}, #{creator})
+    </insert>
+
+    <update id="updateActivityCount">
+        UPDATE activity_table
+        SET count = #{count}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

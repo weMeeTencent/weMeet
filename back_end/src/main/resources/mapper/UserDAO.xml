@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tencent.weili.dao.UserDAO">
+
+    <resultMap id="userResultMap" type="com.tencent.weili.entity.User">
+        <result property="openId" column="open_id" />
+        <result property="nickname" column="nickname" />
+        <result property="avatar" column="avatar" />
+        <!--一对多关系映射-->
+        <collection property="activityList" javaType="java.util.ArrayList"
+                    column="open_id" ofType="com.tencent.weili.entity.Activity"
+                    select="com.tencent.weili.dao.ActivityDAO.selectAllActivitiesByUserId"
+                    fetchType="lazy">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="description" column="description" />
+            <result property="count" column="count" />
+            <result property="location" column="location" />
+            <result property="timeType" column="time_type" />
+            <result property="startTime" column="start_time" />
+            <result property="endTime" column="end_time" />
+            <result property="deadline" column="deadline" />
+            <result property="creator" column="creator" />
+        </collection>
+    </resultMap>
+
+    <select id="selectAllUserByActivityId" parameterType="java.lang.Integer"
+            resultType="com.tencent.weili.entity.User"
+            resultMap="userResultMap">
+        SELECT * FROM user_table
+        WHERE open_id IN (
+        SELECT user_id FROM user_activity_table WHERE activity_id = #{activityId}
+        )
+    </select>
+
+    <select id="selectUserByOpenId" parameterType="java.lang.String" resultType="com.tencent.weili.entity.User" resultMap="userResultMap">
+        SELECT * FROM user_table
+        WHERE open_id = #{openId}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" parameterType="com.tencent.weili.entity.User">
+        INSERT INTO
+        user_table(open_id, nickname, avatar)
+        VALUES
+        (#{openId}, #{nickname}, #{avatar})
+    </insert>
+
+
+</mapper>

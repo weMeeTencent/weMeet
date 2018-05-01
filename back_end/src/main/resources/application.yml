@@ -9,3 +9,13 @@ url:
   secret: 8fe5bcea6652c325aa2c6c040fe96828
   grant_type: authorization_code
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/weili?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123456
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
