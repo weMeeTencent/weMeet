@@ -10,4 +10,6 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+  <button type="default" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}"
+        disabled="{{disabled}}" bindtap="default" hover-class="other-button-hover"> 跳转日历页 </button>
 </view>

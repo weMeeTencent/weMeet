@@ -18,21 +18,15 @@
     "list": [
       {
         "pagePath": "pages/main/index/index",
-        "text": "发起活动",
-        "iconPath": "res/main_normal.png",
-        "selectedIconPath": "res/main_selected.png"
+        "text": "发起活动"
       },
       {
         "pagePath": "pages/recommend/index",
-        "text": "去处推荐",
-        "iconPath": "res/recommend_normal.png",
-        "selectedIconPath": "res/recommend_selected.png"
+        "text": "去处推荐"
       },
       {
         "pagePath": "pages/me/index",
-        "text": "我的活动",
-        "iconPath": "res/me_normal.png",
-        "selectedIconPath": "res/me_selected.png"
+        "text": "我的活动"
       }
     ]
   },
