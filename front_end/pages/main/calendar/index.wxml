@@ -1,34 +1,52 @@
 <view class="calendar-root">
-  <view class="calendar-navbar">
-    <view class="calendar-navbar-button" bindtap="goToday" hover="true" hover-class="view-hover">今日</view>
-    <view class="calendar-navbar-button" bindtap="goLastMonth" hover="true" hover-class="view-hover">{{"  < "}}</view>
-        <view class="calendar-navbar-date ">{{dateData.date}}</view>
-        <view class="calendar-navbar-button " bindtap="goNextMonth " hover="true " hover-class="view-hover ">{{">"}}</view>
-    <picker class="calendar-navbar-button" mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
-      <view hover="true" hover-class="view-hover">跳转</view>
-    </picker>
+  <view class="title">
+    <view class="title-text">微历 - 交互评审会</view>
+    <image class="img-share" src="../../../res/share.png"></image>
   </view>
-  <view class="calendar-head">
-    <view wx:for="一二三四五六日" wx:key="*this">{{item}}</view>
+  <view class="content">Hi，微历er~大坤的交互已输出，本周大家什么时间方便，一起碰一下。开发大佬们也敲定下排期~</view>
+  <view class="position">
+    <image class="img-position" src="../../../res/position.png"></image>
+    <view class="position-text">北京市海淀区第三极大厦B座806会议室</view>
   </view>
-  <view class="calendar-body">
-    <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
-      <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
-        <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
-          <view hidden="{{!dateData.arrIsShow[row * 7 + col]}}">
-            <view class="calendar-body-day">
-              {{dateData.arrDays[row * 7 + col]}}
-            </view>
-            <view class="calendar-body-dayex">
-              {{dateData.arrInfoExShow[row * 7 + col]}}
-            </view>
-            <view class="calendar-body-workturn" style="color:{{workTurnData.arrWorkTurn[row * 7 + col] === '休' ? '#09BB07' : '#e64340'}}" hidden="{{!isWorkTurn}}">
-              {{workTurnData.arrWorkTurn[row * 7 + col]}}
+  <view class="number">
+    <image class="img-clock" src="../../../res/clock.png"></image>
+    <view class="clock-text">预计2小时</view>
+    <image class="img-people" src="../../../res/people.png"></image>
+    <view class="people-text">6人已参加</view>
+  </view>
+  <view class="calendar">
+    <view class="calendar-navbar">
+      <view class="calendar-navbar-button" bindtap="goToday" hover="true" hover-class="view-hover">今日</view>
+      <view class="calendar-navbar-button" bindtap="goLastMonth" hover="true" hover-class="view-hover">{{"<"}}</view>
+        <view class="calendar-navbar-date">{{dateData.date}}</view>
+        <view class="calendar-navbar-button" bindtap="goNextMonth" hover="true" hover-class="view-hover">{{">"}}</view>
+      <picker class="calendar-navbar-button" mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
+        <view hover="true" hover-class="view-hover">跳转</view>
+      </picker>
+    </view>
+    <view class="calendar-head">
+      <view wx:for="一二三四五六日" wx:key="*this">{{item}}</view>
+    </view>
+    <view class="calendar-body">
+      <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
+        <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
+          <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
+            <view hidden="{{!dateData.arrIsShow[row * 7 + col]}}">
+              <view class="calendar-body-day">
+                {{dateData.arrDays[row * 7 + col]}}
+              </view>
+              <view class="calendar-body-dayex">
+                {{dateData.arrInfoExShow[row * 7 + col]}}
+              </view>
+              <view class="calendar-body-workturn" style="color:{{workTurnData.arrWorkTurn[row * 7 + col] === '休' ? '#09BB07' : '#e64340'}}" hidden="{{!isWorkTurn}}">
+                {{workTurnData.arrWorkTurn[row * 7 + col]}}
+              </view>
             </view>
           </view>
         </view>
       </view>
     </view>
   </view>
+
   <view style="height:140rpx;"></view>
 </view>

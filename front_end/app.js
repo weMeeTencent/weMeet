@@ -14,7 +14,6 @@ App({
       startWorkDate.setHours(0, 0, 0, 0);
     }
 
-
     this.globalData.startWorkDate = startWorkDate;
     this.globalData.workTurnTypeName = this.globalData.arrTypeName[index];
     this.globalData.workTurnType = this.globalData.arrTypeDetail[index];
