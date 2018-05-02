@@ -261,4 +261,6 @@
   align-items: center;
   justify-content: center;
   margin-top: 10rpx;
+  font-size: 36rpx;
+  color: #FFFFFF;
 }
