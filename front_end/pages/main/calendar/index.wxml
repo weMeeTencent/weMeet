@@ -16,13 +16,15 @@
   </view>
   <view class="calendar">
     <view class="calendar-navbar">
-      <view class="calendar-navbar-button" bindtap="goToday" hover="true" hover-class="view-hover">今日</view>
-      <view class="calendar-navbar-button" bindtap="goLastMonth" hover="true" hover-class="view-hover">{{"<"}}</view>
-        <view class="calendar-navbar-date">{{dateData.date}}</view>
-        <view class="calendar-navbar-button" bindtap="goNextMonth" hover="true" hover-class="view-hover">{{">"}}</view>
-      <picker class="calendar-navbar-button" mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
-        <view hover="true" hover-class="view-hover">跳转</view>
-      </picker>
+      <image class="calendar-navbar-btn" bindtap="goToday" src="{{2 > 1 ? '../../../res/eye.png' : '../../../res/eye_selected.png'}}"></image>
+      <view class="calendar-navbar-date">
+        <image class="calendar-navbar-arrow" bindtap="goLastMonth" src="../../../res/arrow_left.png"></image>
+        <picker mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
+          {{dateData.date}}
+        </picker>
+        <image class="calendar-navbar-arrow" bindtap="goNextMonth" src="../../../res/arrow_right.png"></image>
+      </view>
+      <image class="calendar-navbar-btn" bindtap="goToday" src="{{2 > 1 ? '../../../res/list.png' : '../../../res/list_selected.png'}}"></image>
     </view>
     <view class="calendar-head">
       <view wx:for="一二三四五六日" wx:key="*this">{{item}}</view>

@@ -21,19 +21,19 @@
       {
         "pagePath": "pages/main/index/index",
         "text": "发起活动",
-        "iconPath": "res/main_normal.png",
+        "iconPath": "res/main.png",
         "selectedIconPath": "res/main_selected.png"
       },
       {
         "pagePath": "pages/recommend/index",
         "text": "去处推荐",
-        "iconPath": "res/recommend_normal.png",
+        "iconPath": "res/recommend.png",
         "selectedIconPath": "res/recommend_selected.png"
       },
       {
         "pagePath": "pages/me/index",
         "text": "我的活动",
-        "iconPath": "res/me_normal.png",
+        "iconPath": "res/me.png",
         "selectedIconPath": "res/me_selected.png"
       }
     ]

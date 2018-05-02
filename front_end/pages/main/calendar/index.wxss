@@ -38,7 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24rpx;
+  margin-top: 16rpx;
 }
 
 .img-position {
@@ -51,14 +51,15 @@
   flex: 1;
   font-size: 24rpx;
   color: #b2b2b2;
-  line-height: 20rpx;
+  line-height: 40rpx;
+
 }
 
 .number {
   display: flex;
   justify-content: start;
   align-items: center;
-  margin-top: 24rpx;
+  margin-top: 16rpx;
 }
 
 .img-clock {
@@ -90,15 +91,34 @@
   border: 1rpx solid #E6E6E6;
   border-radius: 10rpx;
   margin-top: 41rpx;
+  overflow: hidden;
 }
 .calendar-navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background: #fff;
-  height: 70rpx;
+  height: 91rpx;
 }
-
+.calendar-navbar-btn{
+  width: 36rpx;
+  height: 26rpx;
+  margin: 0 30rpx;
+}
+.calendar-navbar-date {
+  font-size: 28rpx;
+  color: #000000;
+  text-align: center;
+  line-height: 48rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calendar-navbar-arrow {
+  width: 11rpx;
+  height: 22rpx;
+  margin: 0 30rpx;
+}
 .calendar-navbar-button {
   flex-grow: 1;
   width: 100rpx;
@@ -108,14 +128,7 @@
   font-size: 30rpx;
 }
 
-.calendar-navbar-date {
-  flex-grow: 1;
-  width: 150rpx;
-  height: 70rpx;
-  line-height: 70rpx;
-  text-align: center;
-  font-size: 30rpx;
-}
+
 
 .calendar-head {
   border-top: solid 0.5rpx #f1f1f1;
