@@ -50,5 +50,10 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  bindToCalendar: function (e) {
+    wx.navigateTo({
+      url: '../calendar/index'
+    });
+  },
 })

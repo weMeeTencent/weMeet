@@ -1,39 +1,50 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    var customTypeStr = wx.getStorageSync('customTypeStr');
+    if (!customTypeStr)
+      customTypeStr = ""
+    this.globalData.arrTypeDetail[this.globalData.arrTypeDetail.length - 1] = customTypeStr;
+    var index = wx.getStorageSync('selectIndex');
+    if (!index)
+      index = 0;
+    var startWorkDate = wx.getStorageSync('startWorkDate');
+    if (!startWorkDate) {
+      startWorkDate = new Date();
+      startWorkDate.setHours(0, 0, 0, 0);
+    }
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
 
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
+    this.globalData.startWorkDate = startWorkDate;
+    this.globalData.workTurnTypeName = this.globalData.arrTypeName[index];
+    this.globalData.workTurnType = this.globalData.arrTypeDetail[index];
+  },
+  setWorkTurnType: function (name, type) {
+    this.globalData.workTurnTypeName = name;
+    this.globalData.workTurnType = type;
   },
   globalData: {
-    userInfo: null
+    workTurnTypeName: "",
+    workTurnType: "",
+    startWorkDate: {},
+    arrTypeName: [
+      "不显示倒班信息", //0
+      "五班三运转", //1
+      "四班两运转", //2
+      "上三休三", //3
+      "三班二运转",//4
+      "四班三运转（两天一倒制）",//5
+      "四班三运转（三天一倒制）",//6
+      "自定义"],
+    arrTypeDetail: [
+      "",//0
+      "中中白白夜夜休休休休",//1
+      "白白夜夜休休休休",//2
+      "白白全休休休",//3
+      "白白夜夜休休",//4
+      "白白中中休夜夜休",//5
+      "白白白中中中休夜夜夜休休",//6
+      ""
+    ],
   }
 })
