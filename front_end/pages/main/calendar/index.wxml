@@ -16,7 +16,7 @@
   </view>
   <view class="calendar">
     <view class="calendar-navbar">
-      <image class="calendar-navbar-btn" bindtap="goToday" src="{{2 > 1 ? '../../../res/eye.png' : '../../../res/eye_selected.png'}}"></image>
+      <image class="calendar-navbar-eye" bindtap="goToday" src="{{2 > 1 ? '../../../res/eye.png' : '../../../res/eye_selected.png'}}"></image>
       <view class="calendar-navbar-date">
         <image class="calendar-navbar-arrow" bindtap="goLastMonth" src="../../../res/arrow_left.png"></image>
         <picker mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
@@ -24,31 +24,34 @@
         </picker>
         <image class="calendar-navbar-arrow" bindtap="goNextMonth" src="../../../res/arrow_right.png"></image>
       </view>
-      <image class="calendar-navbar-btn" bindtap="goToday" src="{{2 > 1 ? '../../../res/list.png' : '../../../res/list_selected.png'}}"></image>
+      <image class="calendar-navbar-list" bindtap="goToday" src="{{2 > 1 ? '../../../res/list.png' : '../../../res/list_selected.png'}}"></image>
     </view>
     <view class="calendar-head">
-      <view wx:for="一二三四五六日" wx:key="*this">{{item}}</view>
+      <view wx:for="一二三四五六日" wx:key="*this">周{{item}}</view>
     </view>
     <view class="calendar-body">
       <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
         <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
           <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
-            <view hidden="{{!dateData.arrIsShow[row * 7 + col]}}">
-              <view class="calendar-body-day">
-                {{dateData.arrDays[row * 7 + col]}}
-              </view>
-              <view class="calendar-body-dayex">
-                {{dateData.arrInfoExShow[row * 7 + col]}}
-              </view>
-              <view class="calendar-body-workturn" style="color:{{workTurnData.arrWorkTurn[row * 7 + col] === '休' ? '#09BB07' : '#e64340'}}" hidden="{{!isWorkTurn}}">
-                {{workTurnData.arrWorkTurn[row * 7 + col]}}
-              </view>
+            <view class="calendar-body-day" hidden="{{!dateData.arrIsShow[row * 7 + col]}}">
+              {{dateData.arrDays[row * 7 + col]}}
             </view>
+            <view class="calendar-body-dot" hidden="{{!isWorkTurn}}"></view>
           </view>
         </view>
       </view>
     </view>
-  </view>
+    <view class="calendar-checkbox">
+      <view class="calendar-checkbox-reset">重置</view>
+      <view class="calendar-checkbox-tab">
+        <view class="calendar-checkbox-btn">月</view>
+        <view class="calendar-checkbox-btn">周</view>
+        <view class="calendar-checkbox-btn">日</view>
+      </view>
+      <view class="calendar-checkbox-today">今天</view>
+    </view>
 
-  <view style="height:140rpx;"></view>
+  </view>
+  <view class="commit">确认提交</view>
+
 </view>
