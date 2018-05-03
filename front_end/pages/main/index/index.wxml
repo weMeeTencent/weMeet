@@ -1,15 +1,41 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="main">
+
+  <view class="maincontainer">
+    <view class="topDivider"></view>
+    <view class="topSlimDivider1"></view>
+    <view class="topslogan">
+      <text>WE CALENDER ENJOY WE PARTY</text>
+    </view>
+    <view class="slogandivider"></view>
+    <view class="time_date">
+      <text>2018年4月25日</text>
+    </view>
+    <view class="time_week">
+      <text>星期三 农历三月初十</text>
+    </view>
+    <view class="circle_container">
+      <view class="circle_out"></view>
+      <view class="circle_in"></view>
+      <view class="circle_text">宜</view>
+    </view>
+    <view class="recommend">攀岩 吃烤鱼 狼人</view>
+    <view class="description">每个没有狼人的日子都是对生命的辜负</view>
+
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <view class="callButton">发起活动
   </view>
-  <button type="default" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}"
-        disabled="{{disabled}}" bindtap="bindToCalendar" hover-class="other-button-hover"> 跳转日历页 </button>
+
+  <view class="tempcontainer">
+    <view class="userinfo">
+      <button class="button" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <block wx:else>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view>
+    <button type="default" class="button" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="bindToCalendar" hover-class="other-button-hover"> 跳转日历页 </button>
+  </view>
+
 </view>

@@ -102,6 +102,7 @@
   align-items: center;
   background: #fff;
   height: 91rpx;
+  border-bottom: solid 1rpx #E6E6E6;
 }
 
 .calendar-navbar-eye {
@@ -132,13 +133,13 @@
 }
 
 .calendar-head {
-  border-top: solid 0.5rpx #f1f1f1;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 68rpx;
   background: #fff;
   font-size: 18rpx;
+  color: #C7C7CC;
   padding: 0 20rpx;
 }
 
@@ -146,7 +147,7 @@
   text-align: center;
   flex: 1;
 }
-
+/* * * * * * * 月历选择表* * * * * * * * */
 .calendar-body {
   background: #f1f1f1;
   margin: 20rpx;
@@ -263,4 +264,72 @@
   margin-top: 10rpx;
   font-size: 36rpx;
   color: #FFFFFF;
+}
+/* * * * * * * 时刻选择轮盘* * * * * * * * */
+.calendar-body.calendar-day{
+  padding: 20rpx;
+  margin-top: 20rpx;
+  padding-right: 25rpx;
+  height: 436rpx;
+  overflow-y: scroll;
+  background: #ffffff;
+  border: 1rpx solid #E6E6E6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.calendar-time-box {
+  width: 50rpx;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: -14rpx;
+}
+.calendar-clock-time {
+  width: 50rpx;
+  height: 84rpx;
+  font-size: 20rpx;
+  color: #4A4A4A;
+  margin-right: 20rpx;
+}
+.calendar-clock-time:last-child {
+  height: 28rpx;
+}
+.calendar-line-box {
+  flex: 1;
+  position: relative;
+}
+.calendar-half-clock {
+  border-top: 1rpx solid #E6E6E6;
+  height: 40rpx;
+}
+.calendar-clock-line:last-child {
+  border-bottom: 1rpx solid #E6E6E6;
+}
+.calendar-clock-line:nth-child(8) {
+  border-left: 6rpx solid #3875FF;
+  background: rgba(56,117,255,0.20);
+}
+.calendar-now {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 844rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8rpx;
+}
+.calendar-now-dot {
+  width: 8rpx;
+  height: 8rpx;
+  background: #3875ff;
+  border-radius: 8rpx;
+}
+.calendar-now-line {
+  flex: 1;
+  height: 2rpx;
+  background: #3875FF;
 }
