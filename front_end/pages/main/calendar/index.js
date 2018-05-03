@@ -1,4 +1,23 @@
-//morningf@foxmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // // // // // // // // // // // // // 
+//
+//            日历相关函数
+//
+// // // // // // // // // // // // // // 
 
 var ccFile = require('../../../utils/calendar-converter.js')
 var calendarConverter = new ccFile.CalendarConverter();
@@ -167,12 +186,14 @@ Page({
   onLoad: function () {
   },
   onShow: function () {
+    
     pageData.isWorkTurn = app.globalData.workTurnType.length != 0;
     pageData.workTurnTypeName = app.globalData.workTurnTypeName;
     pageData.workTurnType = app.globalData.workTurnType;
     refreshWorkTurnData();
     refreshDetailData();
     this.setData({
+      checkbox: 0,
       isWorkTurn: pageData.isWorkTurn,
       workTurnTypeName: pageData.workTurnTypeName,
       workTurnType: pageData.workTurnType,
@@ -269,4 +290,27 @@ Page({
       detailData: pageData.detailData,
     })
   },
+
+
+  // // // // // // // // // // // // // // 
+  //
+  //            页面交互函数
+  //
+  // // // // // // // // // // // // // // 
+
+  showMonth: function () {
+    this.setData({
+      checkbox: 0
+    })
+  },
+  showWeek: function () {
+    this.setData({
+      checkbox: 1
+    })
+  },
+  showDay: function () {
+    this.setData({
+      checkbox: 2
+    })
+  }
 });
