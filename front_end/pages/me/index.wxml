@@ -1,2 +1,61 @@
 <!--pages/me/index.wxml-->
-<text>pages/me/index.wxml</text>
+<view class="me-root">
+  <view class="card">
+    <view class="card-content">
+      <view class="card-content-first">
+        <view class="card-title">
+          微历 - 交互评审会
+        </view>
+        <view class="card-mine">
+          我发起
+        </view>
+      </view>
+      <view class="card-info">
+        12人已参与，3天后征集结束
+      </view>
+    </view>
+    <image class="img-more" src="../../../res/more.png"></image>
+  </view>
+  <view class="card">
+    <view class="card-content">
+      <view class="card-content-first">
+        <view class="card-title">
+          春风十里，不如烤鱼
+        </view>
+        
+      </view>
+      <view class="card-info">
+        6人已参与，征集已结束
+      </view>
+    </view>
+    <image class="img-more" src="../../../res/more.png"></image>
+  </view>
+  <view class="card">
+    <view class="card-content">
+      <view class="card-content-first">
+        <view class="card-title">
+          有没有人想攀岩！
+        </view>
+        
+      </view>
+      <view class="card-info">
+        0人已参与，8小时后征集结束
+      </view>
+    </view>
+    <image class="img-more" src="../../../res/more.png"></image>
+  </view>
+  <view class="card">
+    <view class="card-content">
+      <view class="card-content-first">
+        <view class="card-title">
+           狼人杀组局
+        </view>
+        
+      </view>
+      <view class="card-info">
+        12人已参与，3天后征集结束
+      </view>
+    </view>
+    <image class="img-more" src="../../../res/more.png"></image>
+  </view>
+</view>
