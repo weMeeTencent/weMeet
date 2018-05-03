@@ -1,38 +1,43 @@
 /* pages/mine/index.wxss */
 .me-root {
   font-family: PingFangSC-Regular;
-  font-size: 34rpx;
+  height: 100%;
   color: #353535;
   background: #f6f6f6;
-  padding: 0 40rpx;
+  padding-top: 10rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
   box-sizing: border-box;
   padding-bottom: 26rpx;
 }
 
 .card {
-  height: 150rpx;
+  height: 170rpx;
   display: flex;
+  background-color: #ffffff;
   justify-content: left;
   align-items: left;
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
 }
 
 .card-content {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: left;
   align-items: left;
-  width: 80%;
-  padding-left: 20rpx;
-  padding-bottom: 20rpx;
+  width: 85%;
+  margin-left: 25rpx;
+  margin-top: 15rpx;
+  margin-bottom: 20rpx;
 }
 
 .img-more {
   display: flex;
-  margin-top: 50rpx;
-  width: 82rpx;
-  height: 20rpx;
+  margin-top: 70rpx;
+  margin-right: 10rpx;
+  width: 41rpx;
+  height: 10rpx;
 }
 
 .card-content-first {
@@ -45,26 +50,28 @@
 }
 
 .card-title {
-  font-size: 42rpx;
+  font-size: 46rpx;
   color: #000000;
   line-height: 80rpx;
 }
 
 .card-mine {
-  background-color: #66ccff;
-  font-size: 30rpx;
-  margin-left: 10rpx;
-  margin-top: 20rpx;
+  background-color: #3875FF;
+  font-size: 28rpx;
+  justify-content: center;
+  margin-left: 15rpx;
+  margin-top: 25rpx;
   color: #ffffff;
-  width: 90rpx;
-  height: 40rpx;
+  width: 86rpx;
+  line-height: 31rpx;
 }
 
 .card-info {
-  font-size: 25rpx;
+  font-size: 32rpx;
   color: #b2b2b2;
-  line-height: 30rpx;
+  line-height: 32rpx;
   width: 750rpx;
+  margin-top: 15rpx;
 }
 
 
