@@ -1,61 +1,44 @@
 <!--pages/me/index.wxml-->
 <view class="me-root">
-  <view class="card" bindtap="bindToResult">
-    <view class="card-content">
-      <view class="card-content-first">
-        <view class="card-title">
-          微历 - 交互评审会
+
+  <view class="card" wx:for="{{activity}}" wx:key="activityId">
+    <view class="card-1" data-activity-id="{{item.activityId}}" bindtap="tapActivity">
+      <view class="card-content">
+        <view class="card-content-first">
+          <view class="card-title">
+            {{item.description}}
+          </view>
+          <view class="card-mine" wx:if="{{item.openId == openId}}">
+            我发起
+          </view>
         </view>
-        <view class="card-mine">
-          我发起
+        <view class="card-info">
+          {{item.count}}人已参与，
+          <block wx:if="{{item.deadTimeString != '-1'}}">
+            {{item.deadTimeString}}后征集结束
+          </block>
+          <block wx:else>
+            征集已结束
+          </block>
         </view>
       </view>
-      <view class="card-info">
-        12人已参与，3天后征集结束
-      </view>
+      <image class="img-more" src="../../../res/more.png"></image>
     </view>
-    <image class="img-more" src="../../../res/more.png"></image>
-  </view>
-  <view class="card" bindtap="bindToResult">
-    <view class="card-content">
-      <view class="card-content-first">
-        <view class="card-title">
-          春风十里，不如烤鱼
-        </view>
-        
-      </view>
-      <view class="card-info">
-        6人已参与，征集已结束
-      </view>
+    <view class="divider" hidden="{{item.activityId != activityId}}"></view>
+    <view class="card-2" hidden="{{item.activityId != activityId}}">
+      <image class="img-choice-eye" data-activity-id="{{item.activityId}}" 
+        bindtap="tapLookup" src="../../../res/eye.png"></image>
+      <view class="card-choice-text" data-activity-id="{{item.activityId}}"
+        bindtap="tapLookup">查看</view>
+      <image class="img-choice" data-activity-id="{{item.activityId}}" 
+        bindtap="tapEdit" src="../../../res/edit.png"></image>
+      <view class="card-choice-text" data-activity-id="{{item.activityId}}" 
+        bindtap="tapEdit">编辑</view>
+      <image class="img-choice" data-activity-id="{{item.activityId}}" 
+        bindtap="tapDelete" src="../../../res/delete.png"></image>
+      <view class="card-choice-text" data-activity-id="{{item.activityId}}"
+        bindtap="tapDelete">删除</view>
     </view>
-    <image class="img-more" src="../../../res/more.png"></image>
   </view>
-  <view class="card" bindtap="bindToResult">
-    <view class="card-content">
-      <view class="card-content-first">
-        <view class="card-title">
-          有没有人想攀岩！
-        </view>
-        
-      </view>
-      <view class="card-info">
-        0人已参与，8小时后征集结束
-      </view>
-    </view>
-    <image class="img-more" src="../../../res/more.png"></image>
-  </view>
-  <view class="card" bindtap="bindToResult">
-    <view class="card-content">
-      <view class="card-content-first">
-        <view class="card-title">
-           狼人杀组局
-        </view>
-        
-      </view>
-      <view class="card-info">
-        12人已参与，3天后征集结束
-      </view>
-    </view>
-    <image class="img-more" src="../../../res/more.png"></image>
-  </view>
+
 </view>
