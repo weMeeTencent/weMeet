@@ -1,0 +1,145 @@
+<!--pages/me/index.wxml-->
+<view class="me-root">
+  <view class="title">
+    <view class="title-text">微历 - 交互评审会</view>
+    <image class="img-share" src="../../../res/share.png"></image>
+  </view>
+
+  <view class="content">Hi，微历er~大坤的交互已输出，本周大家什么时间方便，一起碰一下。开发大佬们也敲定下排期~</view>
+
+  <view class="position">
+    <image class="img-position" src="../../../res/position.png"></image>
+    <view class="position-text">第三极大厦B座806会议室</view>
+    <image class="img-clock" src="../../../res/clock.png"></image>
+    <view class="clock-text">预计2小时</view>
+  </view>
+
+  <view class="calendar">
+    <view class="calendar-navbar">
+      <image class="calendar-navbar-eye" src="{{2 > 1 ? '../../../res/eye.png' : '../../../res/eye_selected.png'}}"></image>
+      <view class="calendar-navbar-date">
+        当前可选时间
+      </view>
+      <image class="calendar-navbar-list" bindtap="goToday" src="{{'../../../res/list_selected.png'}}"></image>
+    </view>
+    <view>
+      <!--时间段信息-->
+      <view  style="display:flex;" bindtap="">
+        <view class="select-seq">A</view>
+        <view class="select-content">
+          <view class="select-content-left">
+            4月25日（今天） 18:00-20:00
+          </view>
+          <view class="select-content-right">
+            80%
+          </view>
+        </view>
+      </view>
+      <view  style="display:flex;" bindtap="">
+        <view  class="select-space">
+          <text decode="{{true}}" space="{{true}}">
+            &nbsp;&nbsp;
+          </text>
+        </view>
+        <view class="select-members">
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member-more" src="{{'../../../res/more.png'}}"></image>
+        </view>
+      </view>
+
+        <!--时间段信息-->
+      <view  style="display:flex;" bindtap="">
+        <view class="select-seq">B</view>
+        <view class="select-content">
+          <view class="select-content-left">
+            4月25日（今天） 18:00-20:00
+          </view>
+          <view class="select-content-right">
+            60%
+          </view>
+        </view>
+      </view>
+      <view  style="display:flex;" bindtap="">
+        <view  class="select-space">
+          <text decode="{{true}}" space="{{true}}">
+            &nbsp;&nbsp;
+          </text>
+        </view>
+        <view class="select-members">
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member-more" src="{{'../../../res/more.png'}}"></image>
+        </view>
+      </view>
+
+        <!--时间段信息-->
+      <view  style="display:flex;" bindtap="">
+        <view class="select-seq">C</view>
+        <view class="select-content">
+          <view class="select-content-left">
+            4月25日（今天） 18:00-20:00
+          </view>
+          <view class="select-content-right">
+            40%
+          </view>
+        </view>
+      </view>
+      <view  style="display:flex;" bindtap="">
+        <view  class="select-space">
+          <text decode="{{true}}" space="{{true}}">
+            &nbsp;&nbsp;
+          </text>
+        </view>
+        <view class="select-members">
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member-more" src="{{'../../../res/more.png'}}"></image>
+        </view>
+      </view>
+      <!--时间段信息-->
+      <view  style="display:flex;" bindtap="">
+        <view class="select-seq">D</view>
+        <view class="select-content">
+          <view class="select-content-left">
+            4月25日（今天） 18:00-20:00
+          </view>
+          <view class="select-content-right">
+            20%
+          </view>
+        </view>
+      </view>
+      <view  style="display:flex;" bindtap="">
+        <view  class="select-space">
+          <text decode="{{true}}" space="{{true}}">
+            &nbsp;&nbsp;
+          </text>
+        </view>
+        <view class="select-members">
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member"></image>
+          <image class="select-member-more" src="{{'../../../res/more.png'}}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="commit">确认提交</view>
+</view>
+  

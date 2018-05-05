@@ -1,6 +1,6 @@
 <!--pages/me/index.wxml-->
 <view class="me-root">
-  <view class="card">
+  <view class="card" bindtap="bindToResult">
     <view class="card-content">
       <view class="card-content-first">
         <view class="card-title">
@@ -16,7 +16,7 @@
     </view>
     <image class="img-more" src="../../../res/more.png"></image>
   </view>
-  <view class="card">
+  <view class="card" bindtap="bindToResult">
     <view class="card-content">
       <view class="card-content-first">
         <view class="card-title">
@@ -30,7 +30,7 @@
     </view>
     <image class="img-more" src="../../../res/more.png"></image>
   </view>
-  <view class="card">
+  <view class="card" bindtap="bindToResult">
     <view class="card-content">
       <view class="card-content-first">
         <view class="card-title">
@@ -44,7 +44,7 @@
     </view>
     <image class="img-more" src="../../../res/more.png"></image>
   </view>
-  <view class="card">
+  <view class="card" bindtap="bindToResult">
     <view class="card-content">
       <view class="card-content-first">
         <view class="card-title">
