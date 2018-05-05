@@ -1,2 +1,88 @@
-<!--pages/main/form/index.wxml-->
-<text>pages/main/form/index.wxml</text>
+<view class="container">
+  <view class='page'>
+    <view class="page_body">
+
+      <view class='divider'></view>
+      <view class='item'>
+        <text class='title'>活动主题</text>
+        <textarea class='content' auto-focus auto-height></textarea>
+      </view>
+      <view class='divider_margin_20'></view>
+    </view>
+
+    <view class="page_body">
+
+
+      <view class='item'>
+        <text class='title'>活动说明</text>
+        <textarea class='content' auto-height></textarea>
+      </view>
+      <view class='divider_margin_20'></view>
+    </view>
+
+    <view class="page_body">
+
+
+      <view class='item'>
+        <text class='title'>活动时长</text>
+        <textarea class='content' auto-height></textarea>
+      </view>
+      <view class='divider_margin_20'></view>
+    </view>
+
+    <view class="page_body">
+      <view class='item'>
+        <text class='title'>活动地点</text>
+        <textarea class='content' auto-height></textarea>
+      </view>
+
+      <view class='divider'></view>
+    </view>
+  </view>
+
+
+
+
+  <view class="page_body_margin">
+    <view class='page'>
+      <view class='divider'></view>
+
+      <view class='item'>
+        <view class='time_item'>
+          <text class='title_wrp'>可选时间</text>
+          <view class="weui-cell__bd">
+            <picker mode="date" value="{{date}}" start="2015-09-01" end="2200-09-01" bindchange="bindDateChange">
+              <view class='time'>{{date}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class='time_item'>
+          <text class='title_wrp'>至</text>
+          <view class="weui-cell__bd">
+            <picker mode="date" value="{{date}}" start="2015-09-01" end="2200-09-01" bindchange="bindDateChange">
+              <view class='time'>{{date}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class='divider'></view>
+    </view>
+  </view>
+
+  <view class="page_body_margin">
+    <view class='page'>
+      <view class='divider'></view>
+      <view class='item'>
+        <text class='title_wrp'>征集截止</text>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2200-09-01" bindchange="bindDateChange">
+            <view class='time'>{{date}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class='divider'></view>
+    </view>
+  </view>
+
+<view bindtap="startActivity" class='start_activity'> 完成 </view>
+</view>

@@ -56,4 +56,9 @@ Page({
       url: '../calendar/index'
     });
   },
+  bindToStartActivity: function (e) {
+    wx.navigateTo({
+      url: '../form/index',
+    })
+  }
 })

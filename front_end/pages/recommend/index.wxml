@@ -1,2 +1,29 @@
-<!--pages/recommend/index.wxml-->
-<text>pages/recommend/index.wxml</text>
+<view class='main'>
+  <view class='main_container'>
+    <view class='recommend-list'>
+      <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+        <view class="recommend-list-item">
+          <image class="recommend-list-img" src="{{item.img}}"></image>
+
+          <view class="recommend-list-title">{{item.title}}</view>
+          <view class="recommend-list-desc">{{item.desc}}</view>
+          <view class='divider'></view>
+          <view class='recommend-list-flex'>
+            <view class='recommend-list-flex-item'>
+              <image class="recommend-list-icon" src="../../res/position.png" mode='widthFix'></image>
+              <view class="recommend-list-loc">{{item.loc}}</view>
+            </view>
+            <view class='recommend-list-flex-item'>
+              <image class="recommend-list-icon" src="../../res/people.png" mode='widthFix'></image>
+              <view class="recommend-list-num">{{item.num}}</view>
+            </view>
+
+
+          </view>
+
+
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

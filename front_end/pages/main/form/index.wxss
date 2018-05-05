@@ -1,1 +1,88 @@
-/* pages/main/form/index.wxss */
+.container {
+  background: #f6f6f6;
+  padding-top: 30rpx;
+}
+
+.page {
+  width: 100%;
+  background: #fff;
+}
+
+.page_body {
+  width: 100%;
+  background: #fff;
+}
+
+.page_body_margin {
+  width: 100%;
+  background: #f6f6f6;
+  margin-top: 30rpx;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.divider {
+  border-top: 1rpx solid #e5e5e5;
+}
+
+.divider_margin_20 {
+  border-top: 1rpx solid #e5e5e5;
+  margin-left: 20rpx;
+}
+
+.time {
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #b2b2b2;
+  letter-spacing: 0;
+  margin-left: 20rpx;
+}
+
+.time_item {
+  display: flex;
+  flex-grow: 1;
+}
+
+.title {
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #4a4a4a;
+  width: 170rpx;
+  letter-spacing: 0;
+  margin-left: 29rpx;
+}
+
+.title_wrp {
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #4a4a4a;
+  letter-spacing: 0;
+  margin-left: 29rpx;
+}
+
+.content {
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #000;
+  margin-left: 20rpx;
+  letter-spacing: 0;
+  margin-right: 40rpx;
+}
+
+.start_activity {
+  background: #3875ff;
+  border: 4rpx solid rgba(5, 5, 5, 0.08);
+  border-radius: 10rpx;
+  width: 669rpx;
+  margin: 30rpx auto 0 auto;
+  padding: 20rpx 0rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 36rpx;
+  color: #fff;
+  text-align: center;
+}
