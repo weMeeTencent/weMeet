@@ -1,11 +1,45 @@
 /**index.wxss**/
 
-.main {
-  background: #f8f8f8;
-  height: 100%;
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  min-height: 100%;
+  justify-content: space-between;
+  font-size: 32rpx;
+}
+
+.page-body {
+  width: 100%;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.page-section{
+  display: flex;
+  background-color: #ffffff;
+  justify-content: left;
+  align-items: left;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+
+}
+
+.weui-cells__title {
+  margin-top: .77em;
+  margin-bottom: .3em;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #999999;
+  font-size: 14px;
+}
+
+.weui-cells_after-title {
+  margin-top: 0;
+}
+
+.weui-cell_input {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .maincontainer {
