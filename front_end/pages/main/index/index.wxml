@@ -1,8 +1,14 @@
 <!--index.wxml-->
 <view class="main">
-
+  <view class="label_container">
+    <image class="label1" src="../../../res/left_label_head.png"></image>
+    <view class="label_2" style='background-image: url("../../../res/left_label_body.png");'>
+        <view class="label_text">我是哈哈哈</view>  
+    </view>
+    <image class="label_3" src="../../../res/left_label_foot.png"></image>
+  </view>
   <view class="maincontainer">
-    <view class="topDivider"></view>
+    <image class="topDivider" src="../../../res/main_header_block.png"></image>
     <view class="topSlimDivider1"></view>
     <view class="topslogan">
       <text>WE CALENDER ENJOY WE PARTY</text>
@@ -14,18 +20,13 @@
     <view class="time_week">
       <text>星期三 农历三月初十</text>
     </view>
-    <view class="circle_container">
-      <view class="circle_out"></view>
-      <view class="circle_in"></view>
-      <view class="circle_text">宜</view>
-    </view>
+    <image class="center_icon" src="../../../res/center_icon.png"></image>
     <view class="recommend">攀岩 吃烤鱼 狼人</view>
     <view class="description">每个没有狼人的日子都是对生命的辜负</view>
-
+    <image class="share" src="../../../res/share_icon.png"></image>
   </view>
 
-  <view class="callButton" bindtap='bindToStartActivity'>发起活动
-  </view>
+  <view class="callButton" bindtap='bindToStartActivity'>发起活动</view>
 
   <view class="tempcontainer">
     <view class="userinfo">
