@@ -8,7 +8,7 @@
           <view class="card-title">
             {{item.description}}
           </view>
-          <view class="card-mine" wx:if="{{item.openId == openId}}">
+          <view class="card-mine" wx:if="{{item.creator == creator}}">
             我发起
           </view>
         </view>

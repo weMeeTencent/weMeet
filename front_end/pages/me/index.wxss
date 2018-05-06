@@ -12,7 +12,6 @@
 }
 
 .card {
-  
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
@@ -116,11 +115,10 @@
 
 .divider{
   width: 100%;
-  border: 1rpx dotted #9b9b9b;
+  border: 1rpx solid #9b9b9b;
   border-bottom: 0rpx;
   border-left: 0rpx;
   border-right: 0rpx;
-  border-style: dotted;
   margin-bottom: 8rpx;
 }
 

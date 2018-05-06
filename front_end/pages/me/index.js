@@ -1,11 +1,14 @@
 // pages/mine/index.js
 
 /**
+   * 输入date格式
    * 返回 【3天】 或者 【2小时】这样的string
    */
 var getDateDiff = function (startTime, endTime) {
+  console.log(endTime)
   let sTime = startTime.getTime();
   let eTime = endTime.getTime();
+  console.log(eTime)
 
   if (eTime - sTime > 1000 * 3600 * 24) {
     return parseInt(parseInt(eTime - sTime) / parseInt(1000 * 3600 * 24)) + "天";
@@ -20,57 +23,60 @@ var getDateDiff = function (startTime, endTime) {
   }
 }
 
+/*
 var activity = [{
   activityId: "1",
-  openId: 'tianyetian',
-  name: "tianye",
-  description: "微历—交互评审会",
+  creator: 'tianyetian',
+  name:"微历—交互评审会",
+  description: "描述",
   count: "12",
-  location: "1",
+  location: "房山",
   timeType: "1",
   startTime: "",
   endTime: "",
-  deadTime: "2018-05-14 00:00:00",
+  deadline: "1525140697000",
   deadTimeString: "",
 }, {
   activityId: "2",
-  openId: 'erxiaowu',
-  name: "xiaoxiao",
-  description: "春风十里，不如烤鱼",
+  creator: 'erxiaowu',
+  name: "春风十里，不如烤鱼",
+  description: "描述",
   count: "6",
-  location: "1",
+  location: "房山",
   timeType: "1",
   startTime: "",
   endTime: "",
-  deadTime: "2018-05-05 00:00:00",
+  deadline: "1525140697000",
   deadTimeString: "",
 }, {
   activityId: "3",
-  openId: 'erxiaowu',
-  name: "xiaoxiao",
-  description: "有没有人想攀岩!",
+  creator: 'erxiaowu',
+  name: "有没有人想攀岩！",
+  description: "描述",
   count: "0",
-  location: "1",
+  location: "房山",
   timeType: "1",
   startTime: "",
   endTime: "",
-  deadTime: "2018-05-07 00:00:00",
+  deadline: "1525140697000",
   deadTimeString: "",
 }, {
   activityId: "4",
-  openId: 'erxiaowu',
-  name: "xiaoxiao",
-  description: "狼人杀组局",
+  creator: 'erxiaowu',
+  name: "狼人杀组局",
+  description: "描述",
   count: "12",
-  location: "1",
+  location: "房山",
   timeType: "1",
   startTime: "",
   endTime: "",
-  deadTime: "2018-05-10 00:00:00",
+  deadline: "1525140697000",
   deadTimeString: "",
 }
 ];
-var openId = "";
+*/
+var activity = [];
+var creator = "";
 var activityId = "";
 
 Page({
@@ -79,7 +85,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    openId: "",
+    creator: "",
     activity: activity,
     activityId: activityId,
   },
@@ -88,38 +94,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //存储openid
-    if (getApp().openId == null) {
-      openId = "tianyetian"
-    } else {
-      openId = getApp().openId
-    }
-    this.setData({
-      openId: openId
-    })
-    console.log(openId)
-    // 获取投票历史
-    wx.request({
-      url: 'https://www.chengfpl.com/weili/user/activity',
-      data: {
-        openId: 123,
-      },
-      success:function(res) {
-        console.log(res)
-        this.setData({
-          activity: activity
-        })
-      }
-    })
-
-    //TODO: 接口写好之后写到success里边
-    for (var i = 0; i < activity.length; i++) {
-      activity[i].deadTimeString = getDateDiff(new Date(),
-        new Date(activity[i].deadTime));
-      this.setData({
-        activity : activity
-      })
-    }
     
   },
 
@@ -134,7 +108,40 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var _this = this
+    //存储creator openid
+    if (getApp().creator == null) {
+      creator = "001"
+    } else {
+      creator = getApp().creator
+    }
+    _this.setData({
+      creator: creator
+    })
+    console.log(creator)
+    // 获取投票历史
+    wx.request({
+      url: 'https://www.chengfpl.com/weili/user/activity',
+      data: {
+        openId: creator,
+      },
+      success: function (res) {
+        console.log(res)
+        activity = res.data.data
+        console.log(activity)
+        _this.setData({
+          activity: activity
+        })
+        for (var i = 0; i < activity.length; i++) {
+          activity[i].deadTimeString = getDateDiff(new Date(),
+            new Date(parseInt(activity[i].deadline)));
+          activity[i].activityId = activity[i].id;
+          _this.setData({
+            activity: activity
+          })
+        }
+      }
+    })
   },
 
   /**
