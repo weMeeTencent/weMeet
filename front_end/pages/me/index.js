@@ -192,7 +192,7 @@ Page({
     console.log(e)
     console.log(e.currentTarget.dataset.activityId)
     wx.navigateTo({
-      url: '../main/calendar/index?activityId='+activityId
+      url: './invite/index?activityId='+activityId
     });
   },
 
@@ -209,7 +209,7 @@ Page({
     console.log(e)
     console.log(e.currentTarget.dataset.activityId)
     wx:wx.showActionSheet({
-      itemList: ["删除后无法恢复", "确认删除", "取消"],
+      itemList: ["删除后无法恢复", "确认删除"],
       itemColor: '',
       success: function(res) {
         console.log(res.tapIndex)
@@ -255,17 +255,6 @@ Page({
               fail: function (res) { },
               complete: function (res) { },
           })}, 1500)
-        } else if (res.tapIndex == 2) {
-          wx.showToast({
-            title: '操作已取消',
-            icon: '',
-            image: '',
-            duration: 1500,
-            mask: true,
-            success: function(res) {},
-            fail: function(res) {},
-            complete: function(res) {},
-          })
         }
       },
       fail: function(res) {

@@ -78,8 +78,8 @@
   justify-content: center;
   margin-left: 15rpx;
   margin-top: 25rpx;
+  padding-right: 5rpx;
   color: #ffffff;
-  width: 86rpx;
   line-height: 31rpx;
 }
 

@@ -5,6 +5,7 @@
     "pages/main/calendar/index",
     "pages/recommend/index",
     "pages/me/index",
+    "pages/me/invite/index",
     "pages/logs/logs"
   ],
   "window":{
