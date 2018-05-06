@@ -13,6 +13,7 @@ Page({
         desc: '负重向上，始终下坠，都是生活常态',
         loc: '和平里~兰唐国际极限运动 5.4公里',
         num: '2-6人',
+        duration: 2
       },
       {
         id: '1',
@@ -21,6 +22,7 @@ Page({
         desc: '负重向上，始终下坠，都是生活常态',
         loc: '和平里~兰唐国际极限运动 5.4公里',
         num: '2-6人',
+        duration: 2
       }, {
         id: '1',
         img: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1525091073&di=3a5535861c7b993bb7bd0615c7eac3a2&src=http://pic.qiantucdn.com/00/91/59/42bOOOPIC98.jpg',
@@ -28,66 +30,97 @@ Page({
         desc: '负重向上，始终下坠，都是生活常态',
         loc: '和平里~兰唐国际极限运动 5.4公里',
         num: '2-6人',
+        duration: 2
       }
     ]
+  },
+
+  goToStartActivity: function (e) {
+    var item = e.currentTarget.dataset.item;
+    wx.navigateTo({
+      url: '../main/form/index?title=' + item.title + '&desc=' + item.desc + '&duration=' + item.duration + '小时&loc=' + item.loc
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    wx.showLoading({
+      title: '正在加载',
+    })
+    wx.request({
+      url: '',
+      header: { 'content-type': 'application/json' },
+      data: {},
+      complete: function () {
+        wx.hideLoading()
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          var d = res.data.list
+          this.setData({
+            //list = d
+          })
+        }
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '加载失败',
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
-  
+
   kindToggle: function (e) {
     var id = e.currentTarget.id, list = this.data.list;
     for (var i = 0, len = list.length; i < len; ++i) {

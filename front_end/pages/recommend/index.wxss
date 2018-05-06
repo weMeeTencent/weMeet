@@ -1,17 +1,19 @@
 .main {
   background: #f8f8f8;
   text-align: center;
+  height: 100%;
 }
 
 .main_container {
-  padding: 10rpx 17rpx 17rpx 17rpx;
+  margin-top: 0rpx;
+  padding-top: 5rpx;
 }
 
 .recommend-list-item {
   background: #fff;
   border: 0.5rpx solid #cacaca;
   border-radius: 10rpx;
-  margin: 30rpx 0;
+  margin: 30rpx;
   overflow: hidden;
 }
 
@@ -47,8 +49,14 @@
   text-align: left;
 }
 
-.recommend-list-icon {
-  width: 30rpx;
+.recommend-list-icon-loc {
+  width: 20rpx;
+  margin-top: 8.5rpx;
+  margin-bottom: 10rpx;
+}
+
+.recommend-list-icon-people {
+  width: 25rpx;
 }
 
 .recommend-list-loc {
@@ -56,12 +64,15 @@
   color: #B2B2B2;
   margin-left: 7.5rpx;
   font-family: PingFangSC-Regular;
+  margin-top: 10rpx;
+  margin-bottom: 13.5rpx;
+  margin-right: 13.5rpx;
 }
 
 .recommend-list-num {
   color: #B2B2B2;
   font-size: 20rpx;
-  margin-left: 32rpx;
+  margin-left: 6.5rpx;
   font-family: PingFangSC-Regular;
   margin-right: 7.5rpx;
 }
@@ -79,8 +90,6 @@
   align-items: center;
   align-content: center;
   justify-content: space-between;
-  margin-top: 10rpx;
-  margin-bottom: 13rpx;
   margin-left: 14rpx;
 }
 

@@ -2,7 +2,7 @@
   <view class='main_container'>
     <view class='recommend-list'>
       <block wx:for-items="{{list}}" wx:key="{{item.id}}">
-        <view class="recommend-list-item">
+        <view class="recommend-list-item" data-item='{{item}}'  bindtap='goToStartActivity'>
           <image class="recommend-list-img" src="{{item.img}}"></image>
 
           <view class="recommend-list-title">{{item.title}}</view>
@@ -10,11 +10,11 @@
           <view class='divider'></view>
           <view class='recommend-list-flex'>
             <view class='recommend-list-flex-item'>
-              <image class="recommend-list-icon" src="../../res/position.png" mode='widthFix'></image>
+              <image class="recommend-list-icon-loc" src="../../res/position.png" mode='widthFix'></image>
               <view class="recommend-list-loc">{{item.loc}}</view>
             </view>
             <view class='recommend-list-flex-item'>
-              <image class="recommend-list-icon" src="../../res/people.png" mode='widthFix'></image>
+              <image class="recommend-list-icon-people" src="../../res/people.png" mode='widthFix'></image>
               <view class="recommend-list-num">{{item.num}}</view>
             </view>
 
