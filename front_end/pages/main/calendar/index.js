@@ -79,7 +79,16 @@ var pageData = {
     startWorkDate: {},
     startWorkDateString: "",
     arrWorkTurn: [],    //倒休信息
-  }
+  },
+
+  hot_list: [
+    { seq: 'A', duration: "4月25日（今天） 18:00-20:00", vote_rate: '50' },
+    { seq: 'B', duration: "4月26日（明天） 08:00-10:00", vote_rate: '20' },
+    { seq: 'C', duration: "4月26日（明天） 16:00-18:00", vote_rate: '20' },
+    { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
+    { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
+    { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
+  ]
 }
 
 //获取此月第一天相对视图显示的偏移
@@ -311,6 +320,12 @@ Page({
   showDay: function () {
     this.setData({
       checkbox: 2
+    })
+  },
+  showHot: function () {
+    this.setData({
+      pre_checkbox: this.data.checkbox,
+      checkbox: this.data.checkbox === 3 ? this.data.pre_checkbox : 3
     })
   }
 });

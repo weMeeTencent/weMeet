@@ -6,6 +6,7 @@
     "pages/recommend/index",
     "pages/me/index",
     "pages/me/invite/index",
+    "pages/result/index",
     "pages/logs/logs"
   ],
   "window":{

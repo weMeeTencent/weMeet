@@ -333,3 +333,42 @@
   height: 2rpx;
   background: #3875FF;
 }
+
+.calendar-hot{
+  padding: 20rpx;
+  margin-top: 20rpx;
+  padding-right: 25rpx;
+  height: 436rpx;
+  background: #ffffff;
+}
+
+.calendar-hot-seq{
+  margin:20rpx 20rpx 0rpx 20rpx; 
+  font-size: 35rpx;
+  color: #C7C7CC;
+  height: 50rpx;
+}
+
+.calendar-hot-content{
+  margin: 10rpx;
+  border: 1rpx solid #E6E6E6;
+  border-radius: 3rpx;
+  font-size: 30rpx;
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-hot-content-left{
+  margin-left: 20rpx;
+  width: 100%;
+}
+
+.calendar-hot-content-right{
+  width: 20%;
+  text-align: right;
+  margin-right: 20rpx;
+}

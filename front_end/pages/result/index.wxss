@@ -1,0 +1,218 @@
+page{
+  background-color: #f6f6f6;
+}
+
+.me-root {
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #353535;
+  background: #f6f6f6;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  padding-bottom: 26rpx;
+  height: 100rpx;
+}
+
+.title-text {
+  font-weight: bold;
+  font-size: 40rpx;
+  color: #000;
+  flex: 1;
+}
+
+.title {
+  height: 83rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30rpx;
+  padding-bottom: 23rpx;
+}
+
+.img-share {
+  width: 83rpx;
+  height: 83rpx;
+  margin-right: -10rpx;
+}
+
+.content {
+  font-size: 28rpx;
+  color: #000;
+  line-height: 48rpx;
+}
+
+.position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.img-position {
+  width: 20rpx;
+  height: 24rpx;
+  margin-right: 20rpx;
+}
+
+.position-text {
+  flex: 1;
+  font-size: 24rpx;
+  color: #b2b2b2;
+  line-height: 40rpx;
+}
+
+.number {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.img-clock {
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 20rpx;
+}
+
+.clock-text {
+  font-size: 24rpx;
+  color: #b2b2b2;
+  line-height: 20rpx;
+  margin-right: 77rpx;
+}
+
+.img-people {
+  width: 23rpx;
+  height: 20rpx;
+  margin-right: 20rpx;
+}
+
+.people-text {
+  font-size: 24rpx;
+  color: #b2b2b2;
+  line-height: 20rpx;
+}
+
+.commit {
+  background: #3875ff;
+  border: 2rpx solid rgba(5, 5, 5, 0.08);
+  border-radius: 10rpx;
+  width: 100%;
+  height: 80rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+  font-size: 36rpx;
+  color: #FFFFFF;
+}
+
+.calendar{
+  background:#fff;
+  border:1rpx solid #e6e6e6;
+  border-radius:10rpx;
+  margin-top:41rpx;
+  overflow:hidden;
+}
+
+.calendar-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  height: 91rpx;
+  border-bottom: solid 1rpx #E6E6E6;
+}
+
+.calendar-navbar-eye {
+  width: 36rpx;
+  height: 26rpx;
+  padding: 30rpx;
+}
+.calendar-navbar-list {
+  width: 31rpx;
+  height: 30rpx;
+  padding: 30rpx;
+}
+.calendar-navbar-date {
+  flex: 1;
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  color: #000;
+  text-align: center;
+  line-height: 48rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-navbar-arrow {
+  width: 11rpx;
+  height: 22rpx;
+  padding: 30rpx 50rpx;
+}
+
+.select-seq{
+  margin:30rpx 20rpx 10rpx 30rpx; 
+  font-size: 35rpx;
+  color: #C7C7CC;
+  height: 50rpx;
+}
+
+.select-content{
+  margin: 10rpx;
+  border: 1rpx solid #E6E6E6;
+  border-radius: 3rpx;
+  font-size: 30rpx;
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  background: rgba(56,117,255,0.90);
+}
+
+.select-content-left{
+  margin-left: 20rpx;
+  width: 80%;
+}
+
+.select-content-right{
+  width: 20%;
+  color: #FFFFFF;
+  text-align: right;
+  margin-right: 20rpx;
+}
+
+.select-members{
+  margin: 10rpx;
+  border-radius: 3rpx;
+  font-size: 30rpx;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.select-space{
+  margin:25rpx 20rpx 0rpx 30rpx; 
+  font-size: 20rpx;
+  color: #C7C7CC;
+  height: 50rpx;
+}
+
+.select-member{
+  margin-left: 10rpx;
+  width:  50rpx;
+  height: 50rpx; 
+  border-radius: 50%;
+  background: #D8D8D8;
+}
+
+.select-member-more{
+  margin-left: 10rpx;
+  width:  50rpx;
+  height: 50rpx; 
+  border-radius: 50%;
+}

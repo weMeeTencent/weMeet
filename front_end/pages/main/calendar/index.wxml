@@ -29,14 +29,17 @@
 
     <view class="calendar-navbar">
       <image class="calendar-navbar-eye" bindtap="goToday" src="{{2 > 1 ? '../../../res/eye.png' : '../../../res/eye_selected.png'}}"></image>
-      <view class="calendar-navbar-date">
+      <view class="calendar-navbar-date" style="display: {{checkbox != 3 ? 'flex' : 'none'}}">
         <image class="calendar-navbar-arrow" bindtap="goLastMonth" src="../../../res/arrow_left.png"></image>
         <picker mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
           {{dateData.date}}
         </picker>
         <image class="calendar-navbar-arrow" bindtap="goNextMonth" src="../../../res/arrow_right.png"></image>
       </view>
-      <image class="calendar-navbar-list" bindtap="goToday" src="{{2 > 1 ? '../../../res/list.png' : '../../../res/list_selected.png'}}"></image>
+      <view class="calendar-navbar-date" style="display: {{checkbox === 3 ? 'flex' : 'none'}}">
+        当前可选时间
+      </view>
+      <image class="calendar-navbar-list" bindtap="showHot" src="{{2 > 1 ? '../../../res/list.png' : '../../../res/list_selected.png'}}"></image>
     </view>
 
 
@@ -99,14 +102,30 @@
 
 
 
-    <view class="calendar-checkbox">
+    <view class="calendar-hot" style="display: {{checkbox === 3 ? 'inline' : 'none'}}">
+      <block wx:for="{{hot_list}}" wx:key="{{item.id}}">
+        <view  style="display:flex;width:100%;" bindtap="">
+          <view class="calendar-hot-seq">{{item.seq}}</view>
+          <view class="calendar-hot-content">
+            <view class="calendar-hot-content-left">
+              {{item.duration}}
+            </view>
+            <view class="calendar-hot-content-right">
+              {{item.vote_rate}}%
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view class="calendar-checkbox" style="display: {{checkbox != 3 ? 'flex' : 'none'}}">
       <view class="calendar-checkbox-reset">重置</view>
       <view class="calendar-checkbox-tab">
         <view class="calendar-checkbox-btn" bindtap="showMonth">月</view>
         <view class="calendar-checkbox-btn" bindtap="showWeek">周</view>
         <view class="calendar-checkbox-btn" bindtap="showDay">日</view>
       </view>
-      <view class="calendar-checkbox-today">今天</view>
+      <view class="calendar-checkbox-today"  bindtap="goToday">今天</view>
     </view>
   </view>
   <view class="commit">确认提交</view>

@@ -79,6 +79,42 @@ var activity = [];
 var creator = "";
 var activityId = "";
 
+var refresh = function(__this) {
+  var _this = __this
+  //存储creator openid
+  if (getApp().creator == null) {
+    creator = "001"
+  } else {
+    creator = getApp().creator
+  }
+  _this.setData({
+    creator: creator
+  })
+  console.log(creator)
+  // 获取投票历史
+  wx.request({
+    url: 'https://www.chengfpl.com/weili/user/activity',
+    data: {
+      openId: creator,
+    },
+    success: function (res) {
+      console.log(res)
+      activity = res.data.data
+      console.log(activity)
+      _this.setData({
+        activity: activity
+      })
+      for (var i = 0; i < activity.length; i++) {
+        activity[i].deadTimeString = getDateDiff(new Date(),
+          new Date(parseInt(activity[i].deadline)));
+        activity[i].activityId = activity[i].id;
+        _this.setData({
+          activity: activity
+        })
+      }
+    }
+  })
+}
 Page({
 
   /**
@@ -108,40 +144,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var _this = this
-    //存储creator openid
-    if (getApp().creator == null) {
-      creator = "001"
-    } else {
-      creator = getApp().creator
-    }
-    _this.setData({
-      creator: creator
-    })
-    console.log(creator)
-    // 获取投票历史
-    wx.request({
-      url: 'https://www.chengfpl.com/weili/user/activity',
-      data: {
-        openId: creator,
-      },
-      success: function (res) {
-        console.log(res)
-        activity = res.data.data
-        console.log(activity)
-        _this.setData({
-          activity: activity
-        })
-        for (var i = 0; i < activity.length; i++) {
-          activity[i].deadTimeString = getDateDiff(new Date(),
-            new Date(parseInt(activity[i].deadline)));
-          activity[i].activityId = activity[i].id;
-          _this.setData({
-            activity: activity
-          })
-        }
-      }
-    })
+    var _this = this;
+    refresh(_this);
   },
 
   /**
@@ -162,14 +166,15 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var _this = this;
+    refresh(_this);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    this.onShow();
   },
 
   /**
@@ -178,7 +183,6 @@ Page({
   onShareAppMessage: function () {
   
   },
-
   tapActivity: function(e) {
     console.log(e)
     console.log(e.currentTarget.dataset.activityId)
@@ -192,7 +196,7 @@ Page({
     console.log(e)
     console.log(e.currentTarget.dataset.activityId)
     wx.navigateTo({
-      url: './invite/index?activityId='+activityId
+      url: '../result/index?activityId='+activityId
     });
   },
 
@@ -267,5 +271,3 @@ Page({
   },
   
 })
-
- 
