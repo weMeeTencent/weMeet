@@ -147,6 +147,26 @@
   text-align: center;
   flex: 1;
 }
+/* * * * * * * 上下午选择表* * * * * * * * */
+.calendar-week {
+  display: flex;
+  align-items: center;
+  height:436rpx;
+}
+
+.calendar-week-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.calendar-week-date {
+  flex: 1;
+}
+.calendar-week-duration {
+  flex: 1;
+}
+
 /* * * * * * * 月历选择表* * * * * * * * */
 .calendar-body {
   background: #f1f1f1;
