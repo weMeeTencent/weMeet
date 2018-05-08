@@ -223,28 +223,38 @@ Page({
   },
 
   goLastDay: function (e) {
-    if (0 == curMonth) {
-      curMonth = 11;
-      --curYear
+    if (curDay === 1) {
+      if (curMonth === 0) {
+        curMonth = 11;
+        --curYear
+      } else {
+        --curMonth;
+      }
+      var dayCount = getDayCount(curYear, curMonth);
+      curDay = dayCount;
+    } else {
+      --curDay;
     }
-    else {
-      --curMonth;
-    }
-    refreshPageData(curYear, curMonth, 1, this.data.checkbox);
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
     })
   },
 
   goNextDay: function (e) {
-    if (11 == curMonth) {
-      curMonth = 0;
-      ++curYear
+    var dayCount = getDayCount(curYear, curMonth);
+    if (curDay === dayCount) {
+      if (curMonth === 11) {
+        curMonth = 0;
+        ++curYear
+      } else {
+        ++curMonth;
+      }
+      curDay = 1;
+    } else {
+      ++curDay;
     }
-    else {
-      ++curMonth;
-    }
-    refreshPageData(curYear, curMonth, 1, this.data.checkbox);
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
     })
