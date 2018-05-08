@@ -147,25 +147,7 @@
   text-align: center;
   flex: 1;
 }
-/* * * * * * * 上下午选择表* * * * * * * * */
-.calendar-week {
-  display: flex;
-  align-items: center;
-  height:436rpx;
-}
 
-.calendar-week-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.calendar-week-date {
-  flex: 1;
-}
-.calendar-week-duration {
-  flex: 1;
-}
 
 /* * * * * * * 月历选择表* * * * * * * * */
 .calendar-body {
@@ -285,12 +267,59 @@
   font-size: 36rpx;
   color: #FFFFFF;
 }
+/* * * * * * * 上下午选择表* * * * * * * * */
+.calendar-week {
+  display: flex;
+  align-items: center;
+  height:436rpx;
+  background: #FFFFFF!important;
+  margin-bottom: 17rpx!important;
+}
+
+.calendar-week-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1rpx solid #E6E6E6;
+  border-right: none;
+}
+.calendar-week-item:last-child {
+  border-right: 1rpx solid #E6E6E6;
+}
+.calendar-week-date {
+  height: 69rpx;
+  border-bottom: 1rpx solid #E6E6E6;
+  width: 100%;
+  line-height: 69rpx;
+  font-size: 24rpx;
+  color: #000000;
+  text-align: center;
+}
+.calendar-week-day {
+  flex: 1;
+  width: 100%;
+}
+.calendar-week-duration {
+  flex: 1;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 0 10rpx;
+  font-size: 20rpx;
+  color: #000000;
+  text-align: center;
+  border-bottom: 1rpx solid #E6E6E6;
+}
+.calendar-week-duration:last-child {
+  border-bottom: none;
+}
 /* * * * * * * 时刻选择轮盘* * * * * * * * */
 .calendar-body.calendar-day{
   padding: 20rpx;
   margin-top: 20rpx;
+  margin-bottom: 18rpx;
   padding-right: 25rpx;
-  height: 436rpx;
+  height: 438rpx;
   overflow-y: scroll;
   background: #ffffff;
   border: 1rpx solid #E6E6E6;

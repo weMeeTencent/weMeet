@@ -74,7 +74,7 @@
           <view class="calendar-week-date">
             {{dateData.arrDays[1 * 7 + col]}}
           </view>
-          <view class="calendar-week-duration">
+          <view class="calendar-week-day">
             <view class="calendar-week-duration">早晨</view>
             <view class="calendar-week-duration">上午</view>
             <view class="calendar-week-duration">中午</view>
