@@ -301,7 +301,6 @@
   width: 100%;
 }
 .calendar-week-duration {
-  flex: 1;
   height: 70rpx;
   line-height: 70rpx;
   margin: 0 10rpx;

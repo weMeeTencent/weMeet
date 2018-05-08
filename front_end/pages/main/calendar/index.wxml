@@ -30,11 +30,11 @@
     <view class="calendar-navbar">
       <image class="calendar-navbar-eye" bindtap="goToday" src="{{2 > 1 ? '../../../res/eye.png' : '../../../res/eye_selected.png'}}"></image>
       <view class="calendar-navbar-date" style="display: {{checkbox != 3 ? 'flex' : 'none'}}">
-        <image class="calendar-navbar-arrow" bindtap="goLastMonth" src="../../../res/arrow_left.png"></image>
+        <image class="calendar-navbar-arrow" bindtap="goLast" src="../../../res/arrow_left.png"></image>
         <picker mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
           {{dateData.date}}
         </picker>
-        <image class="calendar-navbar-arrow" bindtap="goNextMonth" src="../../../res/arrow_right.png"></image>
+        <image class="calendar-navbar-arrow" bindtap="goNext" src="../../../res/arrow_right.png"></image>
       </view>
       <view class="calendar-navbar-date" style="display: {{checkbox === 3 ? 'flex' : 'none'}}">
         当前可选时间
@@ -70,9 +70,9 @@
         <view wx:for="一二三四五六日" wx:key="*this">周{{item}}</view>
       </view>
       <view class="calendar-body calendar-week">
-        <view class="calendar-week-item" wx:for="1234567" wx:for-index="col" wx:key="*this" data-day-index="{{1 * 7 + col}}" bindtap="selectDay">
+        <view class="calendar-week-item" wx:for="1234567" wx:for-index="col" wx:key="*this" data-day-index="{{(dateData.curWeek - 1) * 7 + col}}" bindtap="selectDay">
           <view class="calendar-week-date">
-            {{dateData.arrDays[1 * 7 + col]}}
+            {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}
           </view>
           <view class="calendar-week-day">
             <view class="calendar-week-duration">早晨</view>

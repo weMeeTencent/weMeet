@@ -49,10 +49,11 @@ var getSelectable = function (startDate, endDate) {
 var pageData = {
   dateData: {
     date: "",                //当前日期字符串
-    arrDays: [],             //关于几号的信息
+    arrDays: [],             //一个月的日期信息
+    arrWeeks: [],             //一个月拆分成星期后的日期信息
     isCurentMonth: [],           //是否显示此日期
-    isSelectable: [],
-    isToday: [],
+    isSelectable: [],           //是否可以选中此日期
+    isToday: [],           //是否是今天
   },
 
   hot_list: [
@@ -62,7 +63,8 @@ var pageData = {
     { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
     { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
     { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
-  ]
+  ],
+  checkbox: 0,
 }
 
 //获取此月第一天相对视图显示的偏移
@@ -74,12 +76,10 @@ var getOffset = function () {
 
 
 //刷新全部数据
-var refreshPageData = function (year, month, day) {
+var refreshPageData = function (year, month, day, checkbox) {
   curMonth = month;
   curYear = year;
   curDay = day;
-
-  pageData.dateData.date = curYear + '年' + (curMonth + 1) + '月';
 
   var offset = getOffset();
   var offset2 = getDayCount(curYear, curMonth) + offset;
@@ -99,6 +99,21 @@ var refreshPageData = function (year, month, day) {
       pageData.dateData.arrDays[i] = i - offset + 1;
     }
   }
+  
+  pageData.dateData.weekNum = Math.ceil((getDayCount(curYear, curMonth) + offset) / 7);
+  pageData.dateData.arrWeeks = pageData.dateData.arrWeeks.slice(0, pageData.dateData.weekNum)
+  for (var i = 0; i < pageData.dateData.weekNum; ++i) {
+    pageData.dateData.arrWeeks[i] = pageData.dateData.arrDays.slice(i * 7, i * 7 + 7);
+  }
+
+  pageData.dateData.curWeek = Math.ceil((curDay + offset) / 7);
+  if (checkbox === 0) {
+    pageData.dateData.date = curYear + '年' + (curMonth + 1) + '月';
+  } else if (checkbox === 1) {
+    pageData.dateData.date = curYear + '年' + (curMonth + 1) + '月第' + pageData.dateData.curWeek + '周';
+  } else if (checkbox === 2) {
+    pageData.dateData.date = curYear + '年' + (curMonth + 1) + '月' + curDay + '日';
+  }
 };
 
 // // // // // // // // // // // // // // 
@@ -111,7 +126,7 @@ var curDate = new Date();
 var curMonth = curDate.getMonth();
 var curYear = curDate.getFullYear();
 var curDay = curDate.getDate();
-refreshPageData(curYear, curMonth, curDay);
+refreshPageData(curYear, curMonth, curDay, 0);
 
 Page({
   data: pageData,
@@ -135,13 +150,79 @@ Page({
     curMonth = curDate.getMonth();
     curYear = curDate.getFullYear();
     curDay = curDate.getDate();
-    refreshPageData(curYear, curMonth, curDay);
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
+    this.setData({
+      dateData: pageData.dateData,
+    })
+  },
+  
+  goLastMonth: function (e) {
+    if (0 === curMonth) {
+      curMonth = 11;
+      --curYear
+    }
+    else {
+      --curMonth;
+    }
+    refreshPageData(curYear, curMonth, 1, this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
     })
   },
 
-  goLastMonth: function (e) {
+  goNextMonth: function (e) {
+    if (11 === curMonth) {
+      curMonth = 0;
+      ++curYear
+    }
+    else {
+      ++curMonth;
+    }
+    refreshPageData(curYear, curMonth, 1, this.data.checkbox);
+    this.setData({
+      dateData: pageData.dateData,
+    })
+  },
+
+  goLastWeek: function (e) {
+    if (curDay <= 7) {
+      if (curMonth === 0) {
+        curMonth = 11;
+        --curYear
+      } else {
+        --curMonth;
+      }
+      var dayCount = getDayCount(curYear, curMonth);
+      curDay = dayCount + curDay - 7;
+    } else {
+      curDay = curDay - 7;
+    }
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
+    this.setData({
+      dateData: pageData.dateData,
+    })
+  },
+
+  goNextWeek: function (e) {
+    var dayCount = getDayCount(curYear, curMonth);
+    if (curDay >= dayCount - 7) {
+      if (curMonth === 11) {
+        curMonth = 0;
+        ++curYear
+      } else {
+        ++curMonth;
+      }
+      curDay = curDay + 7 - dayCount;
+    } else {
+      curDay = curDay + 7;
+    }
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
+    this.setData({
+      dateData: pageData.dateData,
+    })
+  },
+
+  goLastDay: function (e) {
     if (0 == curMonth) {
       curMonth = 11;
       --curYear
@@ -149,13 +230,13 @@ Page({
     else {
       --curMonth;
     }
-    refreshPageData(curYear, curMonth, 1);
+    refreshPageData(curYear, curMonth, 1, this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
     })
   },
 
-  goNextMonth: function (e) {
+  goNextDay: function (e) {
     if (11 == curMonth) {
       curMonth = 0;
       ++curYear
@@ -163,16 +244,33 @@ Page({
     else {
       ++curMonth;
     }
-    refreshPageData(curYear, curMonth, 1);
+    refreshPageData(curYear, curMonth, 1, this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
     })
   },
 
-
+  goLast: function () {
+    if (this.data.checkbox === 0){
+      this.goLastMonth();
+    } else if (this.data.checkbox === 1) {
+      this.goLastWeek();
+    } else if (this.data.checkbox === 2) {
+      this.goLastDay();
+    }
+  },
+  goNext: function () {
+    if (this.data.checkbox === 0) {
+      this.goNextMonth();
+    } else if (this.data.checkbox === 1) {
+      this.goNextWeek();
+    } else if (this.data.checkbox === 2) {
+      this.goNextDay();
+    }
+  },
   bindDateChange: function (e) {
     var arr = e.detail.value.split("-");
-    refreshPageData(+arr[0], arr[1] - 1, +arr[2]);
+    refreshPageData(+arr[0], arr[1] - 1, +arr[2], this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
     })
@@ -190,15 +288,27 @@ Page({
     this.setData({
       checkbox: 0
     })
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
+    this.setData({
+      dateData: pageData.dateData,
+    })
   },
   showWeek: function () {
     this.setData({
       checkbox: 1
     })
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
+    this.setData({
+      dateData: pageData.dateData,
+    })
   },
   showDay: function () {
     this.setData({
       checkbox: 2
+    })
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
+    this.setData({
+      dateData: pageData.dateData,
     })
   },
   showHot: function () {
