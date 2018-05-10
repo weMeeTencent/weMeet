@@ -8,14 +8,13 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    open: false,
+    shareIcon: '',
+    touchStartTime: 0,
+    touchEndTime: 0,
+    lastTapTime: 0, 
     mark: 0,
     newMark: 0,
-    startMark: 0,
-    endMark: 0,
-    isToUp: true,
-    translate: '',
-    windowHeight: wx.getSystemInfoSync().windowHeight
+    isToUp: true
   },
   //事件处理函数
   bindViewTap: function() {
@@ -69,44 +68,47 @@ Page({
       url: '../form/index',
     })
   },
+  shareTouchStart: function (e) {
+    this.touchStartTime = e.timeStamp
+  },
+  shareTouchEnd: function (e) {
+    this.touchEndTime = e.timeStamp
+  },
+  triggerEgg: function (e) { //double click trigger egg
+    var that = this
+    if (that.touchEndTime - that.touchStartTime < 350) {
+      var currentTime = e.timeStamp
+      var lastTapTime = that.lastTapTime
+      that.lastTapTime = currentTime
+      if (currentTime - lastTapTime < 300) {
+        this.setData({
+          shareIcon: "../../../res/share_icon.png"
+        })
+      }
+    }
+  },
   tap_start: function (e) {
     // touchstart事件
     this.data.mark = this.data.newMark = e.touches[0].pageY;
-    this.data.startMark = e.touches[0].pageY;
   },
   tap_drag: function (e) {
     // touchmove事件
     this.data.newMark = e.touches[0].pageY;
     //从下向上滑
     if (this.data.mark > this.data.newMark) {
-      this.setData({
-        translate: 'transform: transformY(' + (this.data.newMark - this.data.startMark) + 'rpx)'
-      });
       this.isToUp = true;
     } else if (this.data.mark < this.data.newMark) {
-      this.setData({
-        translate: 'transform: transformY(' + (this.data.newMark - this.data.startMark) + 'rpx)'
-      });
       this.isToUp = false;
     }
     this.data.mark = this.data.newMark;
-    this.data.endMark = this.data.newMark;
   },
   tap_end: function (e) {
     // touchend事件
     this.data.mark = 0;
     this.data.newMark = 0;
-    // this.data.endMark = e.touches[0].pageY;
     if (this.isToUp) {
-      this.setData({
-        translate: 'transform: transformY(' + (this.data.endMark - this.data.startMark) + 'rpx)'
-      });
       wx.switchTab({
         url: '../../recommend/index',
-      });
-    } else {
-      this.setData({
-        open: false
       });
     }
   }
