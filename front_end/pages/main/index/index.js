@@ -23,9 +23,9 @@ Page({
     })
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
+    if (app.userInfo) {
       this.setData({
-        userInfo: app.globalData.userInfo,
+        userInfo: app.userInfo,
         hasUserInfo: true
       })
     } else if (this.data.canIUse){
@@ -36,12 +36,13 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+        app.sendUserInfoToServer(res.userInfo)
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
+          app.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -52,7 +53,7 @@ Page({
   },
   getUserInfo: function(e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    app.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
