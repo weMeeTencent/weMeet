@@ -2,8 +2,8 @@
 <view class="main">
   <view class="label_container">
     <image class="label1" src="../../../res/left_label_head.png"></image>
-    <view class="label_2" style='background-image: url("../../../res/left_label_body.png");'>
-      <view class="label_text">我是哈哈哈</view>
+    <view class="label_2">
+      <view class="label_text">小满</view>
     </view>
     <image class="label_3" src="../../../res/left_label_foot.png"></image>
   </view>
@@ -15,7 +15,7 @@
     </view>
     <view class="slogandivider"></view>
     <view class="time_date">
-      <text>2018年4月25日</text>
+      <text>2018年5月21日</text>
     </view>
     <view class="time_week">
       <text>星期三 农历三月初十</text>
