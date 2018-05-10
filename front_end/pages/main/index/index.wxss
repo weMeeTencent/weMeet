@@ -46,7 +46,6 @@
   background: #f8f8f8;
   height: 100%;
   width: 100%;
-  padding-top: 30rpx;
 }
 
 .label_container {
@@ -56,7 +55,7 @@
   position: absolute;
   z-index: 999999;
   margin-left: 100rpx;
-  margin-top: 104rpx;
+  margin-top: 130rpx;
 }
 
 .label1 {
@@ -95,6 +94,7 @@
   justify-content: flex-start;
   align-items: center;
   margin: 0rpx auto 0 auto;
+  margin-top: 30rpx;
 }
 
 .topDivider {

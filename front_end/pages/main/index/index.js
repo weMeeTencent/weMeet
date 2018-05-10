@@ -101,18 +101,13 @@ Page({
       this.setData({
         translate: 'transform: transformY(' + (this.data.endMark - this.data.startMark) + 'rpx)'
       });
-      wx.navigateTo({
-        url: '../../recommend/index'
+      wx.switchTab({
+        url: '../../recommend/index',
       });
     } else {
       this.setData({
         open: false
       });
     }
-  },
-  gotohhh: function(e) {
-    wx.navigateTo({
-      url: '../form/index'
-    });
   }
 })
