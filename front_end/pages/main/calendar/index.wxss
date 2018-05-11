@@ -194,7 +194,16 @@
   justify-content: center;
   font-size: 24rpx;
 }
-
+.notCurentMonth {
+  background: #F8F8F8;
+  color: #9B9B9B;
+}
+.notSelectable {
+  color: #9B9B9B;
+}
+.calendar-body-day-isSelect {
+  background: #E4ECFD;
+}
 .calendar-body-dot {
   width: 6rpx;
   height: 6rpx;

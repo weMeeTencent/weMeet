@@ -11,7 +11,6 @@ var DAY_OF_MONTH = [
   [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
   [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 ];
-
 //判断当前年是否闰年
 var isLeapYear = function (year) {
   if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
@@ -25,11 +24,6 @@ var getDayCount = function (year, month) {
   return DAY_OF_MONTH[isLeapYear(year)][month];
 };
 
-//获取当前索引下是几号
-var getDay = function (index) {
-  return index - curDayOffset;
-};
-
 //获取两个时间戳之间间隔的天数
 var getOffDays = function (startDate, endDate) {
   //得到时间戳相减 得到以毫秒为单位的差  
@@ -38,21 +32,28 @@ var getOffDays = function (startDate, endDate) {
   return (mmSec / 3600000 / 24);
 };
 
-//获取可选时间段
-var getSelectable = function (startDate, endDate) {
-  //得到时间戳相减 得到以毫秒为单位的差  
-  var mmSec = (endDate.getTime() - startDate.getTime());
-  //单位转换为天并返回 
-  return (mmSec / 3600000 / 24);
+var arr24 = new Array(24);
+var defaultArrDay = {
+  'year': 0,
+  'month': 0,
+  'day': 0,
+  'i': 0,
+  'isCurentMonth': false,
+  'isToday': false,
+  'isSelectable': false,
+  'isSelect': false,
 };
-
+var defaultArrDays = [];
+for (var i = 0; i < 42; ++i) {
+  defaultArrDays.push(defaultArrDay);
+}
 var pageData = {
   dateData: {
     date: "",                //当前日期字符串
-    arrDays: [],             //按月拆分的数组，存放日期信息
+    arrDays: defaultArrDays,             //按月拆分的数组，存放日期信息
     arrWeeks: [],             //按星期拆分的数组，存放日期信息
+    arrHours: arr24,             //按小时拆分的数组
   },
-
   hot_list: [
     { seq: 'A', duration: "4月25日（今天） 18:00-20:00", vote_rate: '50' },
     { seq: 'B', duration: "4月26日（明天） 08:00-10:00", vote_rate: '20' },
@@ -85,6 +86,17 @@ var getTimestamps = function (year, month, day, start, end) {
   return startTime + '_' + endTime;
 }
 
+var isSelectable = function (item) {
+  var start = {
+    'year': new Date().getFullYear(),
+    'month': new Date().getMonth() + 1,
+    'day': new Date().getDate(),
+  }
+  var itemTime = parseInt([item.year, addZero(item.month), addZero(item.day)].join(''), 10);
+  var startTime = parseInt([start.year, addZero(start.month), addZero(start.day)].join(''), 10);
+  return itemTime >= startTime;
+}
+
 
 //刷新全部数据
 var refreshPageData = function (year, month, day, checkbox) {
@@ -95,13 +107,12 @@ var refreshPageData = function (year, month, day, checkbox) {
   var offset = getOffset();
   var offset2 = getDayCount(curYear, curMonth) + offset;
   for (var i = 0; i < 42; ++i) {
-    if (i < offset){
-      if (curMonth === 0){
+    if (i < offset) {
+      if (curMonth === 0) {
         pageData.dateData.arrDays[i] = {
           'year': curYear - 1,
           'month': 12,
           'day': getDayCount(curYear - 1, 11) - offset + 1 + i,
-          'isSelectable': false,
           'isCurentMonth': false,
         };
       } else {
@@ -109,7 +120,6 @@ var refreshPageData = function (year, month, day, checkbox) {
           'year': curYear,
           'month': curMonth,
           'day': getDayCount(curYear, curMonth - 1) - offset + 1 + i,
-          'isSelectable': false,
           'isCurentMonth': false,
         };
       }
@@ -119,7 +129,6 @@ var refreshPageData = function (year, month, day, checkbox) {
           'year': curYear + 1,
           'month': 1,
           'day': i - offset2 + 1,
-          'isSelectable': false,
           'isCurentMonth': false,
         };
       } else {
@@ -127,20 +136,20 @@ var refreshPageData = function (year, month, day, checkbox) {
           'year': curYear,
           'month': curMonth + 2,
           'day': i - offset2 + 1,
-          'isSelectable': false,
           'isCurentMonth': false,
         };
       }
-    } else{
+    } else {
       pageData.dateData.arrDays[i] = {
         'year': curYear,
         'month': curMonth + 1,
         'day': i - offset + 1,
-        'isSelectable': true,
         'isCurentMonth': true,
       };
     }
-    pageData.dateData.arrDays[i]['isToday'] = curYear === new Date().getFullYear() && curMonth === new Date().getMonth() && (i - offset + 1 === new Date().getDate()) ? true : false;
+    pageData.dateData.arrDays[i]['i'] = i;
+    pageData.dateData.arrDays[i]['isToday'] = Boolean(curYear === new Date().getFullYear() && curMonth === new Date().getMonth() && (i - offset + 1 === new Date().getDate()));
+    pageData.dateData.arrDays[i]['isSelectable'] = isSelectable(pageData.dateData.arrDays[i]);
   }
   pageData.dateData.weekNum = Math.ceil((getDayCount(curYear, curMonth) + offset) / 7);
   pageData.dateData.arrWeeks = pageData.dateData.arrWeeks.slice(0, pageData.dateData.weekNum)
@@ -173,6 +182,7 @@ refreshPageData(curYear, curMonth, curDay, 0);
 Page({
   data: pageData,
   onLoad: function () {
+    
   },
   onShow: function () {
     this.setData({
@@ -197,7 +207,7 @@ Page({
       dateData: pageData.dateData,
     })
   },
-  
+
   goLastMonth: function (e) {
     if (0 === curMonth) {
       curMonth = 11;
@@ -303,7 +313,7 @@ Page({
   },
 
   goLast: function () {
-    if (this.data.checkbox === 0){
+    if (this.data.checkbox === 0) {
       this.goLastMonth();
     } else if (this.data.checkbox === 1) {
       this.goLastWeek();
@@ -325,51 +335,6 @@ Page({
     refreshPageData(+arr[0], arr[1] - 1, +arr[2], this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
-    })
-  },
-  selectDay: function (e) {
-    var target = e.currentTarget.dataset.dayIndex;
-    var selectDay = getTimestamps(target.year, target.month, target.day, 0, 24);
-    this.data.timestamps.push(selectDay);
-    console.log(this.data.timestamps);
-  },
-  selectWeek: function (e) {
-    var target = e.currentTarget.dataset.dayIndex;
-    var start = e.currentTarget.dataset.weekIndex[0];
-    var end = e.currentTarget.dataset.weekIndex[1];
-    var selectDay = getTimestamps(target.year, target.month, target.day, start, end);
-    console.log(selectDay);
-  },
-  selectDuration: function (e) {
-    var selectDay = getTimestamps(curYear, curMonth, e.currentTarget.dataset.dayIndex, 0, 24);
-    console.log(e.currentTarget.dataset);
-  },
-  submit: function(){
-    wx.request({
-      url: 'https://www.chengfpl.com/weili/user/create/participation',
-      method: 'post',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: { openId: 'openId', activityId: '111', time: this.data.timestamps.join(';')},
-
-      complete: function (res) {
-        //dismiss进度条
-        wx.hideLoading()
-      },
-      success: function (res) {
-        //跳转
-        if (res.statusCode == 200) {
-          console.log(res)
-        }
-
-      },
-      fail: function (res) {
-        //tips
-        wx.showToast({
-          title: '发起活动失败',
-        })
-      }
     })
   },
 
@@ -411,5 +376,52 @@ Page({
       pre_checkbox: this.data.checkbox,
       checkbox: this.data.checkbox === 3 ? this.data.pre_checkbox : 3
     })
-  }
+  },
+  selectDay: function (e) {
+    var target = e.currentTarget.dataset.dayIndex;
+    var selectDay = getTimestamps(target.year, target.month, target.day, 0, 24);
+    this.data.timestamps.push(selectDay);
+    pageData.dateData.arrDays[target.i]['isSelect'] = true;
+    console.log(this.data.timestamps);
+  },
+  selectWeek: function (e) {
+    var target = e.currentTarget.dataset.dayIndex;
+    var start = e.currentTarget.dataset.weekIndex[0];
+    var end = e.currentTarget.dataset.weekIndex[1];
+    var selectDay = getTimestamps(target.year, target.month, target.day, start, end);
+    console.log(selectDay);
+  },
+  selectDuration: function (e) {
+    var target = e.currentTarget.dataset.hourIndex;
+    var selectDay = getTimestamps(curYear, curMonth + 1, curDay, target, target >= 23 ? target + 1 : target + 2);
+    console.log(selectDay);
+  },
+  submit: function () {
+    wx.request({
+      url: 'https://www.chengfpl.com/weili/user/create/participation',
+      method: 'post',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: { openId: 'openId', activityId: '111', time: this.data.timestamps.join(';') },
+
+      complete: function (res) {
+        //dismiss进度条
+        wx.hideLoading()
+      },
+      success: function (res) {
+        //跳转
+        if (res.statusCode == 200) {
+          console.log(res)
+        }
+
+      },
+      fail: function (res) {
+        //tips
+        wx.showToast({
+          title: '发起活动失败',
+        })
+      }
+    })
+  },
 });

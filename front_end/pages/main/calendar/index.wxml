@@ -52,8 +52,7 @@
         <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
           <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
             <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{dateData.arrDays[row * 7 + col]}}" bindtap="selectDay">
-              <view class="calendar-body-day" style="color: {{dateData.arrDays[row * 7 + col].isCurentMonth ? 'black' : 'red'}}">
-                <!-- <view class="calendar-body-day" hidden="{{!dateData.arrIsShow[row * 7 + col]}}"> -->
+              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelect && 'calendar-body-day-isSelect'}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
                 {{dateData.arrDays[row * 7 + col].day}}
               </view>
               <view class="calendar-body-dot" hidden="{{!dateData.arrDays[row * 7 + col].isToday}}"></view>
@@ -96,7 +95,7 @@
           <view class="calendar-now-dot"></view>
           <view class="calendar-now-line"></view>
         </view>
-        <view class="calendar-clock-line" wx:for="111111111111111111111111" wx:for-index="clock" wx:key="*this" bindtap="selectDuration">
+        <view class="calendar-clock-line" wx:for="{{dateData.arrHours}}" wx:for-index="clock" wx:key="*this" data-hour-index="{{clock}}" bindtap="selectDuration">
           <view class="calendar-half-clock"></view>
           <view class="calendar-half-clock"></view>
         </view>
