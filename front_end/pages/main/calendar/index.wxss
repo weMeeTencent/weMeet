@@ -201,8 +201,9 @@
 .notSelectable {
   color: #9B9B9B;
 }
-.calendar-body-day-isSelect {
+.isSelect {
   background: #E4ECFD;
+  border-left: 6rpx solid #3875FF;
 }
 .calendar-body-dot {
   width: 6rpx;

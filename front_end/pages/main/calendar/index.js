@@ -33,24 +33,11 @@ var getOffDays = function (startDate, endDate) {
 };
 
 var arr24 = new Array(24);
-var defaultArrDay = {
-  'year': 0,
-  'month': 0,
-  'day': 0,
-  'i': 0,
-  'isCurentMonth': false,
-  'isToday': false,
-  'isSelectable': false,
-  'isSelect': false,
-};
-var defaultArrDays = [];
-for (var i = 0; i < 42; ++i) {
-  defaultArrDays.push(defaultArrDay);
-}
+
 var pageData = {
   dateData: {
     date: "",                //当前日期字符串
-    arrDays: defaultArrDays,             //按月拆分的数组，存放日期信息
+    arrDays: [],             //按月拆分的数组，存放日期信息
     arrWeeks: [],             //按星期拆分的数组，存放日期信息
     arrHours: arr24,             //按小时拆分的数组
   },
@@ -64,6 +51,7 @@ var pageData = {
   ],
   checkbox: 0,
   timestamps: [],
+  arrSelect: [],
 }
 
 //获取此月第一天相对视图显示的偏移
@@ -97,7 +85,17 @@ var isSelectable = function (item) {
   return itemTime >= startTime;
 }
 
-
+// 点击事件
+var refreshSelectData = function (targrt){
+  for (var i = 0; i < 42; ++i) {
+    if (targrt === i){
+      pageData.arrSelect[i] = !pageData.arrSelect[i];
+    } else {
+      pageData.arrSelect[i] = pageData.arrSelect[i] || false;
+    }
+  }
+  console.log(pageData.arrSelect);
+}
 //刷新全部数据
 var refreshPageData = function (year, month, day, checkbox) {
   curMonth = month;
@@ -381,8 +379,10 @@ Page({
     var target = e.currentTarget.dataset.dayIndex;
     var selectDay = getTimestamps(target.year, target.month, target.day, 0, 24);
     this.data.timestamps.push(selectDay);
-    pageData.dateData.arrDays[target.i]['isSelect'] = true;
-    console.log(this.data.timestamps);
+    refreshSelectData(target.i);
+    this.setData({
+      arrSelect: pageData.arrSelect,
+    })
   },
   selectWeek: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
