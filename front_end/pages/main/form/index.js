@@ -43,7 +43,6 @@ Page({
   startActivity:function(e) {
     wx.showLoading({
       title: '正在尝试',
-      
     })
 
     var deadlinePara = util.time2Stamp(this.data.deadline + ' ' + this.data.deadlineTime)

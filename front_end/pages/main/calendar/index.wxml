@@ -51,12 +51,12 @@
       <view class="calendar-body calendar-month">
         <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
           <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
-            <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
-              <view class="calendar-body-day" style="color: {{dateData.isCurentMonth[row * 7 + col] ? 'black' : 'red'}}">
+            <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{dateData.arrDays[row * 7 + col]}}" bindtap="selectDay">
+              <view class="calendar-body-day" style="color: {{dateData.arrDays[row * 7 + col].isCurentMonth ? 'black' : 'red'}}">
                 <!-- <view class="calendar-body-day" hidden="{{!dateData.arrIsShow[row * 7 + col]}}"> -->
-                {{dateData.arrDays[row * 7 + col]}}
+                {{dateData.arrDays[row * 7 + col].day}}
               </view>
-              <view class="calendar-body-dot" hidden="{{!dateData.isToday[row * 7 + col]}}"></view>
+              <view class="calendar-body-dot" hidden="{{!dateData.arrDays[row * 7 + col].isToday}}"></view>
             </view>
           </view>
         </view>
@@ -70,16 +70,16 @@
         <view wx:for="一二三四五六日" wx:key="*this">周{{item}}</view>
       </view>
       <view class="calendar-body calendar-week">
-        <view class="calendar-week-item" wx:for="1234567" wx:for-index="col" wx:key="*this" data-day-index="{{(dateData.curWeek - 1) * 7 + col}}" bindtap="selectDay">
+        <view class="calendar-week-item" wx:for="1234567" wx:for-index="col" wx:key="*this">
           <view class="calendar-week-date">
-            {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}
+            {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].day}}
           </view>
           <view class="calendar-week-day">
-            <view class="calendar-week-duration">早晨</view>
-            <view class="calendar-week-duration">上午</view>
-            <view class="calendar-week-duration">中午</view>
-            <view class="calendar-week-duration">下午</view>
-            <view class="calendar-week-duration">晚上</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[0, 8]}}" bindtap="selectWeek">早晨</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[8, 12]}}" bindtap="selectWeek">上午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[12, 14]}}" bindtap="selectWeek">中午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[14, 18]}}" bindtap="selectWeek">下午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[18, 24]}}" bindtap="selectWeek">晚上</view>
           </view>
         </view>
       </view>
@@ -96,7 +96,7 @@
           <view class="calendar-now-dot"></view>
           <view class="calendar-now-line"></view>
         </view>
-        <view class="calendar-clock-line" wx:for="111111111111111111111111" wx:for-index="clock" wx:key="*this">
+        <view class="calendar-clock-line" wx:for="111111111111111111111111" wx:for-index="clock" wx:key="*this" bindtap="selectDuration">
           <view class="calendar-half-clock"></view>
           <view class="calendar-half-clock"></view>
         </view>
@@ -131,6 +131,6 @@
       <view class="calendar-checkbox-today" bindtap="goToday">今天</view>
     </view>
   </view>
-  <view class="commit">确认提交</view>
+  <view class="commit" bindtap="submit">确认提交</view>
 
 </view>

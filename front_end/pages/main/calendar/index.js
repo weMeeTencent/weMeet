@@ -49,11 +49,8 @@ var getSelectable = function (startDate, endDate) {
 var pageData = {
   dateData: {
     date: "",                //当前日期字符串
-    arrDays: [],             //一个月的日期信息
-    arrWeeks: [],             //一个月拆分成星期后的日期信息
-    isCurentMonth: [],           //是否显示此日期
-    isSelectable: [],           //是否可以选中此日期
-    isToday: [],           //是否是今天
+    arrDays: [],             //按月拆分的数组，存放日期信息
+    arrWeeks: [],             //按星期拆分的数组，存放日期信息
   },
 
   hot_list: [
@@ -65,6 +62,7 @@ var pageData = {
     { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
   ],
   checkbox: 0,
+  timestamps: [],
 }
 
 //获取此月第一天相对视图显示的偏移
@@ -72,6 +70,19 @@ var getOffset = function () {
   var offset = new Date(curYear, curMonth, 1).getDay();
   offset = offset == 0 ? 6 : offset - 1; //注意这个转换，Date对象的getDay函数返回返回值是 0（周日） 到 6（周六） 
   return offset;
+}
+
+var addZero = function (num) {
+  if (num < 10) {
+    return '0' + num;
+  }
+  return num;
+}
+
+var getTimestamps = function (year, month, day, start, end) {
+  var startTime = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(start) + ':00';
+  var endTime = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(end) + ':00';
+  return startTime + '_' + endTime;
 }
 
 
@@ -84,22 +95,53 @@ var refreshPageData = function (year, month, day, checkbox) {
   var offset = getOffset();
   var offset2 = getDayCount(curYear, curMonth) + offset;
   for (var i = 0; i < 42; ++i) {
-    pageData.dateData.isCurentMonth[i] = i < offset || i >= offset2 ? false : true;
-    // pageData.dateData.isSelectable[i] = (curYear < new Date().getFullYear()) || (curMonth < new Date().getMonth()) || (curDay < new Date().getDate()) ? false : true;
-    pageData.dateData.isToday[i] = curYear === new Date().getFullYear() && curMonth === new Date().getMonth() && (i - offset + 1 === new Date().getDate()) ? true : false;
     if (i < offset){
       if (curMonth === 0){
-        pageData.dateData.arrDays[i] = getDayCount(curYear - 1, 11) - offset + 1 + i;
+        pageData.dateData.arrDays[i] = {
+          'year': curYear - 1,
+          'month': 12,
+          'day': getDayCount(curYear - 1, 11) - offset + 1 + i,
+          'isSelectable': false,
+          'isCurentMonth': false,
+        };
       } else {
-        pageData.dateData.arrDays[i] = getDayCount(curYear, curMonth - 1) - offset + 1 + i;
+        pageData.dateData.arrDays[i] = {
+          'year': curYear,
+          'month': curMonth,
+          'day': getDayCount(curYear, curMonth - 1) - offset + 1 + i,
+          'isSelectable': false,
+          'isCurentMonth': false,
+        };
       }
     } else if (i >= offset2) {
-      pageData.dateData.arrDays[i] = i - offset2 + 1;
+      if (curMonth === 11) {
+        pageData.dateData.arrDays[i] = {
+          'year': curYear + 1,
+          'month': 1,
+          'day': i - offset2 + 1,
+          'isSelectable': false,
+          'isCurentMonth': false,
+        };
+      } else {
+        pageData.dateData.arrDays[i] = {
+          'year': curYear,
+          'month': curMonth + 2,
+          'day': i - offset2 + 1,
+          'isSelectable': false,
+          'isCurentMonth': false,
+        };
+      }
     } else{
-      pageData.dateData.arrDays[i] = i - offset + 1;
+      pageData.dateData.arrDays[i] = {
+        'year': curYear,
+        'month': curMonth + 1,
+        'day': i - offset + 1,
+        'isSelectable': true,
+        'isCurentMonth': true,
+      };
     }
+    pageData.dateData.arrDays[i]['isToday'] = curYear === new Date().getFullYear() && curMonth === new Date().getMonth() && (i - offset + 1 === new Date().getDate()) ? true : false;
   }
-  
   pageData.dateData.weekNum = Math.ceil((getDayCount(curYear, curMonth) + offset) / 7);
   pageData.dateData.arrWeeks = pageData.dateData.arrWeeks.slice(0, pageData.dateData.weekNum)
   for (var i = 0; i < pageData.dateData.weekNum; ++i) {
@@ -285,8 +327,51 @@ Page({
       dateData: pageData.dateData,
     })
   },
+  selectDay: function (e) {
+    var target = e.currentTarget.dataset.dayIndex;
+    var selectDay = getTimestamps(target.year, target.month, target.day, 0, 24);
+    this.data.timestamps.push(selectDay);
+    console.log(this.data.timestamps);
+  },
+  selectWeek: function (e) {
+    var target = e.currentTarget.dataset.dayIndex;
+    var start = e.currentTarget.dataset.weekIndex[0];
+    var end = e.currentTarget.dataset.weekIndex[1];
+    var selectDay = getTimestamps(target.year, target.month, target.day, start, end);
+    console.log(selectDay);
+  },
+  selectDuration: function (e) {
+    var selectDay = getTimestamps(curYear, curMonth, e.currentTarget.dataset.dayIndex, 0, 24);
+    console.log(e.currentTarget.dataset);
+  },
+  submit: function(){
+    wx.request({
+      url: 'https://www.chengfpl.com/weili/user/create/participation',
+      method: 'post',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: { openId: 'openId', activityId: '111', time: this.data.timestamps.join(';')},
 
+      complete: function (res) {
+        //dismiss进度条
+        wx.hideLoading()
+      },
+      success: function (res) {
+        //跳转
+        if (res.statusCode == 200) {
+          console.log(res)
+        }
 
+      },
+      fail: function (res) {
+        //tips
+        wx.showToast({
+          title: '发起活动失败',
+        })
+      }
+    })
+  },
 
   // // // // // // // // // // // // // // 
   //
