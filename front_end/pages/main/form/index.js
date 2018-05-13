@@ -1,17 +1,17 @@
 // pages/main/form/index.js
-var util = require('../../../utils/util.js'); 
+var util = require('../../../utils/util.js');
 Page({
 
   data: {
-   startTime: '',
-   endTime: '',
-   duration: '',
-   title:'',
-   desc: '',
-   duration: '',
-   loc: '',
-   deadline:'',
-   deadlineTime:'12:00'
+    startTime: '',
+    endTime: '',
+    duration: '',
+    title: '',
+    desc: '',
+    duration: '',
+    loc: '',
+    deadline: '',
+    deadlineTime: '12:00'
   },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -40,34 +40,40 @@ Page({
     })
   },
 
-  startActivity:function(e) {
+  formSubmit: function (e) {
     wx.showLoading({
       title: '正在尝试',
     })
 
-    var deadlinePara = util.time2Stamp(this.data.deadline + ' ' + this.data.deadlineTime)
-    
+    var deadlinePara = this.data.deadline + ' ' + this.data.deadlineTime
+    var openId = getApp().openId;
     wx.request({
       url: 'https://www.chengfpl.com/weili/user/create/activity',
-      method: 'post',
+      method: 'POST',
+    
       header: {
-        'content-type': 'application/json'
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
       },
-      data: { openId: 'openId', name: this.data.title, description: this.data.desc, location: this.data.loc, timeType: 1, startTime: this.data.startTime, endTime: this.data.endTime, deadline: deadlinePara},
-   
-      complete: function(res) {
+
+      data: { openId: openId, name: this.data.title, description: this.data.desc, location: this.data.loc, timeType: "2", startTime: this.data.startTime + ' 00:00:00', endTime: this.data.endTime + ' 24:00:00', deadline: deadlinePara + ':00'},
+      // data: { openId: openId, name: this.data.title, description: this.data.desc, location: this.data.loc, timeType: "2", startTime: "2015-09-10 12:09:10", endTime: "2015-09-10 12:09:10", deadline: "2015-09-10 12:09:10" },
+
+      complete: function (res) {
         //dismiss进度条
         wx.hideLoading()
       },
-      success: function(res) {
+      success: function (res) {
         //跳转
         if (res.statusCode == 200) {
-          console.log('发起活动，activityId='+res.data.activityId)
-          var activityId = res.data.activityId;
+          console.log('发起活动，activityId=' + res.data)
+          var activityId = res.data;
+          wx.navigateTo({
+            url: '../calendar/index?activityId=' + activityId,
+          })
         }
-        
+
       },
-      fail: function(res) {
+      fail: function (res) {
         //tips
         wx.showToast({
           title: '发起活动失败',
@@ -77,7 +83,7 @@ Page({
   },
 
   onLoad: function (option) {
-    
+
     // 调用函数时，传入new Date()参数，返回值是日期和时间 
     var startTime = util.formatTime(new Date());
     var endTime = util.formatTime(new Date());
@@ -92,6 +98,6 @@ Page({
       duration: option.duration,
       loc: option.loc
     });
-  }  
-  
+  }
+
 })

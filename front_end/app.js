@@ -9,7 +9,7 @@ App({
       url: 'https://www.chengfpl.com/weili/user/add',
       method: "POST",
       header: {
-        "content-type": "application/x-www-form-urlencoded"
+        "content-type": "form-data"
       },
       data: {
         openId: that.openId,

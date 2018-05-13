@@ -22,6 +22,22 @@ function time2Stamp(time) {
   return stamp
 }
 
+function json2Form(json) {
+  var str = [];
+  for (var p in json) {
+    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
+  }
+  return str.join("&");
+}
+
+module.exports = {
+
+  json2Form: json2Form,
+
+}
+
+
+
 module.exports = {
   formatTime: formatTime,
   time2Stamp: time2Stamp

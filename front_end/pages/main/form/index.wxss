@@ -24,6 +24,9 @@
   flex-direction: row;
   padding-top: 20rpx;
   padding-bottom: 20rpx;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .divider {
@@ -53,8 +56,9 @@
   font-size: 34rpx;
   color: #4a4a4a;
   width: 170rpx;
-  letter-spacing: 0;
+  margin-top: 0;
   margin-left: 29rpx;
+  min-width: 134rpx;
 }
 
 .title_wrp {
@@ -65,13 +69,16 @@
   margin-left: 29rpx;
 }
 
+.content_wrp {
+  margin-left: 20rpx;
+}
+
 .content {
   font-family: PingFangSC-Regular;
   font-size: 34rpx;
   color: #000;
-  margin-left: 20rpx;
-  letter-spacing: 0;
   margin-right: 40rpx;
+  margin-left: 22.5rpx;
 }
 
 .start_activity {
@@ -80,7 +87,7 @@
   border-radius: 10rpx;
   width: 669rpx;
   margin: 30rpx auto 0 auto;
-  padding: 20rpx 0rpx;
+  /* padding: 20rpx 0rpx; */
   font-family: PingFangSC-Regular;
   font-size: 36rpx;
   color: #fff;

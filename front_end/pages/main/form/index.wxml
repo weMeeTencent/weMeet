@@ -1,93 +1,99 @@
-<view class="container">
-  <view class='page'>
-    <view class="page_body">
-
-      <view class='divider'></view>
-      <view class='item'>
-        <text class='title'>活动主题</text>
-        <textarea class='content' auto-focus auto-height value='{{title}}'></textarea>
-      </view>
-      <view class='divider_margin_20'></view>
-    </view>
-
-    <view class="page_body">
-
-
-      <view class='item'>
-        <text class='title'>活动说明</text>
-        <textarea class='content' auto-height value='{{desc}}'></textarea>
-      </view>
-      <view class='divider_margin_20'></view>
-    </view>
-
-    <view class="page_body">
-
-
-      <view class='item'>
-        <text class='title'>活动时长</text>
-        <textarea class='content' auto-height value='{{duration}}'></textarea>
-      </view>
-      <view class='divider_margin_20'></view>
-    </view>
-
-    <view class="page_body">
-      <view class='item'>
-        <text class='title'>活动地点</text>
-        <textarea class='content' auto-height value='{{loc}}'></textarea>
-      </view>
-
-      <view class='divider'></view>
-    </view>
-  </view>
-
-
-
-
-  <view class="page_body_margin">
+<form bindsubmit="formSubmit">
+  <view class="container">
     <view class='page'>
-      <view class='divider'></view>
+      <view class="page_body">
 
-      <view class='item'>
-        <view class='time_item'>
-          <text class='title_wrp'>可选时间</text>
+        <view class='divider'></view>
+        <view class='item'>
+          <text class='title'>活动主题</text>
+        
+            <textarea class='content' auto-focus auto-height value='{{title}}'></textarea>
+    
+        </view>
+        <view class='divider_margin_20'></view>
+      </view>
+
+      <view class="page_body">
+
+
+        <view class='item'>
+          <text class='title'>活动说明</text>
+          <textarea class='content' auto-height value='{{desc}}'></textarea>
+        </view>
+        <view class='divider_margin_20'></view>
+      </view>
+
+      <view class="page_body">
+
+
+        <view class='item'>
+          <text class='title'>活动时长</text>
+          <input class='content' auto-height value='{{duration}}' type='digit'></input>
+        </view>
+        <view class='divider_margin_20'></view>
+      </view>
+
+      <view class="page_body">
+        <view class='item'>
+          <text class='title'>活动地点</text>
+          <textarea class='content' auto-height value='{{loc}}'></textarea>
+        </view>
+
+        <view class='divider'></view>
+      </view>
+    </view>
+
+
+
+
+    <view class="page_body_margin">
+      <view class='page'>
+        <view class='divider'></view>
+
+        <view class='item'>
+          <view class='time_item'>
+            <text class='title_wrp'>可选时间</text>
+            <view class="weui-cell__bd">
+              <picker mode="date" value="{{startTime}}" start="{{startTime}}" end="2200-09-01" bindchange="bindStartTimeChange">
+                <view class='time'>{{startTime}}</view>
+              </picker>
+            </view>
+          </view>
+          <view class='time_item'>
+            <text class='title_wrp'>至</text>
+            <view class="weui-cell__bd">
+              <picker mode="date" value="{{endTime}}" start="2015-09-01" end="2200-09-01" bindchange="bindEndTimeChange">
+                <view class='time'>{{endTime}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        <view class='divider'></view>
+      </view>
+    </view>
+
+    <view class="page_body_margin">
+      <view class='page'>
+        <view class='divider'></view>
+        <view class='item'>
+          <text class='title_wrp'>征集截止</text>
           <view class="weui-cell__bd">
-            <picker mode="date" value="{{startTime}}" start="{{startTime}}" end="2200-09-01" bindchange="bindStartTimeChange">
-              <view class='time'>{{startTime}}</view>
+            <picker mode="date" value="{{deadline}}" start="2015-09-01" end="2200-09-01" bindchange="bindDeadlineChange">
+              <view class='time'>{{deadline}}</view>
+            </picker>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="time" value="{{deadlineTime}}" start="00:00" end="24:00" bindchange="bindDeadlineTimeChange">
+              <view class='time'>{{deadlineTime}}</view>
             </picker>
           </view>
         </view>
-        <view class='time_item'>
-          <text class='title_wrp'>至</text>
-          <view class="weui-cell__bd">
-            <picker mode="date" value="{{endTime}}" start="2015-09-01" end="2200-09-01" bindchange="bindEndTimeChange">
-              <view class='time'>{{endTime}}</view>
-            </picker>
-          </view>
-        </view>
+        <view class='divider'></view>
       </view>
-      <view class='divider'></view>
     </view>
-  </view>
 
-  <view class="page_body_margin">
-    <view class='page'>
-      <view class='divider'></view>
-      <view class='item'>
-        <text class='title_wrp'>征集截止</text>
-        <view class="weui-cell__bd">
-          <picker mode="date" value="{{deadline}}" start="2015-09-01" end="2200-09-01" bindchange="bindDeadlineChange">
-            <view class='time'>{{deadline}}</view>
-          </picker>
-        </view>
-        <view class="weui-cell__bd">
-          <picker mode="time" value="{{deadlineTime}}" start="00:00" end="24:00" bindchange="bindDeadlineTimeChange">
-            <view class='time'>{{deadlineTime}}</view>
-          </picker>
-        </view>
-      </view>
-      <view class='divider'></view>
-    </view>
-  </view>
+    <button form-type='submit' class='start_activity'> 完成 </button>
 
-<view bindtap="startActivity" class='start_activity'> 完成 </view>
-</view>
+
+  </view>
+</form>
