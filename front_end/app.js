@@ -46,8 +46,8 @@ App({
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
-            success: function(res) {
-              console.log(res)
+            success: function (res) {
+              console.log('userInfo', res)
               that.userInfo = res.userInfo;
               that.sendUserInfoToServer(res.userInfo)
               if (this.userInfoReadyCallback) {

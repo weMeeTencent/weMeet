@@ -69,8 +69,8 @@ var addZero = function (num) {
 }
 
 var getTimestamps = function (year, month, day, start, end) {
-  var startTime = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(start) + ':00';
-  var endTime = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(end) + ':00';
+  var startTime = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(start) + ':00:00';
+  var endTime = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(end) + ':00:00';
   return startTime + '_' + endTime;
 }
 
@@ -397,13 +397,14 @@ Page({
     console.log(selectDay);
   },
   submit: function () {
+    var openId = getApp().openId;
     wx.request({
       url: 'https://www.chengfpl.com/weili/user/create/participation',
-      method: 'post',
+      method: 'POST',
       header: {
-        'content-type': 'application/json'
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
       },
-      data: { openId: 'openId', activityId: '111', time: this.data.timestamps.join(';') },
+      data: { openId: openId, acitvityId: 33, time: this.data.timestamps.join(';') },
 
       complete: function (res) {
         //dismiss进度条

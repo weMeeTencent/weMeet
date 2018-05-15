@@ -59,11 +59,6 @@ Page({
       hasUserInfo: true
     })
   },
-  bindToCalendar: function (e) {
-    wx.navigateTo({
-      url: '../calendar/index'
-    });
-  },
   bindToStartActivity: function (e) {
     wx.navigateTo({
       // url: '../form/index',
