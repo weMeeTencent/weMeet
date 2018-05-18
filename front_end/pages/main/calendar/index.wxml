@@ -74,11 +74,11 @@
             {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].day}}
           </view>
           <view class="calendar-week-day">
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[0, 8]}}" bindtap="selectWeek">早晨</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[8, 12]}}" bindtap="selectWeek">上午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[12, 14]}}" bindtap="selectWeek">中午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[14, 18]}}" bindtap="selectWeek">下午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[18, 24]}}" bindtap="selectWeek">晚上</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[0, 0, 8]}}" bindtap="selectDuration">早晨</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[1, 8, 12]}}" bindtap="selectDuration">上午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[2, 12, 14]}}" bindtap="selectDuration">中午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[3, 14, 18]}}" bindtap="selectDuration">下午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[4, 18, 24]}}" bindtap="selectDuration">晚上</view>
           </view>
         </view>
       </view>
@@ -95,7 +95,7 @@
           <view class="calendar-now-dot"></view>
           <view class="calendar-now-line"></view>
         </view>
-        <view class="calendar-clock-line" wx:for="{{dateData.arrHours}}" wx:for-index="clock" wx:key="*this" data-hour-index="{{clock}}" bindtap="selectDuration">
+        <view class="calendar-clock-line" wx:for="{{dateData.arrHours}}" wx:for-index="clock" wx:key="*this" data-hour-index="{{clock}}" bindtap="selectHour">
           <view class="calendar-half-clock"></view>
           <view class="calendar-half-clock"></view>
         </view>

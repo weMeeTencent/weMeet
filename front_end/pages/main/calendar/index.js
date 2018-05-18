@@ -50,8 +50,9 @@ var pageData = {
     { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
   ],
   checkbox: 0,
-  timestamps: [],
+  selected: {},
   arrSelect: [],
+  openId: getApp().openId,
 }
 
 //获取此月第一天相对视图显示的偏移
@@ -72,6 +73,9 @@ var getTimestamps = function (year, month, day, start, end) {
   var startTime = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(start) + ':00:00';
   var endTime = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(end) + ':00:00';
   return startTime + '_' + endTime;
+}
+var getSelectedItem = function (year, month, day) {
+  return [year, addZero(month), addZero(day)].join('');
 }
 
 var isSelectable = function (item) {
@@ -180,7 +184,28 @@ refreshPageData(curYear, curMonth, curDay, 0);
 Page({
   data: pageData,
   onLoad: function () {
-    
+    wx.request({
+      url: 'https://www.chengfpl.com/weili/user/select/activity?activityId=9',
+      data: { openId: pageData.openId },
+
+      complete: function (res) {
+        //dismiss进度条
+        wx.hideLoading()
+      },
+      success: function (res) {
+        //跳转
+        if (res.statusCode == 200) {
+          console.log(res)
+        }
+
+      },
+      fail: function (res) {
+        //tips
+        wx.showToast({
+          title: '发起活动失败',
+        })
+      }
+    })
   },
   onShow: function () {
     this.setData({
@@ -377,34 +402,45 @@ Page({
   },
   selectDay: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
-    var selectDay = getTimestamps(target.year, target.month, target.day, 0, 24);
-    this.data.timestamps.push(selectDay);
-    refreshSelectData(target.i);
+    var item = getSelectedItem(target.year, target.month, target.day);
+    if (!this.data.selected[item]){
+      this.data.selected[item] = {};
+    }
+    this.data.selected[item]['day'] = 1;
+    this.data.selected[item]['day_stamps'] = getTimestamps(target.year, target.month, target.day, 0, 24);
+    // refreshSelectData(target.i);
     this.setData({
       arrSelect: pageData.arrSelect,
     })
   },
-  selectWeek: function (e) {
-    var target = e.currentTarget.dataset.dayIndex;
-    var start = e.currentTarget.dataset.weekIndex[0];
-    var end = e.currentTarget.dataset.weekIndex[1];
-    var selectDay = getTimestamps(target.year, target.month, target.day, start, end);
-    console.log(selectDay);
-  },
   selectDuration: function (e) {
+    var target = e.currentTarget.dataset.dayIndex;
+    var start = e.currentTarget.dataset.weekIndex[1];
+    var end = e.currentTarget.dataset.weekIndex[2];
+    var item = getSelectedItem(target.year, target.month, target.day);
+    if (!this.data.selected[item]) {
+      this.data.selected[item] = {
+        duration: {},
+      };
+    }
+    this.data.selected[item]['duration'][e.currentTarget.dataset.weekIndex[0]] = getTimestamps(target.year, target.month, target.day, start, end);
+    this.setData({
+      arrSelect: pageData.arrSelect,
+    })
+  },
+  selectHour: function (e) {
     var target = e.currentTarget.dataset.hourIndex;
     var selectDay = getTimestamps(curYear, curMonth + 1, curDay, target, target >= 23 ? target + 1 : target + 2);
     console.log(selectDay);
   },
   submit: function () {
-    var openId = getApp().openId;
     wx.request({
       url: 'https://www.chengfpl.com/weili/user/create/participation',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
       },
-      data: { openId: openId, acitvityId: 33, time: this.data.timestamps.join(';') },
+      data: { openId: pageData.openId, acitvityId: 33, time: this.data.timestamps.join(';') },
 
       complete: function (res) {
         //dismiss进度条
