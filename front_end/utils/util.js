@@ -30,15 +30,19 @@ function json2Form(json) {
   return str.join("&");
 }
 
-module.exports = {
 
-  json2Form: json2Form,
-
+function getCurrentPageUrl() {
+  var pages = getCurrentPages();    //获取加载的页面
+  var currentPage = pages[pages.length - 1];    //获取当前页面的对象
+  var options = currentPage.options
+  // var url = currentPage.route
+  return options;
 }
 
 
-
 module.exports = {
+  getCurrentPageUrl: getCurrentPageUrl,
+  json2Form: json2Form,
   formatTime: formatTime,
   time2Stamp: time2Stamp
 }

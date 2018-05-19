@@ -89,7 +89,7 @@ var isSelectable = function (item) {
 // 点击事件
 var refreshSelectData = function (item) {
   for (var i = 0; i < 42; ++i) {
-    if(pageData.dateData.arrDays[i]['item'] === item) {
+    if (pageData.dateData.arrDays[i]['item'] === item) {
       pageData.dateData.arrDays[i]['isSelected'] = Boolean(pageData.selected[item] && pageData.selected[item]['day']);
     }
   }
@@ -156,7 +156,7 @@ var refreshPageData = function (year, month, day, checkbox) {
     pageData.dateData.arrDays[i]['isToday'] = Boolean(curYear === new Date().getFullYear() && curMonth === new Date().getMonth() && (i - offset + 1 === new Date().getDate()));
     pageData.dateData.arrDays[i]['isSelectable'] = isSelectable(pageData.dateData.arrDays[i]);
   }
-  
+
   // refreshSelectData(item);
   pageData.dateData.weekNum = Math.ceil((getDayCount(curYear, curMonth) + offset) / 7);
   pageData.dateData.arrWeeks = pageData.dateData.arrWeeks.slice(0, pageData.dateData.weekNum)
@@ -185,32 +185,41 @@ var curMonth = curDate.getMonth();
 var curYear = curDate.getFullYear();
 var curDay = curDate.getDate();
 refreshPageData(curYear, curMonth, curDay, 0);
+
+var util = require('../../../utils/util.js')
+
 Page({
   data: pageData,
   onLoad: function () {
     var openId = getApp().openId;
+    var activityId = util.getCurrentPageUrl()['activityId'];
+    this.setData({
+      openId: openId,
+      activityId: activityId
+    })
+    var activityUrl = 'https://www.chengfpl.com/weili/user/select/activity?activityId=' + activityId;
+    var _this = this;
     wx.request({
-      url: 'https://www.chengfpl.com/weili/user/select/activity?activityId=9',
+      url: activityUrl,
       data: { openId: openId },
 
       complete: function (res) {
         //dismiss进度条
-        wx.hideLoading()
+        wx.hideLoading();
       },
       success: function (res) {
-        //跳转
-        if (res.statusCode == 200) {
-          console.log(res)
-        }
-
+        console.log(res)
+        _this.setData({
+          acitvityData: res.data.data,
+        })
       },
       fail: function (res) {
-        //tips
         wx.showToast({
-          title: '发起活动失败',
+          title: '加载活动失败',
         })
       }
     })
+    this.getJoinData();
   },
   onShow: function () {
     this.setData({
@@ -224,7 +233,58 @@ Page({
       path: '/pages/main/calendar/index'
     }
   },
-
+  getJoinData: function () {
+    var _this = this;
+    switch (_this.data.checkbox) {
+      case 0:
+        var url = 'https://www.chengfpl.com/weili/user/temporary/participation/day?activityId=' + this.data.activityId;
+        break;
+      case 1:
+        var url = 'https://www.chengfpl.com/weili/user/participation/partofday?activityId=' + this.data.activityId;
+        break;
+      case 2:
+        var url = 'https://www.chengfpl.com/weili/user/participation/hour?activityId=' + this.data.activityId;
+        break;
+      default:
+        var url = 'https://www.chengfpl.com/weili/user/temporary/participation/day?activityId=' + this.data.activityId;
+    }
+    wx.request({
+      url: url,
+      data: { openId: this.data.openId },
+      complete: function (res) {
+        wx.hideLoading();
+      },
+      success: function (res) {
+        switch (_this.data.checkbox) {
+          case 0:
+            _this.setData({
+              monthJoinData: res.data.data,
+            })
+            break;
+          case 1:
+            _this.setData({
+              weekJoinData: res.data.data,
+            })
+            break;
+          case 2:
+            _this.setData({
+              dayJoinData: res.data.data,
+            })
+            break;
+          default:
+            _this.setData({
+              monthJoinData: res.data.data,
+            })
+        }
+      },
+      fail: function (res) {
+      }
+    })
+    // refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
+    // this.setData({
+    //   dateData: pageData.dateData,
+    // })
+  },
   goToday: function (e) {
     curDate = new Date();
     curMonth = curDate.getMonth();
@@ -376,6 +436,7 @@ Page({
     this.setData({
       checkbox: 0
     })
+    this.getJoinData();
     refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
@@ -385,6 +446,7 @@ Page({
     this.setData({
       checkbox: 1
     })
+    this.getJoinData();
     refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
@@ -394,6 +456,7 @@ Page({
     this.setData({
       checkbox: 2
     })
+    this.getJoinData();
     refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
     this.setData({
       dateData: pageData.dateData,
@@ -409,8 +472,8 @@ Page({
     var target = e.currentTarget.dataset.dayIndex;
     console.log(target);
     var item = getSelectedItem(target.year, target.month, target.day);
-    if(target.isSelectable && target.isCurentMonth){
-      if (!pageData.selected[item]){
+    if (target.isSelectable && target.isCurentMonth) {
+      if (!pageData.selected[item]) {
         pageData.selected[item] = {};
       }
       pageData.selected[item]['day'] = 1;
@@ -423,7 +486,7 @@ Page({
         dateData: pageData.dateData,
       });
     }
-    if(target.isSelected){
+    if (target.isSelected) {
       delete pageData.selected[item];
       this.setData({
         selected: pageData.selected,
@@ -433,7 +496,7 @@ Page({
         dateData: pageData.dateData,
       });
     }
-    
+
   },
   selectDuration: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
@@ -456,13 +519,18 @@ Page({
     console.log(selectDay);
   },
   submit: function () {
+    var _this = this;
     wx.request({
       url: 'https://www.chengfpl.com/weili/user/create/participation',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
       },
-      data: { openId: pageData.openId, acitvityId: 33, time: this.data.timestamps.join(';') },
+      data: {
+        openId: _this.data.openId,
+        activityId: _this.data.activityId,
+        time: '2018-05-23 00:00:00_2018-05-23 24:00:00'
+      },
 
       complete: function (res) {
         //dismiss进度条

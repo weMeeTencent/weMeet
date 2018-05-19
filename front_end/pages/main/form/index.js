@@ -65,10 +65,10 @@ Page({
       success: function (res) {
         //跳转
         if (res.statusCode == 200) {
-          console.log('发起活动，activityId=' + res.data)
-          var activityId = res.data;
+          var url = '../calendar/index?activityId=' + res.data.data;
+          console.log(res.data.data, url)
           wx.navigateTo({
-            url: '../calendar/index?activityId=' + activityId,
+            url: url,
           })
         }
 

@@ -2,25 +2,25 @@
 
 
   <view class="title">
-    <view class="title-text">微历 - 交互评审会</view>
+    <view class="title-text">{{acitvityData.name}}</view>
     <image class="img-share" src="../../../res/share.png"></image>
   </view>
 
 
-  <view class="content">Hi，微历er~大坤的交互已输出，本周大家什么时间方便，一起碰一下。开发大佬们也敲定下排期~</view>
+  <view class="content">{{acitvityData.description}}</view>
 
 
   <view class="position">
     <image class="img-position" src="../../../res/position.png"></image>
-    <view class="position-text">北京市海淀区第三极大厦B座806会议室</view>
+    <view class="position-text">{{acitvityData.location}}</view>
   </view>
 
 
   <view class="number">
     <image class="img-clock" src="../../../res/clock.png"></image>
-    <view class="clock-text">预计2小时</view>
+    <view class="clock-text">预计{{acitvityData.timeType}}小时</view>
     <image class="img-people" src="../../../res/people.png"></image>
-    <view class="people-text">6人已参加</view>
+    <view class="people-text">{{acitvityData.count}}人已参加</view>
   </view>
 
 
