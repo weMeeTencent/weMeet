@@ -52,7 +52,7 @@
         <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
           <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
             <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{dateData.arrDays[row * 7 + col]}}" bindtap="selectDay">
-              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected && 'isSelect'}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
+              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected && 'isSelect'}} {{'joinNum'+dateData.arrDays[row * 7 + col].joinNum}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
                 {{dateData.arrDays[row * 7 + col].day}}
               </view>
               <view class="calendar-body-dot" hidden="{{!dateData.arrDays[row * 7 + col].isToday}}"></view>
@@ -74,11 +74,15 @@
             {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].day}}
           </view>
           <view class="calendar-week-day">
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[0, 0, 8]}}" bindtap="selectDuration">早晨</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[1, 8, 12]}}" bindtap="selectDuration">上午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[2, 12, 14]}}" bindtap="selectDuration">中午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[3, 14, 18]}}" bindtap="selectDuration">下午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[4, 18, 24]}}" bindtap="selectDuration">晚上</view>
+            <view
+              class="calendar-week-duration {{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected && 'isSelect'}} {{'joinNum'+dateData.arrDays[row * 7 + col].joinNum}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}}"
+              data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
+              data-week-index="{{[1, 0, 8]}}"
+              bindtap="selectDuration">早晨</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[2, 8, 12]}}" bindtap="selectDuration">上午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[3, 12, 14]}}" bindtap="selectDuration">中午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[4, 14, 18]}}" bindtap="selectDuration">下午</view>
+            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[5, 18, 24]}}" bindtap="selectDuration">晚上</view>
           </view>
         </view>
       </view>

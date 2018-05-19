@@ -95,6 +95,43 @@ var refreshSelectData = function (item) {
   }
 }
 
+// 查看参与人数
+var refreshJoinData = function () {
+  switch (pageData.checkbox) {
+    case 0:
+      var res = pageData.monthJoinData;
+      break;
+    case 1:
+      var res = pageData.weekJoinData;
+      break;
+    case 2:
+      var res = pageData.dayJoinData;
+      break;
+    default:
+      var res = pageData.monthJoinData;
+  }
+  if (pageData.checkbox === 0) {
+    for (var resItme in res) {
+      for (var i = 0; i < 42; ++i) {
+        if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
+          pageData.dateData.arrDays[i]['joinNum'] = res[resItme].length;
+        }
+      }
+    }
+  } else if (pageData.checkbox === 1) {
+    for (var n in res) {
+      for (var resItme in res[n]) {
+        console.log(res[n][resItme]);
+        for (var i = 0; i < 42; ++i) {
+          if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
+            pageData.dateData.arrDays[i]['joinNum'+resItme.slice(10, 12)] = res[n][resItme].length;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 //刷新全部数据
 var refreshPageData = function (year, month, day, checkbox) {
@@ -156,8 +193,7 @@ var refreshPageData = function (year, month, day, checkbox) {
     pageData.dateData.arrDays[i]['isToday'] = Boolean(curYear === new Date().getFullYear() && curMonth === new Date().getMonth() && (i - offset + 1 === new Date().getDate()));
     pageData.dateData.arrDays[i]['isSelectable'] = isSelectable(pageData.dateData.arrDays[i]);
   }
-
-  // refreshSelectData(item);
+  refreshJoinData();
   pageData.dateData.weekNum = Math.ceil((getDayCount(curYear, curMonth) + offset) / 7);
   pageData.dateData.arrWeeks = pageData.dateData.arrWeeks.slice(0, pageData.dateData.weekNum)
   for (var i = 0; i < pageData.dateData.weekNum; ++i) {
@@ -246,7 +282,7 @@ Page({
         var url = 'https://www.chengfpl.com/weili/user/participation/hour?activityId=' + this.data.activityId;
         break;
       default:
-        var url = 'https://www.chengfpl.com/weili/user/temporary/participation/day?activityId=' + this.data.activityId;
+        var url = 'https://www.chengfpl.com/weili/user/participation/day?activityId=' + this.data.activityId;
     }
     wx.request({
       url: url,
@@ -257,34 +293,49 @@ Page({
       success: function (res) {
         switch (_this.data.checkbox) {
           case 0:
+            pageData.monthJoinData = res.data.data,
+              refreshJoinData();
             _this.setData({
-              monthJoinData: res.data.data,
-            })
+              dateData: pageData.dateData,
+              monthJoinData: pageData.monthJoinData,
+            });
             break;
           case 1:
+            pageData.weekJoinData = res.data.data,
+              refreshJoinData();
             _this.setData({
-              weekJoinData: res.data.data,
-            })
+              dateData: pageData.dateData,
+              weekJoinData: pageData.weekJoinData,
+            });
             break;
           case 2:
+            pageData.dayJoinData = res.data.data,
+              refreshJoinData();
             _this.setData({
-              dayJoinData: res.data.data,
-            })
+              dateData: pageData.dateData,
+              dayJoinData: pageData.dayJoinData,
+            });
             break;
           default:
+            pageData.monthJoinData = res.data.data,
+              refreshJoinData();
             _this.setData({
-              monthJoinData: res.data.data,
-            })
+              dateData: pageData.dateData,
+              monthJoinData: pageData.monthJoinData,
+            });
         }
       },
       fail: function (res) {
       }
     })
-    // refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
-    // this.setData({
-    //   dateData: pageData.dateData,
-    // })
   },
+
+  // // // // // // // // // // // // // // 
+  //
+  //            页面交互函数
+  //
+  // // // // // // // // // // // // // // 
+
   goToday: function (e) {
     curDate = new Date();
     curMonth = curDate.getMonth();
@@ -425,16 +476,10 @@ Page({
       dateData: pageData.dateData,
     })
   },
-
-  // // // // // // // // // // // // // // 
-  //
-  //            页面交互函数
-  //
-  // // // // // // // // // // // // // // 
-
   showMonth: function () {
+    pageData.checkbox = 0;
     this.setData({
-      checkbox: 0
+      checkbox: pageData.checkbox,
     })
     this.getJoinData();
     refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
@@ -443,8 +488,9 @@ Page({
     })
   },
   showWeek: function () {
+    pageData.checkbox = 1;
     this.setData({
-      checkbox: 1
+      checkbox: pageData.checkbox,
     })
     this.getJoinData();
     refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
@@ -453,8 +499,9 @@ Page({
     })
   },
   showDay: function () {
+    pageData.checkbox = 2;
     this.setData({
-      checkbox: 2
+      checkbox: pageData.checkbox,
     })
     this.getJoinData();
     refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
@@ -509,6 +556,7 @@ Page({
       };
     }
     pageData.selected[item]['duration'][e.currentTarget.dataset.weekIndex[0]] = getTimestamps(target.year, target.month, target.day, start, end);
+    console.log(pageData.selected[item]['duration'])
     this.setData({
       selected: pageData.selected,
     })
@@ -529,19 +577,16 @@ Page({
       data: {
         openId: _this.data.openId,
         activityId: _this.data.activityId,
-        time: '2018-05-23 00:00:00_2018-05-23 24:00:00'
+        time: '2018-05-25 00:00:00_2018-05-25 24:00:00'
       },
 
       complete: function (res) {
-        //dismiss进度条
         wx.hideLoading()
       },
       success: function (res) {
-        //跳转
-        if (res.statusCode == 200) {
-          console.log(res)
-        }
-
+        wx.showToast({
+          title: '成功',
+        })
       },
       fail: function (res) {
         //tips

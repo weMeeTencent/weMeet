@@ -62,7 +62,7 @@ Page({
   bindToStartActivity: function (e) {
     wx.navigateTo({
       // url: '../form/index',
-      url: '../calendar/index',
+      url: '../calendar/index?activityId=60',
     })
   },
   shareTouchStart: function (e) {

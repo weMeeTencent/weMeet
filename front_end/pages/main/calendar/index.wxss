@@ -205,6 +205,22 @@
   background: #E4ECFD;
   border-left: 6rpx solid #3875FF;
 }
+
+.joinNum1, .joinNum2 {
+  background: #3874ff33;
+}
+.joinNum3, .joinNum4 {
+  background: #3874ff66;
+}
+.joinNum3, .joinNum4 {
+  background: #3874ff99;
+}
+.joinNum7, .joinNum8 {
+  background: #3874ffcc;
+}
+.joinNum9, .joinNum10 {
+  background: #3874ff;
+}
 .calendar-body-dot {
   width: 6rpx;
   height: 6rpx;
