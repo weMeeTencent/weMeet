@@ -52,7 +52,7 @@
         <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
           <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
             <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{dateData.arrDays[row * 7 + col]}}" bindtap="selectDay">
-              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{arrSelect[row * 7 + col] && 'isSelect'}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
+              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected && 'isSelect'}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
                 {{dateData.arrDays[row * 7 + col].day}}
               </view>
               <view class="calendar-body-dot" hidden="{{!dateData.arrDays[row * 7 + col].isToday}}"></view>

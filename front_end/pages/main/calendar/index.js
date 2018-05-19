@@ -4,8 +4,6 @@
 //
 // // // // // // // // // // // // // // 
 
-var app = getApp();
-
 //月份天数表
 var DAY_OF_MONTH = [
   [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
@@ -52,7 +50,6 @@ var pageData = {
   checkbox: 0,
   selected: {},
   arrSelect: [],
-  openId: getApp().openId,
 }
 
 //获取此月第一天相对视图显示的偏移
@@ -75,7 +72,7 @@ var getTimestamps = function (year, month, day, start, end) {
   return startTime + '_' + endTime;
 }
 var getSelectedItem = function (year, month, day) {
-  return [year, addZero(month), addZero(day)].join('');
+  return [year, addZero(month), addZero(day)].join('-');
 }
 
 var isSelectable = function (item) {
@@ -90,16 +87,15 @@ var isSelectable = function (item) {
 }
 
 // 点击事件
-var refreshSelectData = function (targrt){
+var refreshSelectData = function (item) {
   for (var i = 0; i < 42; ++i) {
-    if (targrt === i){
-      pageData.arrSelect[i] = !pageData.arrSelect[i];
-    } else {
-      pageData.arrSelect[i] = pageData.arrSelect[i] || false;
+    if(pageData.dateData.arrDays[i]['item'] === item) {
+      pageData.dateData.arrDays[i]['isSelected'] = Boolean(pageData.selected[item] && pageData.selected[item]['day']);
     }
   }
-  console.log(pageData.arrSelect);
 }
+
+
 //刷新全部数据
 var refreshPageData = function (year, month, day, checkbox) {
   curMonth = month;
@@ -116,6 +112,7 @@ var refreshPageData = function (year, month, day, checkbox) {
           'month': 12,
           'day': getDayCount(curYear - 1, 11) - offset + 1 + i,
           'isCurentMonth': false,
+          'item': getSelectedItem(curYear - 1, 12, getDayCount(curYear - 1, 11) - offset + 1 + i),
         };
       } else {
         pageData.dateData.arrDays[i] = {
@@ -123,6 +120,7 @@ var refreshPageData = function (year, month, day, checkbox) {
           'month': curMonth,
           'day': getDayCount(curYear, curMonth - 1) - offset + 1 + i,
           'isCurentMonth': false,
+          'item': getSelectedItem(curYear, curMonth, getDayCount(curYear, curMonth - 1) - offset + 1 + i),
         };
       }
     } else if (i >= offset2) {
@@ -132,6 +130,7 @@ var refreshPageData = function (year, month, day, checkbox) {
           'month': 1,
           'day': i - offset2 + 1,
           'isCurentMonth': false,
+          'item': getSelectedItem(curYear + 1, 1, i - offset2 + 1),
         };
       } else {
         pageData.dateData.arrDays[i] = {
@@ -139,6 +138,7 @@ var refreshPageData = function (year, month, day, checkbox) {
           'month': curMonth + 2,
           'day': i - offset2 + 1,
           'isCurentMonth': false,
+          'item': getSelectedItem(curYear, curMonth + 2, i - offset2 + 1),
         };
       }
     } else {
@@ -147,12 +147,17 @@ var refreshPageData = function (year, month, day, checkbox) {
         'month': curMonth + 1,
         'day': i - offset + 1,
         'isCurentMonth': true,
+        'item': getSelectedItem(curYear, curMonth + 1, i - offset + 1),
       };
     }
+    var item = pageData.dateData.arrDays[i]['item'];
+    pageData.dateData.arrDays[i]['isSelected'] = Boolean(pageData.selected[item] && pageData.selected[item]['day']);
     pageData.dateData.arrDays[i]['i'] = i;
     pageData.dateData.arrDays[i]['isToday'] = Boolean(curYear === new Date().getFullYear() && curMonth === new Date().getMonth() && (i - offset + 1 === new Date().getDate()));
     pageData.dateData.arrDays[i]['isSelectable'] = isSelectable(pageData.dateData.arrDays[i]);
   }
+  
+  // refreshSelectData(item);
   pageData.dateData.weekNum = Math.ceil((getDayCount(curYear, curMonth) + offset) / 7);
   pageData.dateData.arrWeeks = pageData.dateData.arrWeeks.slice(0, pageData.dateData.weekNum)
   for (var i = 0; i < pageData.dateData.weekNum; ++i) {
@@ -180,13 +185,13 @@ var curMonth = curDate.getMonth();
 var curYear = curDate.getFullYear();
 var curDay = curDate.getDate();
 refreshPageData(curYear, curMonth, curDay, 0);
-
 Page({
   data: pageData,
   onLoad: function () {
+    var openId = getApp().openId;
     wx.request({
       url: 'https://www.chengfpl.com/weili/user/select/activity?activityId=9',
-      data: { openId: pageData.openId },
+      data: { openId: openId },
 
       complete: function (res) {
         //dismiss进度条
@@ -402,30 +407,47 @@ Page({
   },
   selectDay: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
+    console.log(target);
     var item = getSelectedItem(target.year, target.month, target.day);
-    if (!this.data.selected[item]){
-      this.data.selected[item] = {};
+    if(target.isSelectable && target.isCurentMonth){
+      if (!pageData.selected[item]){
+        pageData.selected[item] = {};
+      }
+      pageData.selected[item]['day'] = 1;
+      pageData.selected[item]['day_stamps'] = getTimestamps(target.year, target.month, target.day, 0, 24);
+      this.setData({
+        selected: pageData.selected,
+      });
+      refreshSelectData(item);
+      this.setData({
+        dateData: pageData.dateData,
+      });
     }
-    this.data.selected[item]['day'] = 1;
-    this.data.selected[item]['day_stamps'] = getTimestamps(target.year, target.month, target.day, 0, 24);
-    // refreshSelectData(target.i);
-    this.setData({
-      arrSelect: pageData.arrSelect,
-    })
+    if(target.isSelected){
+      delete pageData.selected[item];
+      this.setData({
+        selected: pageData.selected,
+      });
+      refreshSelectData(item);
+      this.setData({
+        dateData: pageData.dateData,
+      });
+    }
+    
   },
   selectDuration: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
     var start = e.currentTarget.dataset.weekIndex[1];
     var end = e.currentTarget.dataset.weekIndex[2];
     var item = getSelectedItem(target.year, target.month, target.day);
-    if (!this.data.selected[item]) {
-      this.data.selected[item] = {
+    if (!pageData.selected[item]) {
+      pageData.selected[item] = {
         duration: {},
       };
     }
-    this.data.selected[item]['duration'][e.currentTarget.dataset.weekIndex[0]] = getTimestamps(target.year, target.month, target.day, start, end);
+    pageData.selected[item]['duration'][e.currentTarget.dataset.weekIndex[0]] = getTimestamps(target.year, target.month, target.day, start, end);
     this.setData({
-      arrSelect: pageData.arrSelect,
+      selected: pageData.selected,
     })
   },
   selectHour: function (e) {
