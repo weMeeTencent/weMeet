@@ -111,10 +111,13 @@ var refreshJoinData = function () {
       var res = pageData.monthJoinData;
   }
   if (pageData.checkbox === 0) {
-    for (var resItme in res) {
-      for (var i = 0; i < 42; ++i) {
-        if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
-          pageData.dateData.arrDays[i]['joinNum'] = res[resItme].length;
+    for (var n in res) {
+      for (var resItme in res[n]) {
+        console.log(res[n][resItme]);
+        for (var i = 0; i < 42; ++i) {
+          if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
+            pageData.dateData.arrDays[i]['joinNum'] = res[n][resItme].length;
+          }
         }
       }
     }
@@ -273,7 +276,7 @@ Page({
     var _this = this;
     switch (_this.data.checkbox) {
       case 0:
-        var url = 'https://www.chengfpl.com/weili/user/temporary/participation/day?activityId=' + this.data.activityId;
+        var url = 'https://www.chengfpl.com/weili/user/participation/day?activityId=' + this.data.activityId;
         break;
       case 1:
         var url = 'https://www.chengfpl.com/weili/user/participation/partofday?activityId=' + this.data.activityId;
