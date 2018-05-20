@@ -83,7 +83,7 @@ Page({
 
   tapLookup: function (e) {
     wx.navigateTo({
-      url: '../result/index?activityId=' + activityId
+      url: '../main/calendar/index?activityId=' + activityId
     });
   },
 

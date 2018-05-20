@@ -1,102 +1,71 @@
 .main {
   background: #f8f8f8;
-  text-align: center;
   height: 100%;
-}
-
-.main_container {
-  margin-top: 0rpx;
   padding-top: 5rpx;
 }
 
 .recommend-list-item {
   background: #fff;
-  border: 0.5rpx solid #cacaca;
+  border: 1rpx solid #cacaca;
   border-radius: 10rpx;
-  margin: 30rpx;
+  margin: 30rpx auto;
+  width: 680rpx;
+  height: 446rpx;
   overflow: hidden;
 }
 
 .recommend-list-img {
-  height: 340rpx;
+  height: 240rpx;
   width: 100%;
-  border-top-left-radius: 10rpx;
-  border-top-right-radius: 10rpx;
+  display: block;
 }
 
 .recommend-list-title {
-  margin-top: 10rpx;
-  display: flex;
-  align-items: center;
-  margin-left: 13rpx;
-  font-family: PingFangSC-Regular;
+  margin-top: 20rpx;
+  margin-left: 26rpx;
   font-size: 32rpx;
   color: #000;
   letter-spacing: 0;
   text-align: left;
+  line-height: 35rpx;
 }
 
 .recommend-list-desc {
-  margin-top: 10rpx;
-  display: flex;
-  align-items: center;
-  margin-left: 13rpx;
-  font-family: PingFangSC-Regular;
+  margin-top: 20rpx;
+  margin-left: 26rpx;
   font-size: 30rpx;
+  line-height: 35rpx;
   color: #B2B2B2;
   letter-spacing: 0;
-  margin-right: 10rpx;
   text-align: left;
 }
 
 .recommend-list-icon-loc {
   width: 20rpx;
-  margin-top: 8.5rpx;
-  margin-bottom: 10rpx;
+  margin-right: 15rpx;
 }
 
 .recommend-list-icon-people {
   width: 25rpx;
+  margin-right: 13rpx;
 }
 
 .recommend-list-loc {
   font-size: 24rpx;
   color: #B2B2B2;
-  margin-left: 7.5rpx;
-  font-family: PingFangSC-Regular;
-  margin-top: 10rpx;
-  margin-bottom: 13.5rpx;
-  margin-right: 13.5rpx;
+  flex: 1;
 }
 
 .recommend-list-num {
   color: #B2B2B2;
   font-size: 20rpx;
-  margin-left: 6.5rpx;
-  font-family: PingFangSC-Regular;
-  margin-right: 7.5rpx;
-}
-
-.divider {
-   border-top: 1rpx solid #e6e6e6;
-   margin-top: 13rpx;
-   margin-left: 8.5rpx;
-   margin-right: 9rpx;
 }
 
 .recommend-list-flex {
-   
   display: flex;
   align-items: center;
-  align-content: center;
   justify-content: space-between;
-  margin-left: 14rpx;
-}
-
-.recommend-list-flex-item {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: space-between;
-  margin-left: 14rpx;
+  margin: 26rpx 20rpx 0 20rpx;
+  border-top: 1rpx solid #e6e6e6;
+  height: 67rpx;
 }

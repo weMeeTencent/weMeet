@@ -27,7 +27,7 @@
   </view>
   <view class="invite-detail-2">
     <image class="img-detail" src="../../../res/people.png"></image>
-    <view class="invite-detail-text">预计{{acitvityData.count}}人参加</view>
+    <view class="invite-detail-text">预计{{acitvityData.count + 5}}人参加</view>
   </view>
 </view>
   <view class="invite-corner-footer">

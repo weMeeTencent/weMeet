@@ -3,7 +3,7 @@
 
   <view class="title">
     <view class="title-text">{{acitvityData.name}}</view>
-    <image class="img-share" src="../../../res/share.png"></image>
+    <image class="img-share" src="../../../res/share.png" bindtap="onShareAppMessage"></image>
   </view>
 
 

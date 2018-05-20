@@ -1,9 +1,5 @@
 // pages/recommend/index.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     list: [
       {
@@ -39,32 +35,6 @@ Page({
     var item = e.currentTarget.dataset.item;
     wx.navigateTo({
       url: '../main/form/index?title=' + item.title + '&desc=' + item.desc + '&duration=' + item.duration + '小时&loc=' + item.loc
-    })
-  },
-  onReady: function () {
-    wx.showLoading({
-      title: '正在加载',
-    })
-    wx.request({
-      url: '',
-      header: { 'content-type': 'application/json' },
-      data: {},
-      complete: function () {
-        wx.hideLoading()
-      },
-      success: function (res) {
-        if (res.statusCode == 200) {
-          var d = res.data.list
-          this.setData({
-            //list = d
-          })
-        }
-      },
-      fail: function(res) {
-        wx.showToast({
-          title: '加载失败',
-        })
-      }
     })
   },
   onShareAppMessage: function () {
