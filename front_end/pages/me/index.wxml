@@ -6,9 +6,9 @@
       <view class="card-content">
         <view class="card-content-first">
           <view class="card-title">
-            {{item.description}}
+            {{item.name}}
           </view>
-          <view class="card-mine" wx:if="{{item.creator == creator}}">
+          <view class="card-mine" wx:if="{{item.creator == openId}}">
             我发起
           </view>
         </view>
