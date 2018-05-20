@@ -63,13 +63,18 @@ Page({
   },
   triggerEgg: function (e) { //double click trigger egg
     var that = this
-    if (that.touchEndTime - that.touchStartTime < 350) {
+    if (this.data.shareShowed) {
+      wx.navigateTo({
+        url: '../share/index',
+      })
+    } else if (that.touchEndTime - that.touchStartTime < 350) {
       var currentTime = e.timeStamp
       var lastTapTime = that.lastTapTime
       that.lastTapTime = currentTime
       if (currentTime - lastTapTime < 300) {
         this.setData({
-          shareIcon: "../../../res/share_icon.png"
+          shareIcon: "../../../res/share_icon.png",
+          shareShowed: true
         })
       }
     }

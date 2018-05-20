@@ -1,2 +1,3 @@
-<button bindtap='saveImageToPhotosAlbum'>保存图片</button>
-<canvas canvas-id='share' style='width: 100vw; height: 100vh;'></canvas>
+
+<canvas canvas-id='share' style='width: 100vw; height: 100vh;'
+hidden='{{canvasHidden}}'></canvas>
