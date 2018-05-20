@@ -32,7 +32,7 @@
       <view class="calendar-navbar-date" style="display: {{checkbox != 3 ? 'flex' : 'none'}}">
         <image class="calendar-navbar-arrow" bindtap="goLast" src="../../../res/arrow_left.png"></image>
         <picker mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
-          {{dateData.date}}
+          {{dateData.date[0]}}
         </picker>
         <image class="calendar-navbar-arrow" bindtap="goNext" src="../../../res/arrow_right.png"></image>
       </view>
@@ -52,7 +52,7 @@
         <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
           <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
             <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{dateData.arrDays[row * 7 + col]}}" bindtap="selectDay">
-              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected && 'isSelect'}} {{'joinNum'+dateData.arrDays[row * 7 + col].joinNum}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
+              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected.selectedDay && 'isSelect'}} {{'joinNum'+dateData.arrDays[row * 7 + col].joinNum}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
                 {{dateData.arrDays[row * 7 + col].day}}
               </view>
               <view class="calendar-body-dot" hidden="{{!dateData.arrDays[row * 7 + col].isToday}}"></view>
@@ -75,14 +75,30 @@
           </view>
           <view class="calendar-week-day">
             <view
-              class="calendar-week-duration {{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected && 'isSelect'}} {{'joinNum'+dateData.arrDays[row * 7 + col].joinNum}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}}"
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration1 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_1}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
               data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
-              data-week-index="{{[1, 0, 8]}}"
+              data-week-index="{{1}}"
               bindtap="selectDuration">早晨</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[2, 8, 12]}}" bindtap="selectDuration">上午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[3, 12, 14]}}" bindtap="selectDuration">中午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[4, 14, 18]}}" bindtap="selectDuration">下午</view>
-            <view class="calendar-week-duration" data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}" data-week-index="{{[5, 18, 24]}}" bindtap="selectDuration">晚上</view>
+            <view
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration2 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_2}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
+              data-week-index="{{2}}"
+              bindtap="selectDuration">上午</view>
+            <view
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration3 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_3}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
+              data-week-index="{{3}}"
+              bindtap="selectDuration">中午</view>
+            <view
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration4 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_4}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
+              data-week-index="{{4}}"
+              bindtap="selectDuration">下午</view>
+            <view
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration5 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_5}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
+              data-week-index="{{5}}"
+              bindtap="selectDuration">晚上</view>
           </view>
         </view>
       </view>
@@ -92,14 +108,20 @@
 
     <view class="calendar-body calendar-day" style="display: {{checkbox === 2 ? 'flex' : 'none'}}">
       <view class="calendar-time-box">
-        <view class="calendar-clock-time" wx:for="1111111111111111111111111" wx:for-index="clock" wx:key="*this">{{clock}}:00</view>
+        <view class="calendar-clock-time" wx:for="1111111111111111111111111" wx:for-index="clockTime" wx:key="*this">{{clockTime}}:00</view>
       </view>
       <view class="calendar-line-box">
         <view class="calendar-now">
           <view class="calendar-now-dot"></view>
           <view class="calendar-now-line"></view>
         </view>
-        <view class="calendar-clock-line" wx:for="{{dateData.arrHours}}" wx:for-index="clock" wx:key="*this" data-hour-index="{{clock}}" bindtap="selectHour">
+        <view
+          wx:for-index="clock"
+          class="calendar-clock-line {{dateData.arrDays[dateData.date[1]]['isSelected']['selectedHour'+clock] && 'isSelect'}} {{clock > 9 ? 'joinNum'+dateData.arrDays[dateData.date[1]]['joinNum__'+clock] : 'joinNum'+dateData.arrDays[dateData.date[1]]['joinNum__0'+clock]}} {{!dateData.arrDays[dateData.date[1]].isSelectable && 'notSelectable'}}"
+          wx:for="{{dateData.arrHours}}"
+          wx:key="*this"
+          data-hour-index="{{clock}}"
+          bindtap="selectHour">
           <view class="calendar-half-clock"></view>
           <view class="calendar-half-clock"></view>
         </view>

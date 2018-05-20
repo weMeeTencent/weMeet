@@ -9,6 +9,9 @@ var DAY_OF_MONTH = [
   [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
   [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 ];
+
+// 早中晚时间划分
+var HOUR_OF_DURATION = [[0, 8, 1], [8, 12, 2], [12, 14, 3], [14, 18, 4], [18, 24, 5]];
 //判断当前年是否闰年
 var isLeapYear = function (year) {
   if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
@@ -20,14 +23,6 @@ var isLeapYear = function (year) {
 //获取当月有多少天
 var getDayCount = function (year, month) {
   return DAY_OF_MONTH[isLeapYear(year)][month];
-};
-
-//获取两个时间戳之间间隔的天数
-var getOffDays = function (startDate, endDate) {
-  //得到时间戳相减 得到以毫秒为单位的差  
-  var mmSec = (endDate.getTime() - startDate.getTime());
-  //单位转换为天并返回 
-  return (mmSec / 3600000 / 24);
 };
 
 var arr24 = new Array(24);
@@ -88,9 +83,28 @@ var isSelectable = function (item) {
 
 // 点击事件
 var refreshSelectData = function (item) {
-  for (var i = 0; i < 42; ++i) {
-    if (pageData.dateData.arrDays[i]['item'] === item) {
-      pageData.dateData.arrDays[i]['isSelected'] = Boolean(pageData.selected[item] && pageData.selected[item]['day']);
+  for (var q = 0; q < 42; q++) {
+    if (pageData.dateData.arrDays[q]['item'] === item) {
+      pageData.dateData.arrDays[q]['isSelected']['selectedDay'] = Boolean(pageData.selected[item] && pageData.selected[item]['day']);
+      for(let j = 1; j <= 5; j++){
+        const value1 = Boolean(pageData.selected[item] && pageData.selected[item]['duration' + j]);
+        pageData.dateData.arrDays[q]['isSelected']['selectedDuration' + j] = value1;
+        if(value1){
+          pageData.dateData.arrDays[q]['isSelected']['selectedDay'] = true;
+        };
+      }
+      for(let k = 0; k <= 23; k++){
+        const value2 = Boolean(pageData.selected[item] && pageData.selected[item]['hour' + k]);
+        pageData.dateData.arrDays[q]['isSelected']['selectedHour' + k] = value2;
+        if(value2){
+          pageData.dateData.arrDays[q]['isSelected']['selectedDay'] = true;
+          for(let arr in HOUR_OF_DURATION){
+            if(k >= HOUR_OF_DURATION[arr][0] && k < HOUR_OF_DURATION[arr][1]){
+              pageData.dateData.arrDays[q]['isSelected']['selectedDuration' + HOUR_OF_DURATION[arr][2]] = true;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -113,7 +127,6 @@ var refreshJoinData = function () {
   if (pageData.checkbox === 0) {
     for (var n in res) {
       for (var resItme in res[n]) {
-        console.log(res[n][resItme]);
         for (var i = 0; i < 42; ++i) {
           if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
             pageData.dateData.arrDays[i]['joinNum'] = res[n][resItme].length;
@@ -124,10 +137,20 @@ var refreshJoinData = function () {
   } else if (pageData.checkbox === 1) {
     for (var n in res) {
       for (var resItme in res[n]) {
-        console.log(res[n][resItme]);
         for (var i = 0; i < 42; ++i) {
           if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
             pageData.dateData.arrDays[i]['joinNum'+resItme.slice(10, 12)] = res[n][resItme].length;
+          }
+        }
+      }
+    }
+  } else if (pageData.checkbox === 2) {
+    for (var n in res) {
+      for (var resItme in res[n]) {
+        console.log(res[n][resItme]);
+        for (var i = 0; i < 42; ++i) {
+          if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
+            pageData.dateData.arrDays[i]['joinNum__'+resItme.slice(11, 13)] = res[n][resItme].length;
           }
         }
       }
@@ -190,11 +213,14 @@ var refreshPageData = function (year, month, day, checkbox) {
         'item': getSelectedItem(curYear, curMonth + 1, i - offset + 1),
       };
     }
-    var item = pageData.dateData.arrDays[i]['item'];
-    pageData.dateData.arrDays[i]['isSelected'] = Boolean(pageData.selected[item] && pageData.selected[item]['day']);
+    pageData.dateData.arrDays[i]['isSelected'] = {};
     pageData.dateData.arrDays[i]['i'] = i;
     pageData.dateData.arrDays[i]['isToday'] = Boolean(curYear === new Date().getFullYear() && curMonth === new Date().getMonth() && (i - offset + 1 === new Date().getDate()));
     pageData.dateData.arrDays[i]['isSelectable'] = isSelectable(pageData.dateData.arrDays[i]);
+  }
+  for (var i = 0; i < 42; ++i) {
+    var item = pageData.dateData.arrDays[i]['item'];
+    refreshSelectData(item);
   }
   refreshJoinData();
   pageData.dateData.weekNum = Math.ceil((getDayCount(curYear, curMonth) + offset) / 7);
@@ -205,11 +231,11 @@ var refreshPageData = function (year, month, day, checkbox) {
 
   pageData.dateData.curWeek = Math.ceil((curDay + offset) / 7);
   if (checkbox === 0) {
-    pageData.dateData.date = curYear + '年' + (curMonth + 1) + '月';
+    pageData.dateData.date = [curYear + '年' + (curMonth + 1) + '月'];
   } else if (checkbox === 1) {
-    pageData.dateData.date = curYear + '年' + (curMonth + 1) + '月第' + pageData.dateData.curWeek + '周';
+    pageData.dateData.date = [curYear + '年' + (curMonth + 1) + '月第' + pageData.dateData.curWeek + '周'];
   } else if (checkbox === 2) {
-    pageData.dateData.date = curYear + '年' + (curMonth + 1) + '月' + curDay + '日';
+    pageData.dateData.date = [curYear + '年' + (curMonth + 1) + '月' + curDay + '日', getOffset()+curDay-1];
   }
 };
 
@@ -520,14 +546,23 @@ Page({
   },
   selectDay: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
-    console.log(target);
+    console.log(target, 'target');
     var item = getSelectedItem(target.year, target.month, target.day);
     if (target.isSelectable && target.isCurentMonth) {
       if (!pageData.selected[item]) {
         pageData.selected[item] = {};
       }
-      pageData.selected[item]['day'] = 1;
-      pageData.selected[item]['day_stamps'] = getTimestamps(target.year, target.month, target.day, 0, 24);
+      if (target.isSelected.selectedDay) {
+        delete pageData.selected[item];
+      } else {
+        pageData.selected[item]['day'] = getTimestamps(target.year, target.month, target.day, 0, 24);
+        for(let i = 1; i <= 5; i++){
+          pageData.selected[item]['duration' + i] = getTimestamps(target.year, target.month, target.day, HOUR_OF_DURATION[i - 1][0], HOUR_OF_DURATION[i - 1][1]);
+        }
+        for(let i = 0; i <= 23; i++){
+          pageData.selected[item]['hour' + i] = getTimestamps(target.year, target.month, target.day, i, i + 1);
+        }
+      }
       this.setData({
         selected: pageData.selected,
       });
@@ -536,38 +571,57 @@ Page({
         dateData: pageData.dateData,
       });
     }
-    if (target.isSelected) {
-      delete pageData.selected[item];
-      this.setData({
-        selected: pageData.selected,
-      });
-      refreshSelectData(item);
-      this.setData({
-        dateData: pageData.dateData,
-      });
-    }
+    
 
   },
   selectDuration: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
-    var start = e.currentTarget.dataset.weekIndex[1];
-    var end = e.currentTarget.dataset.weekIndex[2];
+    var weekIndex = e.currentTarget.dataset.weekIndex;
     var item = getSelectedItem(target.year, target.month, target.day);
-    if (!pageData.selected[item]) {
-      pageData.selected[item] = {
-        duration: {},
-      };
+    if (target.isSelectable && target.isCurentMonth) {
+      if (!pageData.selected[item]) {
+        pageData.selected[item] = {};
+      }
+      if(pageData.selected[item]['duration' + weekIndex]){
+        delete pageData.selected[item]['duration' + weekIndex];
+        for(let hour = HOUR_OF_DURATION[weekIndex - 1][0]; hour < HOUR_OF_DURATION[weekIndex - 1][1]; hour ++){
+          delete pageData.selected[item]['hour' + hour];
+        }
+      } else {
+        pageData.selected[item]['duration' + weekIndex] = getTimestamps(target.year, target.month, target.day, HOUR_OF_DURATION[weekIndex - 1][0], HOUR_OF_DURATION[weekIndex - 1][1]);
+        for(let hour = HOUR_OF_DURATION[weekIndex - 1][0]; hour < HOUR_OF_DURATION[weekIndex - 1][1]; hour ++){
+          pageData.selected[item]['hour' + hour] = getTimestamps(target.year, target.month, target.day, hour, hour + 1);
+        }
+      }
+      this.setData({
+        selected: pageData.selected,
+      })
+      refreshSelectData(item);
+      this.setData({
+        dateData: pageData.dateData,
+      });
     }
-    pageData.selected[item]['duration'][e.currentTarget.dataset.weekIndex[0]] = getTimestamps(target.year, target.month, target.day, start, end);
-    console.log(pageData.selected[item]['duration'])
+  },
+  selectHour: function (e) {
+    var hour = e.currentTarget.dataset.hourIndex;
+    var item = getSelectedItem(curYear, curMonth + 1, curDay);
+    if(isSelectable({year: curYear, month: curMonth + 1, day: curDay})){
+      if (!pageData.selected[item]) {
+        pageData.selected[item] = {};
+      }
+      if(pageData.selected[item]['hour' + hour]){
+        delete pageData.selected[item]['hour' + hour];
+      } else {
+        pageData.selected[item]['hour' + hour] = getTimestamps(curYear, curMonth + 1, curDay, hour, hour + 1);
+      }
+    }
     this.setData({
       selected: pageData.selected,
     })
-  },
-  selectHour: function (e) {
-    var target = e.currentTarget.dataset.hourIndex;
-    var selectDay = getTimestamps(curYear, curMonth + 1, curDay, target, target >= 23 ? target + 1 : target + 2);
-    console.log(selectDay);
+    refreshSelectData(item);
+    this.setData({
+      dateData: pageData.dateData,
+    });
   },
   submit: function () {
     var _this = this;
@@ -580,7 +634,7 @@ Page({
       data: {
         openId: _this.data.openId,
         activityId: _this.data.activityId,
-        time: '2018-05-25 00:00:00_2018-05-25 24:00:00'
+        time: '2018-05-25 00:00:00_2018-05-25 01:00:00;2018-05-25 00:00:00_2018-05-25 10:00:00'
       },
 
       complete: function (res) {
