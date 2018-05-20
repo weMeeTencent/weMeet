@@ -30,11 +30,11 @@
         bindtap="tapLookup" src="../../../res/eye.png"></image>
       <view class="card-choice-text" data-activity-id="{{item.activityId}}"
         bindtap="tapLookup">查看</view>
-      <image class="img-choice" data-activity-id="{{item.activityId}}" 
+      <image class="img-choice-2" data-activity-id="{{item.activityId}}" 
         bindtap="tapEdit" src="../../../res/edit.png"></image>
       <view class="card-choice-text" data-activity-id="{{item.activityId}}" 
         bindtap="tapEdit">编辑</view>
-      <image class="img-choice" data-activity-id="{{item.activityId}}" 
+      <image class="img-choice-3" data-activity-id="{{item.activityId}}" 
         bindtap="tapDelete" src="../../../res/delete.png"></image>
       <view class="card-choice-text" data-activity-id="{{item.activityId}}"
         bindtap="tapDelete">删除</view>
