@@ -69,6 +69,17 @@ var getTimestamps = function (year, month, day, start, end) {
 var getSelectedItem = function (year, month, day) {
   return [year, addZero(month), addZero(day)].join('-');
 }
+var getSelectedStr = function (obj) {
+  let arr = [];
+  for(let item in obj) {
+    let itemArr = [];
+    for(let stamp in obj[item]) {
+      itemArr.push(obj[item][stamp]);
+    }
+    arr.push(itemArr.join(';'));
+  }
+  return arr.join(';');
+}
 
 var isSelectable = function (item) {
   var start = {
@@ -147,7 +158,6 @@ var refreshJoinData = function () {
   } else if (pageData.checkbox === 2) {
     for (var n in res) {
       for (var resItme in res[n]) {
-        console.log(res[n][resItme]);
         for (var i = 0; i < 42; ++i) {
           if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
             pageData.dateData.arrDays[i]['joinNum__'+resItme.slice(11, 13)] = res[n][resItme].length;
@@ -273,7 +283,6 @@ Page({
         wx.hideLoading();
       },
       success: function (res) {
-        console.log(res)
         _this.setData({
           acitvityData: res.data.data,
         })
@@ -546,7 +555,6 @@ Page({
   },
   selectDay: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
-    console.log(target, 'target');
     var item = getSelectedItem(target.year, target.month, target.day);
     if (target.isSelectable && target.isCurentMonth) {
       if (!pageData.selected[item]) {
@@ -625,6 +633,7 @@ Page({
   },
   submit: function () {
     var _this = this;
+    var time = getSelectedStr(this.data.selected);
     wx.request({
       url: 'https://www.chengfpl.com/weili/user/create/participation',
       method: 'POST',
@@ -634,7 +643,7 @@ Page({
       data: {
         openId: _this.data.openId,
         activityId: _this.data.activityId,
-        time: '2018-05-25 00:00:00_2018-05-25 01:00:00;2018-05-25 00:00:00_2018-05-25 10:00:00'
+        time: time,
       },
 
       complete: function (res) {
