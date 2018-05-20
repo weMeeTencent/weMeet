@@ -8,28 +8,28 @@ Page({
     list: [
       {
         id: '1',
-        img: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1525091073&di=3a5535861c7b993bb7bd0615c7eac3a2&src=http://pic.qiantucdn.com/00/91/59/42bOOOPIC98.jpg',
-        title: '春末夏初，组队攀岩了解一下',
-        desc: '负重向上，始终下坠，都是生活常态',
-        loc: '和平里~兰唐国际极限运动 5.4公里',
-        num: '2-6人',
+        img: '../../../res/activity_hot_pot.png',
+        title: '我的热情，好像一顿火锅',
+        desc: '用FFF团的火把，煮一顿热烈的火锅。',
+        loc: '魏公村·重八牛府牛丸火锅    982米',
+        num: '2-8人',
         duration: 2
       },
       {
         id: '1',
-        img: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1525091073&di=3a5535861c7b993bb7bd0615c7eac3a2&src=http://pic.qiantucdn.com/00/91/59/42bOOOPIC98.jpg',
-        title: '春末夏初，组队攀岩了解一下',
-        desc: '负重向上，始终下坠，都是生活常态',
-        loc: '和平里~兰唐国际极限运动 5.4公里',
-        num: '2-6人',
+        img: '../../../res/activity_music.png',
+        title: '为你唱这首歌',
+        desc: '勇敢说爱，刚给你一个唱出“爱你”的理由。',
+        loc: '五道口·麦颂量贩式KTV    1.2公里',
+        num: '2-12人',
         duration: 2
       }, {
         id: '1',
-        img: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1525091073&di=3a5535861c7b993bb7bd0615c7eac3a2&src=http://pic.qiantucdn.com/00/91/59/42bOOOPIC98.jpg',
-        title: '春末夏初，组队攀岩了解一下',
-        desc: '负重向上，始终下坠，都是生活常态',
-        loc: '和平里~兰唐国际极限运动 5.4公里',
-        num: '2-6人',
+        img: '../../../res/activity_school.png',
+        title: '初夏·校园·压马路',
+        desc: '一无所有时的朋友，情愫初生时的爱人。',
+        loc: '五道口·北京林业大学    679米',
+        num: '2-15人',
         duration: 2
       }
     ]
