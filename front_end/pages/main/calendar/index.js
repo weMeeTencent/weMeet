@@ -660,6 +660,13 @@ Page({
       selected: obj,
     })
   },
+  invite: function(){
+    var _this = this;
+    wx.navigateTo({
+      // url: '../form/index',
+      url: '../../me/invite/index?activityId='+_this.data.activityId,
+    })
+  },
   submit: function () {
     var _this = this;
     var time = getSelectedStr(this.data.selected);

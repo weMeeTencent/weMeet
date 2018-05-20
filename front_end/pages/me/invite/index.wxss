@@ -1,5 +1,4 @@
 .invite-root {
-  font-family: PingFangSC-Regular;
   height: 100%;
   display: flex;
   flex-direction: column;  
@@ -7,25 +6,31 @@
   color: #353535;
   background: #ffffff;
   border: 1px solid #E6E6E6;
-  padding-top: 30rpx;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  padding: 0 20rpx;
   margin-left: 20rpx;
   margin-right: 20rpx;
   box-sizing: border-box;
-  padding-bottom: 20rpx;
 }
 
 .invite-corner {
   display: flex;
   justify-content: space-between;
 }
-
+.invite-corner-footer {
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: space-between;
+}
 .img-corner {
   display: flex;
-  margin-top: 10rpx;
   width:  120rpx;
   height: 120rpx;
+}
+.invite-corner .img-corner {
+  margin-top: 20rpx;
+}
+.invite-corner-footer .img-corner {
+  margin-bottom: 20rpx;
 }
 
 .invite-invite-text {
@@ -74,20 +79,19 @@
   color: #000000;
   display: flex;
   justify-content:center;
+  al
 }
 
 .invite-detail-1 {
   margin-top:80rpx;
   display: flex;
   justify-content: left;
-  flex-direction: row;
 }
 
 .invite-detail-2 {
   margin-top:30rpx;
   display: flex;
   justify-content: left;
-  flex-direction: row;
 }
 
 .img-detail {
@@ -107,8 +111,3 @@
   width: 500rpx;
 }
 
-.invite-corner-footer {
-  margin-top: 40rpx;
-  display: flex;
-  justify-content: space-between;
-}

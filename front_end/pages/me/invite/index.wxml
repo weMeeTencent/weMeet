@@ -9,25 +9,25 @@
 
   <view class="invite-invite-text">邀您参加</view>
 
-  <view class="img-view"><image class="img-invite" src="../../../res/touxiang.png"> </image></view>
+  <view class="img-view"><image class="img-invite" src="{{userInfo.avatarUrl}}"> </image></view>
   
 
-  <view class="invite-nickname">刘芷怡</view>
-  <view class="invite-gender">女士</view>
+  <view class="invite-nickname">{{userInfo.nickName}}</view>
+  <view class="invite-gender">{{userInfo.gender === 2 ? '女士' : '先生'}}</view>
 
-  <view class="invite-title">微历 - 交互评审会</view>
+  <view class="invite-title">{{acitvityData.name}}</view>
 
   <view class="invite-detail-1">
     <image class="img-detail" src="../../../res/clock.png"></image>
-    <view class="invite-detail-text">4月25日(今天) 18:00-20:00</view>
+    <view class="invite-detail-text">5月26日(周六) 18:00-20:00</view>
   </view>
   <view class="invite-detail-2">
     <image class="img-detail" src="../../../res/position.png"></image>
-    <view class="invite-detail-text">北京市海淀区第三极大厦B座806会议室</view>
+    <view class="invite-detail-text">{{acitvityData.location}}</view>
   </view>
   <view class="invite-detail-2">
     <image class="img-detail" src="../../../res/people.png"></image>
-    <view class="invite-detail-text">预计12人参加</view>
+    <view class="invite-detail-text">预计{{acitvityData.count}}人参加</view>
   </view>
 
   <view class="invite-corner-footer">

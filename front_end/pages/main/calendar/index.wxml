@@ -162,6 +162,8 @@
       <view class="calendar-checkbox-today" bindtap="goToday">今天</view>
     </view>
   </view>
-  <view class="commit" bindtap="submit">确认提交</view>
-
+  <view  class="commit">
+    <view class="invite-btn" bindtap="invite">生成邀请函</view>
+    <view class="commit-btn" bindtap="submit">确认提交</view>
+  </view>
 </view>
