@@ -3,6 +3,7 @@
     "pages/main/index/index",
     "pages/main/form/index",
     "pages/main/calendar/index",
+    "pages/main/share/index",
     "pages/recommend/index",
     "pages/me/index",
     "pages/me/invite/index",

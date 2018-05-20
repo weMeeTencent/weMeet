@@ -2,27 +2,27 @@
 <view class="main">
   <view class="label_container">
     <image class="label1" src="../../../res/left_label_head.png"></image>
-    <view class="label_2">
-      <view class="label_text">小满</view>
-    </view>
-    <image class="label_3" src="../../../res/left_label_foot.png"></image>
+    <image class="label_3" src="../../../res/left_label_body.png"></image>
   </view>
   <view class="maincontainer">
     <image class="topDivider" src="../../../res/main_header_block.png"></image>
     <view class="topSlimDivider1"></view>
     <view class="topslogan">
-      <text>WE CALENDER ENJOY WE PARTY</text>
+      <text>WE MEET · MEET LOVE</text>
     </view>
     <view class="slogandivider"></view>
     <view class="time_date">
       <text>2018年5月21日</text>
     </view>
     <view class="time_week">
-      <text>星期三 农历三月初十</text>
+      <text>星期一 戊戌年四月初七</text>
     </view>
     <image class="center_icon" src="../../../res/center_icon.png"></image>
-    <view class="recommend">攀岩 吃烤鱼 狼人</view>
-    <view class="description">每个没有狼人的日子都是对生命的辜负</view>
+    <view class="recommend">火锅 K歌 压马路</view>
+    <view class="description">
+    521，微历一群朋友去K歌
+    <view>给你一个唱出“爱你”的理由</view>
+    </view>
     <image class="share" src="{{shareIcon}}" bindtap='triggerEgg' bindtouchstart="shareTouchStart" bindtouchend="shareTouchEnd"></image>
   </view>
 
@@ -43,5 +43,4 @@
     </view>
     <button type="default" class="button" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="bindToCalendar" hover-class="other-button-hover"> 跳转日历页 </button>
   </view> -->
-
 </view>

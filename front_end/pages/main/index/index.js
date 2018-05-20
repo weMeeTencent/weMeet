@@ -1,20 +1,11 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var items = ['保存分享图到本地相册']
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    shareIcon: '',
-    touchStartTime: 0,
-    touchEndTime: 0,
-    lastTapTime: 0, 
-    mark: 0,
-    newMark: 0,
-    isToUp: true
+    actionSheetHidden: true,
+    actionSheetItems: items
   },
   //事件处理函数
   bindViewTap: function() {
@@ -73,13 +64,23 @@ Page({
   },
   triggerEgg: function (e) { //double click trigger egg
     var that = this
-    if (that.touchEndTime - that.touchStartTime < 350) {
+    if (this.data.shareShowed) {
+      wx.showActionSheet({
+        itemList: ["保存分享图到本地相册"],
+        success: function (res) {
+          wx.navigateTo({
+            url: '../share/index',
+          })
+        }
+      })
+    } else if (that.touchEndTime - that.touchStartTime < 350) {
       var currentTime = e.timeStamp
       var lastTapTime = that.lastTapTime
       that.lastTapTime = currentTime
       if (currentTime - lastTapTime < 300) {
         this.setData({
-          shareIcon: "../../../res/share_icon.png"
+          shareIcon: "../../../res/share_icon.png",
+          shareShowed: true
         })
       }
     }
@@ -108,5 +109,11 @@ Page({
         url: '../../recommend/index',
       });
     }
+  },
+  actionSheetTap: function(e) {
+
+  },
+  actionSheetChange: function (e) {
+
   }
 })
