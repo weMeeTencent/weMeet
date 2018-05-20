@@ -15,16 +15,17 @@ Page({
         })
       },
     })
-    wx.showLoading({
-      title: '保存中...',
-    })
+    // wx.showLoading({
+    //   title: '保存中...',
+    // })
     var that = this;
     that.setData({
       canvasHidden: false
     })
     var unit = that.data.screenWidth / 375
     const ctx = wx.createCanvasContext('share')
-    ctx.drawImage('../../../res/share_img.png', 375 * unit, 667 * unit, 375 * unit, 667 * unit)
+    ctx.drawImage('../../../res/share_img.png', 0, 0, 375 * unit, 667 * unit)
+    //  ctx.draw()
     ctx.draw(false, function() {
       wx.canvasToTempFilePath({
         canvasId: 'share',
@@ -49,12 +50,22 @@ Page({
             filePath: res.tempFilePath,
             success: function (res) {
               wx.hideLoading()
-              that.setData({
-                canvasHidden: true
+              wx.showModal({
+                title: '黄历图片已保存到本地相册',
+                content: '请前往相册分享',
+                showCancel: false,
+                confirmText: '我知道了',
+                success: function(res) {
+                  if (res.confirm) {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  }
+                }
               })
-              wx.navigateBack({
-                delta: 1
-              })
+              // wx.navigateBack({
+              //   delta: 1
+              // })
             },
             fail: function (err) {
               console.log(err)

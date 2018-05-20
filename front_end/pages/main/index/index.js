@@ -1,10 +1,11 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var items = ['保存分享图到本地相册']
 Page({
   data: {
-    
+    actionSheetHidden: true,
+    actionSheetItems: items
   },
   //事件处理函数
   bindViewTap: function() {
@@ -64,8 +65,13 @@ Page({
   triggerEgg: function (e) { //double click trigger egg
     var that = this
     if (this.data.shareShowed) {
-      wx.navigateTo({
-        url: '../share/index',
+      wx.showActionSheet({
+        itemList: ["保存分享图到本地相册"],
+        success: function (res) {
+          wx.navigateTo({
+            url: '../share/index',
+          })
+        }
       })
     } else if (that.touchEndTime - that.touchStartTime < 350) {
       var currentTime = e.timeStamp
@@ -103,5 +109,11 @@ Page({
         url: '../../recommend/index',
       });
     }
+  },
+  actionSheetTap: function(e) {
+
+  },
+  actionSheetChange: function (e) {
+
   }
 })

@@ -43,5 +43,4 @@
     </view>
     <button type="default" class="button" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="bindToCalendar" hover-class="other-button-hover"> 跳转日历页 </button>
   </view> -->
-
 </view>
