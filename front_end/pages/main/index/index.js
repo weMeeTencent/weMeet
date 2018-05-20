@@ -4,17 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    shareIcon: '',
-    touchStartTime: 0,
-    touchEndTime: 0,
-    lastTapTime: 0, 
-    mark: 0,
-    newMark: 0,
-    isToUp: true
+    
   },
   //事件处理函数
   bindViewTap: function() {
