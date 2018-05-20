@@ -377,44 +377,73 @@
 }
 
 .calendar-hot{
-  padding: 20rpx;
-  margin-top: 20rpx;
-  padding-right: 25rpx;
-  height: 436rpx;
+  padding: 0 26rpx;
+  height: 626rpx;
   background: #ffffff;
+  overflow: scroll;
+  padding-bottom: 31rpx;
 }
-
-.calendar-hot-seq{
-  margin:20rpx 20rpx 0rpx 20rpx; 
+.calendar-hot-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 31rpx;
+}
+.calendar-hot-seq {
+  margin-right: 20rpx; 
   font-size: 35rpx;
   color: #C7C7CC;
   height: 50rpx;
 }
 
-.calendar-hot-content{
-  margin: 10rpx;
+.calendar-hot-content {
   border: 1rpx solid #E6E6E6;
-  border-radius: 3rpx;
-  font-size: 30rpx;
+  font-size: 24rpx;
   width: 100%;
-  height: 70rpx;
+  height: 72rpx;
   display: flex;
-  box-sizing: border-box;
   align-items: center;
   justify-content: center;
 }
-
+.calendar-hot-box:nth-child(1) .calendar-hot-content {
+  background: linear-gradient(to right, #3875FF, #3875FF99);
+}
+.calendar-hot-box:nth-child(3) .calendar-hot-content {
+  background: linear-gradient(to right, #3875FFe6, #3875FF66);
+}
+.calendar-hot-box:nth-child(5) .calendar-hot-content {
+  background: linear-gradient(to right, #3875FFb3, #3875FF4d);
+}
+.calendar-hot-box:nth-child(7) .calendar-hot-content {
+  background: linear-gradient(to right, #3875FF66, #3875FF33);
+}
+.calendar-hot-box:nth-child(9) .calendar-hot-content {
+  background: linear-gradient(to right, #3875FF33, #3875FF1a);
+}
 .calendar-hot-content-left{
-  margin-left: 20rpx;
-  width: 100%;
+  margin-left: 31rpx;
+  color: #000000;
+  flex: 1;
 }
-
 .calendar-hot-content-right{
-  width: 20%;
-  text-align: right;
-  margin-right: 20rpx;
+  margin-right: 33rpx;
+  color: #ffffff;
 }
-
+.calendar-hot-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-left: 64rpx;
+  margin-top: 15rpx;
+  height: 42rpx;
+}
+.avatar-icon {
+  width: 42rpx;
+  height: 42rpx;
+  border-radius: 100%;
+  margin-right: 18rpx;
+}
 .notCurentMonth {
   background: #F8F8F8;
   color: #9B9B9B;

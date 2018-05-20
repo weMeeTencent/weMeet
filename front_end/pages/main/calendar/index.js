@@ -12,6 +12,7 @@ var DAY_OF_MONTH = [
 
 // 早中晚时间划分
 var HOUR_OF_DURATION = [[0, 8, 1], [8, 12, 2], [12, 14, 3], [14, 18, 4], [18, 24, 5]];
+
 //判断当前年是否闰年
 var isLeapYear = function (year) {
   if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
@@ -34,14 +35,7 @@ var pageData = {
     arrWeeks: [],             //按星期拆分的数组，存放日期信息
     arrHours: arr24,             //按小时拆分的数组
   },
-  hot_list: [
-    { seq: 'A', duration: "4月25日（今天） 18:00-20:00", vote_rate: '50' },
-    { seq: 'B', duration: "4月26日（明天） 08:00-10:00", vote_rate: '20' },
-    { seq: 'C', duration: "4月26日（明天） 16:00-18:00", vote_rate: '20' },
-    { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
-    { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
-    { seq: 'D', duration: "4月27日（周五） 10:00-12:00", vote_rate: '10' },
-  ],
+  hotList: [],
   checkbox: 0,
   selected: {},
   arrSelect: [],
@@ -71,9 +65,9 @@ var getSelectedItem = function (year, month, day) {
 }
 var getSelectedStr = function (obj) {
   let arr = [];
-  for(let item in obj) {
+  for (let item in obj) {
     let itemArr = [];
-    for(let stamp in obj[item]) {
+    for (let stamp in obj[item]) {
       itemArr.push(obj[item][stamp]);
     }
     arr.push(itemArr.join(';'));
@@ -91,26 +85,43 @@ var isSelectable = function (item) {
   var startTime = parseInt([start.year, addZero(start.month), addZero(start.day)].join(''), 10);
   return itemTime >= startTime;
 }
-
+// 清洗hotList数据
+// 月份天数表
+var ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var gethotList = function (array, total) {
+  let hotList = [];
+  for(let i = 0; i < array.length; i++){
+    for(let time in array[i]){
+      hotList.push({
+        alphabet: ALPHABET[i],
+        stamp: time,
+        date: time.slice(5, 7)+'月'+time.slice(8, 10)+'日 '+time.slice(11, 16)+'—'+time.slice(31, 36),
+        rate: total <= 0 ? "0%" : (Math.round(array[i][time].length / total * 10000) / 100.00 + "%"),
+        people: array[i][time],
+      })
+    }
+  }
+  return hotList;
+}
 // 点击事件
 var refreshSelectData = function (item) {
   for (var q = 0; q < 42; q++) {
     if (pageData.dateData.arrDays[q]['item'] === item) {
       pageData.dateData.arrDays[q]['isSelected']['selectedDay'] = Boolean(pageData.selected[item] && pageData.selected[item]['day']);
-      for(let j = 1; j <= 5; j++){
+      for (let j = 1; j <= 5; j++) {
         const value1 = Boolean(pageData.selected[item] && pageData.selected[item]['duration' + j]);
         pageData.dateData.arrDays[q]['isSelected']['selectedDuration' + j] = value1;
-        if(value1){
+        if (value1) {
           pageData.dateData.arrDays[q]['isSelected']['selectedDay'] = true;
         };
       }
-      for(let k = 0; k <= 23; k++){
+      for (let k = 0; k <= 23; k++) {
         const value2 = Boolean(pageData.selected[item] && pageData.selected[item]['hour' + k]);
         pageData.dateData.arrDays[q]['isSelected']['selectedHour' + k] = value2;
-        if(value2){
+        if (value2) {
           pageData.dateData.arrDays[q]['isSelected']['selectedDay'] = true;
-          for(let arr in HOUR_OF_DURATION){
-            if(k >= HOUR_OF_DURATION[arr][0] && k < HOUR_OF_DURATION[arr][1]){
+          for (let arr in HOUR_OF_DURATION) {
+            if (k >= HOUR_OF_DURATION[arr][0] && k < HOUR_OF_DURATION[arr][1]) {
               pageData.dateData.arrDays[q]['isSelected']['selectedDuration' + HOUR_OF_DURATION[arr][2]] = true;
             }
           }
@@ -150,7 +161,7 @@ var refreshJoinData = function () {
       for (var resItme in res[n]) {
         for (var i = 0; i < 42; ++i) {
           if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
-            pageData.dateData.arrDays[i]['joinNum'+resItme.slice(10, 12)] = res[n][resItme].length;
+            pageData.dateData.arrDays[i]['joinNum' + resItme.slice(10, 12)] = res[n][resItme].length;
           }
         }
       }
@@ -160,7 +171,7 @@ var refreshJoinData = function () {
       for (var resItme in res[n]) {
         for (var i = 0; i < 42; ++i) {
           if (pageData.dateData.arrDays[i]['item'] === resItme.slice(0, 10)) {
-            pageData.dateData.arrDays[i]['joinNum__'+resItme.slice(11, 13)] = res[n][resItme].length;
+            pageData.dateData.arrDays[i]['joinNum__' + resItme.slice(11, 13)] = res[n][resItme].length;
           }
         }
       }
@@ -245,7 +256,7 @@ var refreshPageData = function (year, month, day, checkbox) {
   } else if (checkbox === 1) {
     pageData.dateData.date = [curYear + '年' + (curMonth + 1) + '月第' + pageData.dateData.curWeek + '周'];
   } else if (checkbox === 2) {
-    pageData.dateData.date = [curYear + '年' + (curMonth + 1) + '月' + curDay + '日', getOffset()+curDay-1];
+    pageData.dateData.date = [curYear + '年' + (curMonth + 1) + '月' + curDay + '日', getOffset() + curDay - 1];
   }
 };
 
@@ -319,6 +330,9 @@ Page({
       case 2:
         var url = 'https://www.chengfpl.com/weili/user/participation/hour?activityId=' + this.data.activityId;
         break;
+      case 3:
+        var url = 'https://www.chengfpl.com/weili/user/participation/interval?activityId=' + this.data.activityId;
+        break;
       default:
         var url = 'https://www.chengfpl.com/weili/user/participation/day?activityId=' + this.data.activityId;
     }
@@ -332,7 +346,7 @@ Page({
         switch (_this.data.checkbox) {
           case 0:
             pageData.monthJoinData = res.data.data,
-              refreshJoinData();
+            refreshJoinData();
             _this.setData({
               dateData: pageData.dateData,
               monthJoinData: pageData.monthJoinData,
@@ -340,7 +354,7 @@ Page({
             break;
           case 1:
             pageData.weekJoinData = res.data.data,
-              refreshJoinData();
+            refreshJoinData();
             _this.setData({
               dateData: pageData.dateData,
               weekJoinData: pageData.weekJoinData,
@@ -348,15 +362,21 @@ Page({
             break;
           case 2:
             pageData.dayJoinData = res.data.data,
-              refreshJoinData();
+            refreshJoinData();
             _this.setData({
               dateData: pageData.dateData,
               dayJoinData: pageData.dayJoinData,
             });
             break;
+          case 3:
+            pageData.hotList = gethotList(res.data.data.slice(0,5), _this.data.acitvityData.count)
+            _this.setData({
+              hotList: pageData.hotList,
+            });
+            break;
           default:
             pageData.monthJoinData = res.data.data,
-              refreshJoinData();
+            refreshJoinData();
             _this.setData({
               dateData: pageData.dateData,
               monthJoinData: pageData.monthJoinData,
@@ -552,6 +572,7 @@ Page({
       pre_checkbox: this.data.checkbox,
       checkbox: this.data.checkbox === 3 ? this.data.pre_checkbox : 3
     })
+    this.getJoinData();
   },
   selectDay: function (e) {
     var target = e.currentTarget.dataset.dayIndex;
@@ -564,10 +585,10 @@ Page({
         delete pageData.selected[item];
       } else {
         pageData.selected[item]['day'] = getTimestamps(target.year, target.month, target.day, 0, 24);
-        for(let i = 1; i <= 5; i++){
+        for (let i = 1; i <= 5; i++) {
           pageData.selected[item]['duration' + i] = getTimestamps(target.year, target.month, target.day, HOUR_OF_DURATION[i - 1][0], HOUR_OF_DURATION[i - 1][1]);
         }
-        for(let i = 0; i <= 23; i++){
+        for (let i = 0; i <= 23; i++) {
           pageData.selected[item]['hour' + i] = getTimestamps(target.year, target.month, target.day, i, i + 1);
         }
       }
@@ -579,7 +600,7 @@ Page({
         dateData: pageData.dateData,
       });
     }
-    
+
 
   },
   selectDuration: function (e) {
@@ -590,14 +611,14 @@ Page({
       if (!pageData.selected[item]) {
         pageData.selected[item] = {};
       }
-      if(pageData.selected[item]['duration' + weekIndex]){
+      if (pageData.selected[item]['duration' + weekIndex]) {
         delete pageData.selected[item]['duration' + weekIndex];
-        for(let hour = HOUR_OF_DURATION[weekIndex - 1][0]; hour < HOUR_OF_DURATION[weekIndex - 1][1]; hour ++){
+        for (let hour = HOUR_OF_DURATION[weekIndex - 1][0]; hour < HOUR_OF_DURATION[weekIndex - 1][1]; hour++) {
           delete pageData.selected[item]['hour' + hour];
         }
       } else {
         pageData.selected[item]['duration' + weekIndex] = getTimestamps(target.year, target.month, target.day, HOUR_OF_DURATION[weekIndex - 1][0], HOUR_OF_DURATION[weekIndex - 1][1]);
-        for(let hour = HOUR_OF_DURATION[weekIndex - 1][0]; hour < HOUR_OF_DURATION[weekIndex - 1][1]; hour ++){
+        for (let hour = HOUR_OF_DURATION[weekIndex - 1][0]; hour < HOUR_OF_DURATION[weekIndex - 1][1]; hour++) {
           pageData.selected[item]['hour' + hour] = getTimestamps(target.year, target.month, target.day, hour, hour + 1);
         }
       }
@@ -613,11 +634,11 @@ Page({
   selectHour: function (e) {
     var hour = e.currentTarget.dataset.hourIndex;
     var item = getSelectedItem(curYear, curMonth + 1, curDay);
-    if(isSelectable({year: curYear, month: curMonth + 1, day: curDay})){
+    if (isSelectable({ year: curYear, month: curMonth + 1, day: curDay })) {
       if (!pageData.selected[item]) {
         pageData.selected[item] = {};
       }
-      if(pageData.selected[item]['hour' + hour]){
+      if (pageData.selected[item]['hour' + hour]) {
         delete pageData.selected[item]['hour' + hour];
       } else {
         pageData.selected[item]['hour' + hour] = getTimestamps(curYear, curMonth + 1, curDay, hour, hour + 1);
@@ -630,6 +651,14 @@ Page({
     this.setData({
       dateData: pageData.dateData,
     });
+  },
+  clickHotList: function(e){
+    let obj = {
+      0: { 'stamp': e.currentTarget.dataset.obj.stamp}
+    };
+    this.setData({
+      selected: obj,
+    })
   },
   submit: function () {
     var _this = this;

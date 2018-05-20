@@ -130,19 +130,25 @@
 
 
 
-    <view class="calendar-hot" style="display: {{checkbox === 3 ? 'inline' : 'none'}}">
-      <block wx:for="{{hot_list}}" wx:key="{{item.id}}">
-        <view style="display:flex;width:100%;" bindtap="">
-          <view class="calendar-hot-seq">{{item.seq}}</view>
+    <view class="calendar-hot" style="display: {{checkbox === 3 ? 'block' : 'none'}}">
+      <block wx:for="{{hotList}}" wx:key="index" wx:for-index="index">
+        <view class="calendar-hot-box" data-obj="{{item}}" bindtap="clickHotList">
+          <view class="calendar-hot-seq">{{item.alphabet}}</view>
           <view class="calendar-hot-content">
             <view class="calendar-hot-content-left">
-              {{item.duration}}
+              {{item.date}}
             </view>
             <view class="calendar-hot-content-right">
-              {{item.vote_rate}}%
+              {{item.rate}}
             </view>
           </view>
         </view>
+        <view class="calendar-hot-avatar">
+          <block wx:for="{{item.people}}" wx:key="index">
+            <image class="avatar-icon" src="{{item['avatar']}}"></image>
+          </block>
+          <image class="avatar-icon" style="display: {{item.people.length > 7 ? 'block' : 'none'}}" src="../../../res/member_more.png"></image>
+        </view>        
       </block>
     </view>
 
