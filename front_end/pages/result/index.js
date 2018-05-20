@@ -95,48 +95,13 @@ Page({
       }
     })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
-
-  }
+    return {
+      title: 'weMeet微历',
+      desc: '微历，让相聚更容易。',
+      path: '/pages/main/index/index'
+    }
+  },
 })
 function checkTime(i) {
   if (i < 10)

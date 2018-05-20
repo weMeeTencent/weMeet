@@ -6,7 +6,7 @@
     <image class="img-corner" src="../../../res/corner1.png"> </image>
     <image class="img-corner" src="../../../res/corner2.png"> </image>
   </view>
-
+<view class="content">
   <view class="invite-invite-text">邀您参加</view>
 
   <view class="img-view"><image class="img-invite" src="{{userInfo.avatarUrl}}"> </image></view>
@@ -29,7 +29,7 @@
     <image class="img-detail" src="../../../res/people.png"></image>
     <view class="invite-detail-text">预计{{acitvityData.count}}人参加</view>
   </view>
-
+</view>
   <view class="invite-corner-footer">
     <image class="img-corner" src="../../../res/corner3.png"> </image>
     <image class="img-corner" src="../../../res/corner4.png"> </image>

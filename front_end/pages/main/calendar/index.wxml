@@ -28,7 +28,7 @@
 
 
     <view class="calendar-navbar">
-      <image class="calendar-navbar-eye" bindtap="goToday" src="{{2 > 1 ? '../../../res/eye.png' : '../../../res/eye_selected.png'}}"></image>
+      <image class="calendar-navbar-eye" bindtap="hideFriendSelected" src="{{showFriend ? '../../../res/eye_selected.png' : '../../../res/eye.png'}}"></image>
       <view class="calendar-navbar-date" style="display: {{checkbox != 3 ? 'flex' : 'none'}}">
         <image class="calendar-navbar-arrow" bindtap="goLast" src="../../../res/arrow_left.png"></image>
         <picker mode="date" start="1900-01-01" end="2100-01-01" bindchange="bindDateChange">
@@ -39,7 +39,7 @@
       <view class="calendar-navbar-date" style="display: {{checkbox === 3 ? 'flex' : 'none'}}">
         当前可选时间
       </view>
-      <image class="calendar-navbar-list" bindtap="showHot" src="{{2 > 1 ? '../../../res/list.png' : '../../../res/list_selected.png'}}"></image>
+      <image class="calendar-navbar-list" bindtap="showHot" src="{{checkbox === 3 ? '../../../res/list_selected.png' : '../../../res/list.png'}}"></image>
     </view>
 
 
@@ -52,7 +52,7 @@
         <view class="calendar-body-rows" wx:for="123456" wx:for-index="row" wx:key="*this">
           <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="*this">
             <view class="calendar-body-item" hover="true" hover-class="view-hover" data-day-index="{{dateData.arrDays[row * 7 + col]}}" bindtap="selectDay">
-              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected.selectedDay && 'isSelect'}} {{'joinNum'+dateData.arrDays[row * 7 + col].joinNum}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
+              <view class="{{!dateData.arrDays[row * 7 + col].isCurentMonth && 'notCurentMonth'}} {{dateData.arrDays[row * 7 + col].isSelected.selectedDay && 'isSelect'}} {{showFriend && 'joinNum'+dateData.arrDays[row * 7 + col].joinNum}} {{!dateData.arrDays[row * 7 + col].isSelectable && 'notSelectable'}} calendar-body-day">
                 {{dateData.arrDays[row * 7 + col].day}}
               </view>
               <view class="calendar-body-dot" hidden="{{!dateData.arrDays[row * 7 + col].isToday}}"></view>
@@ -75,27 +75,27 @@
           </view>
           <view class="calendar-week-day">
             <view
-              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration1 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_1}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration1 && 'isSelect'}} {{showFriend && 'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_1}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
               data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
               data-week-index="{{1}}"
               bindtap="selectDuration">早晨</view>
             <view
-              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration2 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_2}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration2 && 'isSelect'}} {{showFriend && 'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_2}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
               data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
               data-week-index="{{2}}"
               bindtap="selectDuration">上午</view>
             <view
-              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration3 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_3}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration3 && 'isSelect'}} {{showFriend && 'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_3}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
               data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
               data-week-index="{{3}}"
               bindtap="selectDuration">中午</view>
             <view
-              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration4 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_4}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration4 && 'isSelect'}} {{showFriend && 'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_4}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
               data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
               data-week-index="{{4}}"
               bindtap="selectDuration">下午</view>
             <view
-              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration5 && 'isSelect'}} {{'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_5}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
+              class="calendar-week-duration {{dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelected.selectedDuration5 && 'isSelect'}} {{showFriend && 'joinNum'+dateData.arrDays[(dateData.curWeek - 1) * 7 + col].joinNum_5}} {{!dateData.arrDays[(dateData.curWeek - 1) * 7 + col].isSelectable && 'notSelectable'}}"
               data-day-index="{{dateData.arrDays[(dateData.curWeek - 1) * 7 + col]}}"
               data-week-index="{{5}}"
               bindtap="selectDuration">晚上</view>
@@ -117,7 +117,7 @@
         </view>
         <view
           wx:for-index="clock"
-          class="calendar-clock-line {{dateData.arrDays[dateData.date[1]]['isSelected']['selectedHour'+clock] && 'isSelect'}} {{clock > 9 ? 'joinNum'+dateData.arrDays[dateData.date[1]]['joinNum__'+clock] : 'joinNum'+dateData.arrDays[dateData.date[1]]['joinNum__0'+clock]}} {{!dateData.arrDays[dateData.date[1]].isSelectable && 'notSelectable'}}"
+          class="calendar-clock-line {{dateData.arrDays[dateData.date[1]]['isSelected']['selectedHour'+clock] && 'isSelect'}} {{showFriend && (clock > 9 ? 'joinNum'+dateData.arrDays[dateData.date[1]]['joinNum__'+clock] : 'joinNum'+dateData.arrDays[dateData.date[1]]['joinNum__0'+clock])}} {{!dateData.arrDays[dateData.date[1]].isSelectable && 'notSelectable'}}"
           wx:for="{{dateData.arrHours}}"
           wx:key="*this"
           data-hour-index="{{clock}}"
@@ -153,7 +153,7 @@
     </view>
 
     <view class="calendar-checkbox" style="display: {{checkbox != 3 ? 'flex' : 'none'}}">
-      <view class="calendar-checkbox-reset">重置</view>
+      <view class="calendar-checkbox-reset" bindtap="clearSelected">重置</view>
       <view class="calendar-checkbox-tab">
         <view class="calendar-checkbox-btn" bindtap="showMonth">月</view>
         <view class="calendar-checkbox-btn" bindtap="showWeek">周</view>
@@ -163,7 +163,7 @@
     </view>
   </view>
   <view  class="commit">
-    <view class="invite-btn" bindtap="invite">生成邀请函</view>
+    <view class="invite-btn" style="display: {{openId === acitvityData.creator ? 'flex' : 'none'}}" bindtap="invite">生成邀请函</view>
     <view class="commit-btn" bindtap="submit">确认提交</view>
   </view>
 </view>

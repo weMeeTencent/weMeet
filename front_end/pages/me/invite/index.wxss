@@ -1,4 +1,5 @@
 .invite-root {
+  box-sizing: border-box;
   height: 100%;
   display: flex;
   flex-direction: column;  
@@ -6,10 +7,9 @@
   color: #353535;
   background: #ffffff;
   border: 1px solid #E6E6E6;
-  padding: 0 20rpx;
+  padding: 20rpx;
   margin-left: 20rpx;
   margin-right: 20rpx;
-  box-sizing: border-box;
 }
 
 .invite-corner {
@@ -17,7 +17,6 @@
   justify-content: space-between;
 }
 .invite-corner-footer {
-  margin-top: 40rpx;
   display: flex;
   justify-content: space-between;
 }
@@ -26,13 +25,10 @@
   width:  120rpx;
   height: 120rpx;
 }
-.invite-corner .img-corner {
-  margin-top: 20rpx;
-}
-.invite-corner-footer .img-corner {
-  margin-bottom: 20rpx;
-}
 
+.content {
+  flex: 1;
+}
 .invite-invite-text {
   display: flex;
   justify-content:center;
@@ -43,7 +39,7 @@
 .img-view {
   display: flex;
   justify-content:center;
-  margin-top: 50rpx;
+  margin-top: 80rpx;
 }
 
 .img-invite {
@@ -51,6 +47,7 @@
   justify-content:center;
   width:  140rpx;
   height: 140rpx;
+  border-radius: 100%;
 }
 
 .invite-nickname {
@@ -79,35 +76,30 @@
   color: #000000;
   display: flex;
   justify-content:center;
-  al
 }
 
 .invite-detail-1 {
-  margin-top:80rpx;
   display: flex;
   justify-content: left;
+  align-items: center;
+  margin: 60rpx 50rpx 0 50rpx;
 }
 
 .invite-detail-2 {
-  margin-top:30rpx;
   display: flex;
   justify-content: left;
+  align-items: center;
+  margin: 30rpx 50rpx 0 50rpx;
 }
 
 .img-detail {
-  display: flex;
-  margin-top: 9rpx;
-  margin-left:100rpx;
-  justify-content:center;
   width:  25rpx;
   height: 25rpx;
+  margin-right:20rpx;
 }
 .invite-detail-text {
-  margin-left:20rpx;
-  display: flex;
-  justify-content:left;
   color: #4A4A4A;
   line-height: 20px;
-  width: 500rpx;
+  flex: 1;
 }
 

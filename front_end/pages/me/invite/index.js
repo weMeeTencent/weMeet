@@ -38,7 +38,11 @@ Page(
       })
     },
     onShareAppMessage: function () {
-
+      return {
+        title: this.data.acitvityData.name,
+        desc: this.data.acitvityData.description,
+        path: '/pages/me/invite/index?activityId='+this.data.activityId,
+      }
     },
   }
 )

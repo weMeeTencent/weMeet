@@ -52,8 +52,7 @@ Page({
   },
   bindToStartActivity: function (e) {
     wx.navigateTo({
-      // url: '../form/index',
-      url: '../calendar/index?activityId=60',
+      url: '../form/index',
     })
   },
   shareTouchStart: function (e) {
@@ -115,5 +114,12 @@ Page({
   },
   actionSheetChange: function (e) {
 
-  }
+  },
+  onShareAppMessage: function () {
+    return {
+      title: 'weMeet微历',
+      desc: '微历，让相聚更容易。',
+      path: '/pages/main/index/index'
+    }
+  },
 })

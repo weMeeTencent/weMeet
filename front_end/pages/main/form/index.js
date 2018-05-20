@@ -98,6 +98,13 @@ Page({
       duration: option.duration,
       loc: option.loc
     });
-  }
+  },
+  onShareAppMessage: function () {
+    return {
+      title: 'weMeet微历',
+      desc: '微历，让相聚更容易。',
+      path: '/pages/main/index/index'
+    }
+  },
 
 })

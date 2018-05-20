@@ -39,6 +39,7 @@ var pageData = {
   checkbox: 0,
   selected: {},
   arrSelect: [],
+  showFriend: true,
 }
 
 //获取此月第一天相对视图显示的偏移
@@ -313,9 +314,9 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: 'weMeet微历',
-      desc: '微历，让相聚更容易。',
-      path: '/pages/main/calendar/index'
+      title: this.data.acitvityData.name,
+      desc: this.data.acitvityData.description,
+      path: '/pages/main/calendar/index?acitvityId='+this.data.activityId
     }
   },
   getJoinData: function () {
@@ -659,6 +660,23 @@ Page({
     this.setData({
       selected: obj,
     })
+  },
+  hideFriendSelected: function(){
+    pageData.showFriend = !pageData.showFriend;
+    this.setData({
+      showFriend: pageData.showFriend,
+    })
+  },
+  clearSelected: function(){
+    pageData.selected = {};
+    this.setData({
+      selected: pageData.selected,
+    })
+    refreshPageData(curYear, curMonth, curDay, this.data.checkbox);
+    this.setData({
+      dateData: pageData.dateData,
+    })
+    console.log(pageData.dateData);
   },
   invite: function(){
     var _this = this;
