@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "微历"
+  "navigationBarTitleText": "微历", 
+  "enablePullDownRefresh": false
 }
