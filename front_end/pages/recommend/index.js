@@ -4,7 +4,7 @@ Page({
     list: [
       {
         id: '1',
-        img: '../../../res/activity_hot_pot.png',
+        img: '../../res/activity_hot_pot.png',
         title: '我的热情，好像一顿火锅',
         desc: '用FFF团的火把，煮一顿热烈的火锅。',
         loc: '魏公村·重八牛府牛丸火锅    982米',
@@ -13,7 +13,7 @@ Page({
       },
       {
         id: '1',
-        img: '../../../res/activity_music.png',
+        img: '../../res/activity_music.png',
         title: '为你唱这首歌',
         desc: '勇敢说爱，刚给你一个唱出“爱你”的理由。',
         loc: '五道口·麦颂量贩式KTV    1.2公里',
@@ -21,7 +21,7 @@ Page({
         duration: 2
       }, {
         id: '1',
-        img: '../../../res/activity_school.png',
+        img: '../../res/activity_school.png',
         title: '初夏·校园·压马路',
         desc: '一无所有时的朋友，情愫初生时的爱人。',
         loc: '五道口·北京林业大学    679米',
