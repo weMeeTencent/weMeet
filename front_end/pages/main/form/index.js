@@ -40,6 +40,30 @@ Page({
     })
   },
 
+  bindTitle: function (e) {
+    this.setData({
+      title: e.detail.value
+    })
+  },
+
+  bindDesc: function (e) {
+    this.setData({
+      desc: e.detail.value
+    })
+  },
+
+  bindDuration: function (e) {
+    this.setData({
+      duration: e.detail.value
+    })
+  },
+
+  bindLoc: function (e) {
+    this.setData({
+      loc: e.detail.value
+    })
+  },
+
   formSubmit: function (e) {
     wx.showLoading({
       title: '正在尝试',
@@ -106,5 +130,9 @@ Page({
       path: '/pages/main/index/index'
     }
   },
+
+  input: function() {
+
+  }
 
 })

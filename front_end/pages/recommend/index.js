@@ -31,10 +31,12 @@ Page({
     ]
   },
 
+
+
   goToStartActivity: function (e) {
     var item = e.currentTarget.dataset.item;
     wx.navigateTo({
-      url: '../main/form/index?title=' + item.title + '&desc=' + item.desc + '&duration=' + item.duration + '小时&loc=' + item.loc
+      url: '../main/form/index?title=' + item.title + '&desc=' + item.desc + '&duration=' + item.duration + '&loc=' + item.loc
     })
   },
   onShareAppMessage: function () {
