@@ -19,6 +19,10 @@
   margin-top: 30rpx;
 }
 
+.label {
+  width: 100rpx;
+}
+
 .item {
   display: flex;
   flex-direction: row;
@@ -79,6 +83,16 @@
   color: #000;
   margin-right: 40rpx;
   margin-left: 22.5rpx;
+}
+
+.duration {
+  width: 100rpx;
+    font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #000;
+  margin-right: 40rpx;
+  margin-left: 22.5rpx;
+  visibility:hidden;
 }
 
 .start_activity {

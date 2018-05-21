@@ -7,7 +7,7 @@
         <view class='item'>
           <text class='title'>活动主题</text>
         
-            <textarea class='content' auto-focus auto-height value='{{title}}'></textarea>
+            <textarea class='content' auto-focus auto-height value='{{title}}' bindinput='bindTitle'></textarea>
     
         </view>
         <view class='divider_margin_20'></view>
@@ -18,7 +18,7 @@
 
         <view class='item'>
           <text class='title'>活动说明</text>
-          <textarea class='content' auto-height value='{{desc}}'></textarea>
+          <textarea class='content' auto-height value='{{desc}}' bindinput='bindDesc'></textarea>
         </view>
         <view class='divider_margin_20'></view>
       </view>
@@ -28,7 +28,8 @@
 
         <view class='item'>
           <text class='title'>活动时长</text>
-          <input class='content' auto-height value='{{duration}}' type='digit'></input>
+          <input class='content' auto-height value='{{duration}}' type='digit' bindinput='bindDuration'></input>
+          <label class='title'>小时</label>
         </view>
         <view class='divider_margin_20'></view>
       </view>
@@ -36,7 +37,7 @@
       <view class="page_body">
         <view class='item'>
           <text class='title'>活动地点</text>
-          <textarea class='content' auto-height value='{{loc}}'></textarea>
+          <textarea class='content' auto-height value='{{loc}}' bindinput='bindLoc'></textarea>
         </view>
 
         <view class='divider'></view>
