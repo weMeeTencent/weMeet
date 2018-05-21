@@ -39,7 +39,9 @@ var pageData = {
   checkbox: 0,
   selected: {},
   arrSelect: [],
-  showFriend: true,
+  showFriend: false,
+  activityId: '',
+  openId: '',
 }
 
 //获取此月第一天相对视图显示的偏移
@@ -313,10 +315,11 @@ Page({
     })
   },
   onShareAppMessage: function () {
+    var activityId = util.getCurrentPageUrl()['activityId'];
     return {
       title: this.data.acitvityData.name,
       desc: this.data.acitvityData.description,
-      path: '/pages/main/calendar/index?acitvityId='+this.data.activityId
+      path: '/pages/main/calendar/index?acitvityId='+activityId,
     }
   },
   getJoinData: function () {

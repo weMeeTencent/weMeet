@@ -5,9 +5,9 @@
       <view class="recommend-list-title">{{item.title}}</view>
       <view class="recommend-list-desc">{{item.desc}}</view>
       <view class='recommend-list-flex'>
-        <image class="recommend-list-icon-loc" src="../../res/position.png" mode='widthFix'></image>
+        <image class="recommend-list-icon-loc" src="http://mat1.gtimg.com/www/js/news/wemeet/position.png" mode='widthFix'></image>
         <view class="recommend-list-loc">{{item.loc}}</view>
-        <image class="recommend-list-icon-people" src="../../res/people.png" mode='widthFix'></image>
+        <image class="recommend-list-icon-people" src="http://mat1.gtimg.com/www/js/news/wemeet/people.png" mode='widthFix'></image>
         <view class="recommend-list-num">{{item.num}}</view>
       </view>
     </view>

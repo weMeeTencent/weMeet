@@ -22,20 +22,20 @@
           </block>
         </view>
       </view>
-      <image class="img-more" src="../../../res/more.png"></image>
+      <image class="img-more" src="http://mat1.gtimg.com/www/js/news/wemeet/more.png"></image>
     </view>
     <view class="divider" hidden="{{item.activityId != activityId}}"></view>
     <view class="card-2" hidden="{{item.activityId != activityId}}">
       <image class="img-choice-eye" data-activity-id="{{item.activityId}}" 
-        bindtap="tapLookup" src="../../../res/eye.png"></image>
+        bindtap="tapLookup" src="http://mat1.gtimg.com/www/js/news/wemeet/eye.png"></image>
       <view class="card-choice-text" data-activity-id="{{item.activityId}}"
         bindtap="tapLookup">查看</view>
       <image class="img-choice-2" data-activity-id="{{item.activityId}}" 
-        bindtap="tapEdit" src="../../../res/edit.png"></image>
+        bindtap="tapEdit" src="http://mat1.gtimg.com/www/js/news/wemeet/edit.png"></image>
       <view class="card-choice-text" data-activity-id="{{item.activityId}}" 
         bindtap="tapEdit">编辑</view>
       <image class="img-choice-3" data-activity-id="{{item.activityId}}" 
-        bindtap="tapDelete" src="../../../res/delete.png"></image>
+        bindtap="tapDelete" src="http://mat1.gtimg.com/www/js/news/wemeet/delete.png"></image>
       <view class="card-choice-text" data-activity-id="{{item.activityId}}"
         bindtap="tapDelete">删除</view>
     </view>

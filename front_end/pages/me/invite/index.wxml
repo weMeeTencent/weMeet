@@ -3,8 +3,8 @@
 <view class="invite-root">
 
   <view class="invite-corner">
-    <image class="img-corner" src="../../../res/corner1.png"> </image>
-    <image class="img-corner" src="../../../res/corner2.png"> </image>
+    <image class="img-corner" src="http://mat1.gtimg.com/www/js/news/wemeet/corner1.png"> </image>
+    <image class="img-corner" src="http://mat1.gtimg.com/www/js/news/wemeet/corner2.png"> </image>
   </view>
 <view class="content">
   <view class="invite-invite-text">邀您参加</view>
@@ -18,21 +18,21 @@
   <view class="invite-title">{{acitvityData.name}}</view>
 
   <view class="invite-detail-1">
-    <image class="img-detail" src="../../../res/clock.png"></image>
+    <image class="img-detail" src="http://mat1.gtimg.com/www/js/news/wemeet/clock.png"></image>
     <view class="invite-detail-text">5月26日(周六) 18:00-20:00</view>
   </view>
   <view class="invite-detail-2">
-    <image class="img-detail" src="../../../res/position.png"></image>
+    <image class="img-detail" src="http://mat1.gtimg.com/www/js/news/wemeet/position.png"></image>
     <view class="invite-detail-text">{{acitvityData.location}}</view>
   </view>
   <view class="invite-detail-2">
-    <image class="img-detail" src="../../../res/people.png"></image>
+    <image class="img-detail" src="http://mat1.gtimg.com/www/js/news/wemeet/people.png"></image>
     <view class="invite-detail-text">预计{{acitvityData.count + 5}}人参加</view>
   </view>
 </view>
   <view class="invite-corner-footer">
-    <image class="img-corner" src="../../../res/corner3.png"> </image>
-    <image class="img-corner" src="../../../res/corner4.png"> </image>
+    <image class="img-corner" src="http://mat1.gtimg.com/www/js/news/wemeet/corner3.png"> </image>
+    <image class="img-corner" src="http://mat1.gtimg.com/www/js/news/wemeet/corner4.png"> </image>
   </view>
 
 </view>

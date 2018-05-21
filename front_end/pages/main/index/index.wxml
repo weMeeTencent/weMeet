@@ -1,11 +1,11 @@
 <!--index.wxml-->
 <view class="main">
   <view class="label_container">
-    <image class="label1" src="../../../res/left_label_head.png"></image>
-    <image class="label_3" src="../../../res/left_label_body.png"></image>
+    <image class="label1" src="http://mat1.gtimg.com/www/js/news/wemeet/left_label_head.png"></image>
+    <image class="label_3" src="http://mat1.gtimg.com/www/js/news/wemeet/left_label_body.png"></image>
   </view>
   <view class="maincontainer">
-    <image class="topDivider" src="../../../res/main_header_block.png"></image>
+    <image class="topDivider" src="http://mat1.gtimg.com/www/js/news/wemeet/main_header_block.png"></image>
     <view class="topSlimDivider1"></view>
     <view class="topslogan">
       <text>WE MEET · MEET LOVE</text>
@@ -17,7 +17,7 @@
     <view class="time_week">
       <text>星期一 戊戌年四月初七</text>
     </view>
-    <image class="center_icon" src="../../../res/center_icon.png"></image>
+    <image class="center_icon" src="http://mat1.gtimg.com/www/js/news/wemeet/center_icon.png"></image>
     <view class="recommend">火锅 K歌 压马路</view>
     <view class="description">
     521，微历一群朋友去K歌
@@ -29,7 +29,7 @@
   <view class="callButton" bindtap='bindToStartActivity'>发起活动</view>
 
   <view class="drop_up_container" bindtouchstart='tap_start' bindtouchmove='tap_drag' bindtouchend='tap_end'>
-    <image class="drop_up" src="../../../res/arrow_top.png"></image>
+    <image class="drop_up" src="http://mat1.gtimg.com/www/js/news/wemeet/arrow_top.png"></image>
     <text class="drop_up_text">上滑发现附近好去处</text>
   </view>
 

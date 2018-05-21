@@ -78,7 +78,7 @@ Page({
       that.lastTapTime = currentTime
       if (currentTime - lastTapTime < 300) {
         this.setData({
-          shareIcon: "../../../res/share_icon.png",
+          shareIcon: "http://mat1.gtimg.com/www/js/news/wemeet/share_icon.png",
           shareShowed: true
         })
       }
