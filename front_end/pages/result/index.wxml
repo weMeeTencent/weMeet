@@ -2,25 +2,25 @@
 <view class="me-root">
   <view class="title">
     <view class="title-text">{{activity.name}}</view>
-    <image class="img-share" src="http://mat1.gtimg.com/www/js/news/wemeet/share.png"></image>
+    <image class="img-share" src="../../../res/share.png"></image>
   </view>
 
   <view class="content">{{activity.description}}</view>
 
   <view class="position">
-    <image class="img-position" src="http://mat1.gtimg.com/www/js/news/wemeet/position.png"></image>
+    <image class="img-position" src="../../../res/position.png"></image>
     <view class="position-text">{{activity.location}}</view>
-    <image class="img-clock" src="http://mat1.gtimg.com/www/js/news/wemeet/clock.png"></image>
+    <image class="img-clock" src="../../../res/clock.png"></image>
     <view class="clock-text">预计2小时</view>
   </view>
 
   <view class="calendar">
     <view class="calendar-navbar">
-      <image class="calendar-navbar-eye" src="{{2 > 1 ? 'http://mat1.gtimg.com/www/js/news/wemeet/eye.png' : 'http://mat1.gtimg.com/www/js/news/wemeet/eye_selected.png'}}"></image>
+      <image class="calendar-navbar-eye" src="{{2 > 1 ? '../../../res/eye.png' : '../../../res/eye_selected.png'}}"></image>
       <view class="calendar-navbar-date">
         当前可选时间
       </view>
-      <image class="calendar-navbar-list" bindtap="goToday" src="{{'http://mat1.gtimg.com/www/js/news/wemeet/list_selected.png'}}"></image>
+      <image class="calendar-navbar-list" bindtap="goToday" src="{{'../../../res/list_selected.png'}}"></image>
     </view>
     <view wx:for="{{seqList}}" wx:key="{{seq}}">
       <!--时间段信息-->
@@ -45,7 +45,7 @@
           <view wx:for="{{item.users}}" wx:key="{{user}}">
             <image class="select-member-more" src="{{item.avatar}}"></image>
           </view>
-          <image class="select-member-more" src="{{'http://mat1.gtimg.com/www/js/news/wemeet/member_more.png'}}"></image>
+          <image class="select-member-more" src="{{'../../../res/member_more.png'}}"></image>
         </view>
       </view>
     </view>

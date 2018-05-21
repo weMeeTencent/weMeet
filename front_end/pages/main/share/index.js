@@ -24,7 +24,7 @@ Page({
     })
     var unit = that.data.screenWidth / 375
     const ctx = wx.createCanvasContext('share')
-    ctx.drawImage('http://mat1.gtimg.com/www/js/news/wemeet/share_img.png', 0, 0, 375 * unit, 667 * unit)
+    ctx.drawImage('../../../res/share_img.png', 0, 0, 375 * unit, 667 * unit)
     //  ctx.draw()
     ctx.draw(false, function() {
       wx.canvasToTempFilePath({
