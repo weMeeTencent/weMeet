@@ -12,15 +12,15 @@
     </view>
     <view class="slogandivider"></view>
     <view class="time_date">
-      <text>2018年5月21日</text>
+      <text>{{date.sYear}}年{{date.sMonth}}月{{date.sDay}}日</text>
     </view>
     <view class="time_week">
-      <text>星期一 戊戌年四月初七</text>
+      <text>星期{{date.week}} {{date.cYear}}年{{date.lunarMonth}}月{{date.lunarDay}}</text>
     </view>
     <image class="center_icon" src="http://mat1.gtimg.com/www/js/news/wemeet/center_icon.png"></image>
     <view class="recommend">火锅 K歌 压马路</view>
     <view class="description">
-    521，微历一群朋友去K歌
+    微历一群朋友去K歌
     <view>给你一个唱出“爱你”的理由</view>
     </view>
     <image class="share" src="{{shareIcon}}" bindtap='triggerEgg' bindtouchstart="shareTouchStart" bindtouchend="shareTouchEnd"></image>

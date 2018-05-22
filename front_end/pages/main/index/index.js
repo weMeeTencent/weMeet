@@ -1,12 +1,18 @@
 //index.js
+var ccFile = require('../../../utils/calendar-converter.js')
+var calendarConverter = new ccFile.CalendarConverter();
 //获取应用实例
 const app = getApp()
 var items = ['保存分享图到本地相册']
-Page({
-  data: {
+var curDate = calendarConverter.solar2lunar(new Date());
+var pageData = {
     actionSheetHidden: true,
-    actionSheetItems: items
-  },
+    actionSheetItems: items,
+    date: curDate,
+}
+
+Page({
+  data: pageData,
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
