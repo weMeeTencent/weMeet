@@ -26,13 +26,16 @@
     <image class="share" src="{{shareIcon}}" bindtap='triggerEgg' bindtouchstart="shareTouchStart" bindtouchend="shareTouchEnd"></image>
   </view>
 
-  <view class="callButton" bindtap='bindToStartActivity'>发起活动</view>
+  <!-- <view class="callButton" bindtap='bindToStartActivity'>发起活动</view> -->
+  <button class="callButton" open-type='getUserInfo' lang='zh_CN' bindgetuserinfo='onGotUserInfo' binderrror='onGetUserInfoError'>发起活动</button> 
 
   <view class="drop_up_container" bindtouchstart='tap_start' bindtouchmove='tap_drag' bindtouchend='tap_end'>
     <image class="drop_up" src="http://mat1.gtimg.com/www/js/news/wemeet/arrow_top.png"></image>
     <text class="drop_up_text">上滑发现附近好去处</text>
   </view>
 
+   <!-- <open-data type="userNickName" hidden id="#111"></open-data>  -->
+  <!-- <open-data type="userAvatarUrl" hidden id="#222"></open-data> -->
   <!-- <view class="tempcontainer">
     <view class="userinfo">
       <button class="button" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>

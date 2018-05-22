@@ -182,7 +182,7 @@
   border-radius: 10rpx;
   width: 669rpx;
   margin: 20rpx auto 0 auto;
-  padding: 20rpx 0rpx;
+  padding: 5rpx 0rpx;
   font-family: PingFangSC-Regular;
   font-size: 36rpx;
   color: #fff;

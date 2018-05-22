@@ -17,7 +17,7 @@ App({
         avatar: res.avatarUrl
       },
       success: function(res) {
-        console.log(res)
+        console.log('add:', res)
       }
     })
   },
@@ -33,7 +33,7 @@ App({
               code: res.code
             },
             success: function(res) {
-              console.log(res.data);
+              console.log('login:', res.data);
               that.openId = res.data.openid;
             }
           })
@@ -42,21 +42,22 @@ App({
         }
       }
     })
-    wx.getSetting({
-      success: function(res) {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: function (res) {
-              console.log('userInfo', res)
-              that.userInfo = res.userInfo;
-              that.sendUserInfoToServer(res.userInfo)
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
+
+    // wx.getSetting({
+    //   success: function(res) {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       wx.getUserInfo({
+    //         success: function (res) {
+    //           console.log('userInfo', res)
+    //           that.userInfo = res.userInfo;
+    //           that.sendUserInfoToServer(res.userInfo)
+    //           if (this.userInfoReadyCallback) {
+    //             this.userInfoReadyCallback(res)
+    //           }
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
   }
 })
