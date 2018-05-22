@@ -276,7 +276,7 @@ var curDay = curDate.getDate();
 refreshPageData(curYear, curMonth, curDay, 0);
 
 var util = require('../../../utils/util.js')
-
+var app = getApp()
 Page({
   data: pageData,
   onLoad: function () {
@@ -718,5 +718,33 @@ Page({
         })
       }
     })
+  },
+  onGotUserInfo: function (e) {
+    console.log(1, e)
+    console.log(2, e.detail)
+
+    var detail = e.detail;
+    if (detail.userInfo) {
+      this.setData({
+        userInfo: detail.userInfo,
+        hasUserInfo: true
+      })
+      app.sendUserInfoToServer(detail.userInfo)
+      this.submit();
+    } else {
+      console.log('user refused authorization')
+      wx.showModal({
+        title: '提醒',
+        content: '不授权将会影响您的后续操作，请您三思~',
+        showCancel: false,
+        confirmText: '知道了',
+        success: function (res) {
+
+        }
+      })
+    }
+  },
+  ononGetUserInfoError: function (e) {
+    console.log(4, e)
   },
 });

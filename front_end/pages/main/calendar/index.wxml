@@ -164,6 +164,8 @@
   </view>
   <view  class="commit">
     <view class="invite-btn" style="display: {{openId === acitvityData.creator ? 'flex' : 'none'}}" bindtap="invite">生成邀请函</view>
-    <view class="commit-btn" bindtap="submit">确认提交</view>
+    <!-- <view class="commit-btn" bindtap="submit">确认提交</view> -->
+    <button class='commit-btn' open-type='getUserInfo' bindgetuserinfo='onGotUserInfo' binderrror='onGetUserInfoError'>确认提交</button>
+      <!-- <button class="callButton" open-type='getUserInfo' lang='zh_CN' bindgetuserinfo='onGotUserInfo' binderrror='onGetUserInfoError'>发起活动</button>  -->
   </view>
 </view>
