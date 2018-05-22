@@ -299,6 +299,11 @@ Page({
       success: function (res) {
         _this.setData({
           acitvityData: res.data.data,
+          shareInfo: {
+            title: res.data.data ? res.data.data.name : '',
+            desc: res.data.data ? res.data.data.description : '',
+            path: res.data.data ? '/pages/main/calendar/index?acitvityId=' + res.data.data.id : '',
+          }
         })
       },
       fail: function (res) {
@@ -315,12 +320,7 @@ Page({
     })
   },
   onShareAppMessage: function () {
-    var activityId = util.getCurrentPageUrl()['activityId'];
-    return {
-      title: this.data.acitvityData.name,
-      desc: this.data.acitvityData.description,
-      path: '/pages/main/calendar/index?acitvityId='+activityId,
-    }
+    return this.shareInfo;
   },
   getJoinData: function () {
     var _this = this;
