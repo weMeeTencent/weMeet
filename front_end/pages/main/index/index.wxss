@@ -71,7 +71,6 @@
 .maincontainer {
   border: 7rpx solid #1d1d1d;
   width: 669rpx;
-  height: 870rpx;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
