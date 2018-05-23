@@ -19,8 +19,8 @@
 
 |            | language | developer |
 | ---------------- | ------------- | ------------------------------------------------------------ |
-| front-end        | `Js`    | [@chengfpl](https://github.com/chengfpl) [@MingFei](https://github.com/MingFL)                      |
-| back-end     | `Java`       |[@mdyoyo](https://github.com/mdyoyo), [@SmartDoubleXiao](https://github.com/SmartDoubleXiao), [@toy](https://github.com/ty2145621), [@	wuyouxiong](https://github.com/wuyouxiong), [@SpliteJm](https://github.com/splitJm)|
+| front-end        | `Js`    | [@mdyoyo](https://github.com/mdyoyo), [@SmartDoubleXiao](https://github.com/SmartDoubleXiao), [@toy](https://github.com/ty2145621), [@wuyouxiong](https://github.com/wuyouxiong), [@SpliteJm](https://github.com/splitJm)|
+| back-end     | `Java`       |[@chengfpl](https://github.com/chengfpl) [@MingFei](https://github.com/MingFL)|
 
 **说明**
 
