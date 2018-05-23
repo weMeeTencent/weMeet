@@ -1,4 +1,4 @@
-<form bindsubmit="formSubmit">
+<form bindsubmit="bindFormSubmit">
   <view class="container">
     <view class='page'>
       <view class="page_body">
@@ -7,7 +7,7 @@
         <view class='item'>
           <text class='title'>活动主题</text>
         
-            <textarea class='content' auto-focus auto-height value='{{title}}' bindinput='bindTitle'></textarea>
+            <textarea class='content' auto-height value='{{title}}' bindinput='bindTitle' placeholder='请输入活动主题'></textarea>
     
         </view>
         <view class='divider_margin_20'></view>
@@ -18,7 +18,7 @@
 
         <view class='item'>
           <text class='title'>活动说明</text>
-          <textarea class='content' auto-height value='{{desc}}' bindinput='bindDesc'></textarea>
+          <textarea class='content' auto-height value='{{desc}}' bindinput='bindDesc' placeholder='请输入活动补充说明'></textarea>
         </view>
         <view class='divider_margin_20'></view>
       </view>
@@ -28,7 +28,7 @@
 
         <view class='item'>
           <text class='title'>活动时长</text>
-          <input class='content' auto-height value='{{duration}}' type='digit' bindinput='bindDuration'></input>
+          <input class='content' auto-height value='{{duration}}' type='digit' bindinput='bindDuration' placeholder='请输入活动预计时长'></input>
           <label class='title'>小时</label>
         </view>
         <view class='divider_margin_20'></view>
@@ -37,7 +37,7 @@
       <view class="page_body">
         <view class='item'>
           <text class='title'>活动地点</text>
-          <textarea class='content' auto-height value='{{loc}}' bindinput='bindLoc'></textarea>
+          <textarea class='content' auto-height value='{{loc}}' bindinput='bindLoc' placeholder='请输入活动地点'></textarea>
         </view>
 
         <view class='divider'></view>
@@ -93,7 +93,7 @@
       </view>
     </view>
 
-    <button form-type='submit' class='start_activity'> 完成 </button>
+    <button form-type='submit' class='start_activity' > 完成 </button>
 
 
   </view>

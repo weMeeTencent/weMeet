@@ -8,10 +8,9 @@ Page({
     duration: '',
     title: '',
     desc: '',
-    duration: '',
     loc: '',
     deadline: '',
-    deadlineTime: '12:00'
+    deadlineTime: '24:00'
   },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -64,9 +63,61 @@ Page({
     })
   },
 
-  formSubmit: function (e) {
+  bindFormSubmit: function (e) {
+
+
+    if (this.data.title == null || this.data.title.length == 0) {
+      wx.showToast({
+        title: '请输入活动主题',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (this.data.desc == null || this.data.desc.length == 0) {
+      wx.showToast({
+        title: '请输入活动主题说明',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (this.data.duration == null || this.data.duration.length == 0) {
+      wx.showToast({
+        title: '请输入活动时长',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (this.data.duration <= 0) {
+      wx.showToast({
+        title: '活动时长必须大于0哟',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (this.data.loc == null || this.data.loc.length == 0) {
+      wx.showToast({
+        title: '请输入活动地点',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (this.data.startTime >= this.data.endTime) {
+      wx.showToast({
+        title: '活动成行结束日期要大于开始日期哟',
+        icon: 'none'
+      })
+      return
+    }
+
+
+
     wx.showLoading({
-      title: '正在尝试',
+      title: '正在尝试'
     })
 
     var deadlinePara = this.data.deadline + ' ' + this.data.deadlineTime
@@ -79,7 +130,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
       },
 
-      data: { openId: openId, name: this.data.title, description: this.data.desc, location: this.data.loc, timeType: "2", startTime: this.data.startTime + ' 00:00:00', endTime: this.data.endTime + ' 24:00:00', deadline: deadlinePara + ':00'},
+      data: { openId: openId, name: this.data.title, description: this.data.desc, location: this.data.loc, timeType: this.data.duration, startTime: this.data.startTime + ' 00:00:00', endTime: this.data.endTime + ' 24:00:00', deadline: deadlinePara + ':00'},
       // data: { openId: openId, name: this.data.title, description: this.data.desc, location: this.data.loc, timeType: "2", startTime: "2015-09-10 12:09:10", endTime: "2015-09-10 12:09:10", deadline: "2015-09-10 12:09:10" },
 
       complete: function (res) {
@@ -88,7 +139,7 @@ Page({
       },
       success: function (res) {
         //跳转
-        if (res.statusCode == 200) {
+        if (res.statusCode == 200 && res.data != null) {
           var url = '../calendar/index?activityId=' + res.data.data;
           console.log(res.data.data, url)
           wx.navigateTo({
@@ -117,11 +168,17 @@ Page({
       startTime: startTime,
       endTime: endTime,
       deadline: deadline,
-      title: option.title,
-      desc: option.desc,
-      duration: option.duration,
-      loc: option.loc
     });
+
+    if (option != null && option.title != null) {
+      this.setData({
+        title: option.title,
+        desc: option.desc,
+        duration: option.duration,
+        loc: option.loc
+      });
+    }
+
   },
   onShareAppMessage: function () {
     return {
@@ -130,9 +187,5 @@ Page({
       path: '/pages/main/index/index'
     }
   },
-
-  input: function() {
-
-  }
 
 })
