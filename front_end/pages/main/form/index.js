@@ -24,14 +24,30 @@ Page({
     })
   },
   bindEndTimeChange: function (e) {
-    this.setData({
-      endTime: e.detail.value
-    })
+    var newEndTime = e.detail.value
+    if (newEndTime >= this.data.startTime) {
+      this.setData({
+        endTime: newEndTime,
+        deadline: newEndTime
+      })
+    } else 
+      wx.showToast({
+        title: '活动结束日期不能早于开始日期哟',
+        icon: 'none'
+      })
   },
   bindDeadlineChange: function (e) {
-    this.setData({
-      deadline: e.detail.value
-    })
+    var newDDL = e.detail.value
+    if (newDDL >= this.data.startTime && newDDL <= this.data.endTime) {
+      this.setData({
+        deadline: newDDL
+      })
+    } else {
+      wx.showToast({
+        title: '征集截止日期不在可选范围内哦',
+        icon: 'none'
+      })
+    }
   },
   bindDeadlineTimeChange: function (e) {
     this.setData({
@@ -106,14 +122,21 @@ Page({
       return
     }
 
-    if (this.data.startTime >= this.data.endTime) {
+    // if (this.data.startTime >= this.data.endTime) {
+    //   wx.showToast({
+    //     title: '活动成行结束日期要大于开始日期哟',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+
+    if (this.data.deadline < this.data.startTime || this.data.deadline > this.data.endTime) {
       wx.showToast({
-        title: '活动成行结束日期要大于开始日期哟',
+        title: '征集截止日期不在可选范围内',
         icon: 'none'
       })
       return
     }
-
 
 
     wx.showLoading({

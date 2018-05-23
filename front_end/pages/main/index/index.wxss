@@ -55,7 +55,7 @@
   position: absolute;
   z-index: 999999;
   margin-left: 100rpx;
-  margin-top: 130rpx;
+  margin-top: 141rpx;
 }
 
 .label1 {
@@ -76,7 +76,7 @@
   justify-content: flex-start;
   align-items: center;
   margin: 0rpx auto 0 auto;
-  margin-top: 30rpx;
+  margin-top: 5%;
 }
 
 .topDivider {
@@ -195,6 +195,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 10%;
 }
 
 .drop_up {
