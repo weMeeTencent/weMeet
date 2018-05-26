@@ -11,6 +11,9 @@
           <view class="card-mine" wx:if="{{item.creator == openId}}">
             我发起
           </view>
+          <view class="card-delete" wx:if="{{item.flag == 0}}">
+            已删除
+          </view>
         </view>
         <view class="card-info">
           {{item.count}}人已参与，

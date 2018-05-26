@@ -114,41 +114,66 @@ Page({
             complete: function (res) { },
           })
         } else if (res.tapIndex == 1) {
-          wx.showToast({
+          wx.showLoading({
             title: '正在删除',
             icon: 'loading',
-            image: '',
-            duration: 1500,
             mask: true,
-            success: function (res) { },
+            success: function (res) {
+              // 删除
+              wx.request({
+                url: 'https://www.chengfpl.com/weili/user/activity/delete',
+                data: {
+                  openId: _this.data.openId,
+                  activityId: activityId,
+                },
+                success: function (res) {
+                  console.log(res)
+                  refresh(_this)
+                  wx.hideLoading()
+                  wx.showToast({
+                    title: '删除成功',
+                    icon: 'success',
+                    image: '',
+                    duration: 1500,
+                    mask: true,
+                    success: function (res) { },
+                    fail: function (res) { },
+                    complete: function (res) { },
+                  })
+                },
+                fail: function (res) {
+                  console.log(res)
+                  wx.hideLoading()
+                  wx.showToast({
+                    title: '删除失败',
+                    icon: 'none',
+                    image: '',
+                    duration: 1500,
+                    mask: true,
+                    success: function (res) { },
+                    fail: function (res) { },
+                    complete: function (res) { },
+                  })
+                }
+              })
+            },
             fail: function (res) { },
             complete: function (res) { },
           })
-          // TODO: 发送删除请求，现在是假装的
-          setTimeout(function () {
-            for (var i = 0; i < activity.length; i++) {
-              if (activity[i].activityId == activityId) {
-                activity.splice(i, 1);
-              }
-            }
-            _this.setData({
-              activity: activity
-            })
-            wx.showToast({
-              title: '删除成功',
-              icon: 'success',
-              image: '',
-              duration: 1500,
-              mask: true,
-              success: function (res) { },
-              fail: function (res) { },
-              complete: function (res) { },
-            })
-          }, 1500)
         }
       },
       fail: function (res) {
         console.log(res.errMsg)
+        wx.showToast({
+          title: '操作已取消',
+          icon: '',
+          image: '',
+          duration: 1500,
+          mask: true,
+          success: function (res) { },
+          fail: function (res) { },
+          complete: function (res) { },
+        })
       },
       complete: function (res) {
 

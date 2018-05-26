@@ -78,6 +78,17 @@
   line-height: 20rpx;
 }
 
+.card-delete {
+  background-color: #888888;
+  font-size: 20rpx;
+  justify-content: center;
+  margin-left: 6rpx;
+  margin-top: 8rpx;
+  padding: 6rpx;
+  color: #ffffff;
+  line-height: 20rpx;
+}
+
 .card-info {
   font-size: 26rpx;
   color: #888888;
