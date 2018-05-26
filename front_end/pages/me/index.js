@@ -128,18 +128,34 @@ Page({
                 },
                 success: function (res) {
                   console.log(res)
-                  refresh(_this)
-                  wx.hideLoading()
-                  wx.showToast({
-                    title: '删除成功',
-                    icon: 'success',
-                    image: '',
-                    duration: 1500,
-                    mask: true,
-                    success: function (res) { },
-                    fail: function (res) { },
-                    complete: function (res) { },
-                  })
+                  // 接口返回 提示错误
+                  if (data.data.success == false) {
+                    wx.showToast({
+                      title: '删除失败',
+                      icon: 'none',
+                      image: '',
+                      duration: 1500,
+                      mask: true,
+                      success: function (res) { },
+                      fail: function (res) { },
+                      complete: function (res) { },
+                    })
+                    // 接口返回 提示正确删除
+                  } else {
+                    refresh(_this)
+                    wx.hideLoading()
+                    wx.showToast({
+                      title: '删除成功',
+                      icon: 'success',
+                      image: '',
+                      duration: 1500,
+                      mask: true,
+                      success: function (res) { },
+                      fail: function (res) { },
+                      complete: function (res) { },
+                    })
+                  }
+                  
                 },
                 fail: function (res) {
                   console.log(res)
