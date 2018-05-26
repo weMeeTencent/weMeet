@@ -129,7 +129,7 @@ Page({
                 success: function (res) {
                   console.log(res)
                   // 接口返回 提示错误
-                  if (data.data.success == false) {
+                  if (res.data.success == false) {
                     wx.showToast({
                       title: '删除失败',
                       icon: 'none',
